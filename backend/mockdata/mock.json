@@ -1,0 +1,314 @@
+    {
+      "data": {
+        "first-chart": {
+          "data": [
+            {
+              "name": 50,
+              "amt": 138
+            },
+            {
+              "name": 100,
+              "amt": 142
+            },
+            {
+              "name": 150,
+              "amt": 145
+            },
+            {
+              "name": 180,
+              "amt": 146.53
+            },
+            {
+              "name": 200,
+              "amt": 147
+            },
+            {
+              "name": 250,
+              "amt": 148
+            }
+          ]
+        },
+        "second-chart": {
+          "data": [
+            {
+              "name": 1,
+              "cto": 20,
+              "tco": 80
+            },
+            {
+              "name": 2,
+              "cto": 30,
+              "tco": 20
+            },
+            {
+              "name": 3,
+              "cto": 40,
+              "tco": 10
+            },
+            {
+              "name": 4,
+              "cto": 60,
+              "tco": 5
+            },
+            {
+              "name": 5,
+              "cto": 80,
+              "tco": 2
+            },
+            {
+              "name": 6,
+              "cto": 60,
+              "tco": 1
+            },
+            {
+              "name": 7,
+              "tco": 1,
+              "cto": 70
+            },
+            {
+              "name": 8,
+              "cto": 60,
+              "tco": 1
+            },
+            {
+              "name": 9,
+              "tco": 1,
+              "cto": 50
+            },
+            {
+              "name": 10,
+              "tco": 1,
+              "cto": 50
+            },
+            {
+              "name": 11,
+              "tco": 1,
+              "cto": 60
+            }
+          ]
+        },
+        "third-chart": {
+          "data": [
+            {
+              "name": 1,
+              "lco": 100
+            },
+            {
+              "name": 2,
+              "lco": 20
+            },
+            {
+              "name": 3,
+              "lco": 10
+            },
+            {
+              "name": 4,
+              "lco": 3
+            },
+            {
+              "name": 5,
+              "lco": 2
+            },
+            {
+              "name": 6,
+              "lco": 1
+            },
+            {
+              "name": 7,
+              "lco": 1
+            },
+            {
+              "name": 8,
+              "lco": 1
+            },
+            {
+              "name": 9,
+              "uv": 1,
+              "lco": 1
+            },
+            {
+              "name": 10,
+              "lco": 1
+            },
+            {
+              "name": 11,
+              "lco": 1
+            }
+          ]
+        },
+        "fourth-chart": {
+          "data": [
+            {
+              "name": 1,
+              "aov": 200,
+              "tco": 100
+            },
+            {
+              "name": 2,
+              "aov": 150,
+              "tco": 20
+            },
+            {
+              "name": 3,
+              "aov": 220,
+              "tco": 5
+            },
+            {
+              "name": 4,
+              "aov": 200,
+              "tco": 1
+            },
+            {
+              "name": 5,
+              "aov": 190,
+              "tco": 1
+            }
+          ]
+        },
+        "fifth-chart": {
+          "data": [
+            {
+              "name": 1,
+              "amt": 130
+            },
+            {
+              "name": 2,
+              "amt": 150
+            },
+            {
+              "name": 3,
+              "amt": 155
+            },
+            {
+              "name": 4,
+              "amt": 159
+            },
+            {
+              "name": 5,
+              "amt": 163
+            },
+            {
+              "name": 6,
+              "amt": 165
+            },
+            {
+              "name": 7,
+              "amt": 167,
+              "cnt": 60
+            },
+            {
+              "name": 8,
+              "amt": 168
+            },
+            {
+              "name": 9,
+              "amt": 169
+            },
+            {
+              "name": 10,
+              "amt": 170
+            },
+            {
+              "name": 11,
+              "amt": 170
+            }
+          ]
+        },
+        "sixth-chart": {
+          "data": [
+            {
+              "name": 1,
+              "amt": 46
+            },
+            {
+              "name": 2,
+              "amt": 45
+            },
+            {
+              "name": 3,
+              "amt": 40
+            },
+            {
+              "name": 4,
+              "amt": 39
+            },
+            {
+              "name": 5,
+              "amt": 42
+            },
+            {
+              "name": 6,
+              "amt": 43
+            },
+            {
+              "name": 7,
+              "amt": 41
+            },
+            {
+              "name": 8,
+              "amt": 45
+            },
+            {
+              "name": 9,
+              "amt": 60
+            },
+            {
+              "name": 10,
+              "amt": 45
+            },
+            {
+              "name": 11,
+              "amt": 42
+            }
+          ]
+        },
+        "seventh-chart": {
+          "data": [
+            {
+              "name": 50,
+              "amt": 120
+            },
+            {
+              "name": 100,
+              "amt": 140
+            },
+            {
+              "name": 150,
+              "amt": 150
+            },
+            {
+              "name": 200,
+              "amt": 155
+            },
+            {
+              "name": 250,
+              "amt": 157
+            },
+            {
+              "name": 300,
+              "amt": 159
+            },
+            {
+              "name": 350,
+              "amt": 161
+            },
+            {
+              "name": 400,
+              "amt": 162
+            },
+            {
+              "name": 450,
+              "amt": 163
+            },
+            {
+              "name": 500,
+              "amt": 164
+            },
+            {
+              "name": 550,
+              "amt": 164.53
+            }
+          ]
+        }
+      }
+    }
