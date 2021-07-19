@@ -13,8 +13,8 @@ import {Card} from 'antd'
 
 export default function App({data}) {
   return (
-  <Card title="Average Order Value by Occurence" style={{width: "550px", margin:"100px", paddingBottom: "100px"}}> 
-<ComposedChart width={500} height={300} data={data}>
+  <Card title="Average Order Value by Occurence" style={{width: "850px", margin:"100px", paddingBottom: "100px"}}> 
+<ComposedChart width={800} height={300} data={data}>
     <XAxis dataKey="name" tickLine={false} type="number" domain={[0, 'dataMax + 1']} scale="time">
     <Label value="Activity occurence" offset={0} position="insideBottom" />
     </XAxis>

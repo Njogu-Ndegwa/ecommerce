@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import FirstChart from './charts/first-chart'
-import SecondChart from './charts/second-chart'
-import ThirdChart from './charts/third-chart'
-import FourthChart from './charts/fourth-chart'
-import FifthChart from './charts/fifth-chart'
-import SixthChart from './charts/sixth-chart'
-import SeventhChart from './charts/seventh-chart'
+import OrderRetention from './charts/order_retention'
+import LikelihoodToReachOrder from './charts/likelihood_to_reach_order'
+import AverageOrderValue from './charts/average_order_value'
+import CustomerValueByOccurence from './charts/customer_value_by_occurence'
+import MedianDaysBetweenOrder from './charts/median_days_between_order'
+import CustomerValueByTenure from './charts/customer_value_by_tenure'
 import getData from './charts/chart-service'
 import Loading from './charts/loading'
 
@@ -14,25 +13,24 @@ export default function Main() {
     const [loading, setLoading] = useState(true)
     
     useEffect( async () => {
-        const response = await getData().catch(error => setError(true))
+        const response = await getData().catch(error => console.log(error))
         setData(response.data)
         setLoading(false)
 
       }, []);
-      data['first-chart'] !== undefined
-       && console.log(data['fourth-chart'].data)
+
+     
     return (
        
         loading ? <Loading/> :
         <>
-        <div style={{width: "100%", height: "100%", backgroundColor:"grey", padding:"150px"}} >
-        <FirstChart data = { data['first-chart'] !== undefined &&  data['first-chart'].data}/>
-        <SecondChart data = { data['second-chart'] !== undefined && data['second-chart'].data} />
-        <ThirdChart data = { data['third-chart'] !== undefined && data['third-chart'].data} /> 
-        <FourthChart data = { data['fourth-chart'] !== undefined && data['fourth-chart'].data} />
-        <FifthChart data = { data['fifth-chart'] !== undefined && data['fifth-chart'].data} />
-        <SixthChart data = { data['sixth-chart'] !== undefined && data['sixth-chart'].data} />
-        <SeventhChart data = { data['seventh-chart'] !== undefined && data['seventh-chart'].data} />
+        <div style={{width: "100%", height: "100%", backgroundColor:"grey", padding:"75px"}} >
+        <OrderRetention data = { data['order-retention'] !== undefined && data['order-retention'].data} />
+        <LikelihoodToReachOrder data = { data['likelihood-to-reach-order'] !== undefined && data['likelihood-to-reach-order'] .data} /> 
+        <AverageOrderValue data = { data['average-order-value'] !== undefined && data['average-order-value'].data} />
+        <CustomerValueByOccurence ltv={data['customer-value-by-occurence'] !== undefined && data['ltv']} data = { data['customer-value-by-occurence'] !== undefined && data['customer-value-by-occurence'].data} />
+       <MedianDaysBetweenOrder data = { data['median-days-between-order'] !== undefined && data['median-days-between-order'].data} /> 
+        <CustomerValueByTenure ltv={data['customer-value-by-tenure'] !== undefined && data['ltv']} data = { data['customer-value-by-tenure'] !== undefined && data['customer-value-by-tenure'].data} /> 
         </div>
         </>
     )

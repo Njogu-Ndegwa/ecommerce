@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  ComposedChart,
   LineChart,
   Line,
   XAxis,
@@ -14,8 +13,8 @@ import {Card} from 'antd'
 export default function App({data}) {
   console.log(data)
   return (
-       <Card title="Modeled Likelihood of reaching Each Completed order" style={{width: "550px", margin:"100px"}}> 
-<LineChart width={500} height={350} data={data}>
+       <Card title="Modeled Likelihood of reaching Each Completed order" style={{width: "850px", margin:"100px"}}> 
+<LineChart width={800} height={350} data={data}>
     <XAxis dataKey="name" tickLine={false} tickCount="12" type="number" domain={[0, 'dataMax + 1']}>
     <Label value="Activity occurence" offset={0} position="insideBottom" />
     </XAxis>

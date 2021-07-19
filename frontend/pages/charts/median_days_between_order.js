@@ -12,8 +12,8 @@ import {Card} from 'antd'
 export default function App({data}) {
   console.log(data)
   return (
-<Card title="Median Days Between Each Other" style={{width: "550px", margin:"100px"}}> 
-  <BarChart width={500} height={300} data={data}>
+<Card title="Median Days Between Each Other" style={{width: "850px", margin:"100px"}}> 
+  <BarChart width={800} height={300} data={data}>
     <XAxis dataKey="name" tickLine={false} type="number" domain={[0, 'dataMax + 1']} scale="time" >
     <Label value="Activity Occurence" offset={0} position="insideBottom" />
     </XAxis>
