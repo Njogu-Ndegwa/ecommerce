@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET charts listing. */
 router.get('/', function(req, res, next) {
-  console.log('\nobj:', JSON.stringify(data, null, 2));
+  // console.log('\nobj:', JSON.stringify(data, null, 2));
   res.send(data);
 });
 

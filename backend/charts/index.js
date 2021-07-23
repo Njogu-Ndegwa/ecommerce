@@ -6,7 +6,7 @@ let medianDaysBetweenOrder = require('./median_days_between_order')
 let customerValueByTenure = require('./value_by_customer_tenure')
 const {calculateLtv} = require('./chart_services')
 let ltv = calculateLtv()
-console.log(ltv)
+
 
 module.exports = {
     data: {

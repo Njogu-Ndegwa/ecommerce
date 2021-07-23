@@ -7,7 +7,7 @@ let likelihood = likelihoodToCompletedOrders()
 
 module.exports = createOccurence.reduce((r, c, i) => {
     r['order-retention'].data.push({
-        name: i+1,
+        name: i + 1,
         cto: conversionRate[i],
         tco: createOccurence[i]
     });

@@ -1,15 +1,28 @@
 const { json } = require('express')
-var data = require('./Datafile.json')
+var data = require('./datafile.json')
 var unRecentData = require('./recent_data.js')
 
-let nonRecentData =  unRecentData(data)
+// let filteredData =  unRecentfilteredData(filteredData)
+
+function filterByCompletedOrders(data){
+    let filteredData = []
+    let completedOrder = "completed_order"
+    for(let i = 0; i<data.length; i++){
+        if(data[i].activity === completedOrder) {
+            filteredData.push(data[i])
+        }
+    }
+    return filteredData
+}
+
+const filteredData = filterByCompletedOrders(data)
 
 function createCustomer(){
     // Get a list of Customers
     let customer = []
-    for (let i = 0; i<nonRecentData.length; i++){
-        if(data[i].occurrence === 1) {
-            customer.push(data[i].customer)
+    for (let i = 0; i<filteredData.length; i++){
+        if(filteredData[i].occurrence === 1) {
+            customer.push(filteredData[i].customer)
         }
     }
     return customer
@@ -21,19 +34,24 @@ function createOccurenceArray(){
     //  Get a list of occurences
     let customer = createCustomer()
     let occurence = []
-    for (let i = 0; i<nonRecentData.length; i++){
-        if(customer.includes(data[i].customer)) {
-            occurence.push(data[i].occurrence)
+    // Ensures customers at the begining remain the same to the end
+    for (let i = 0; i<filteredData.length; i++){
+        if(customer.includes(filteredData[i].customer)) {
+            occurence.push(filteredData[i].occurrence)
         }
+       
     }
+
 occurence.sort(function(a, b) {
     return a - b;
   });
 const countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 const occurenceCount = countOccurrences(occurence)
 const occurenceCountArray = Object.values(occurenceCount)
+console.log(occurenceCountArray.length)
 return occurenceCountArray
 }
+
 
 function conversionToNextOrder(){
     // Conversion to next Order
@@ -41,13 +59,18 @@ function conversionToNextOrder(){
     let occurenceCount = createOccurenceArray()
 for(let i = 0; i < occurenceCount.length; i++){
     let cr = 0
+        
     cr = Math.trunc(occurenceCount[i+1]/occurenceCount[i] * 100)
     if(cr){
         conversionRate.push(cr)
     }  
+   
 }
+
 return conversionRate
 }
+
+conversionToNextOrder()
 
 function totalOrdersPercent(){
     // Percentage of total completed order
@@ -64,7 +87,7 @@ return ordersPercent
 function likelihoodToCompletedOrders(){
     // Likelihood of reaching each Completed Order
     let conversionRate = conversionToNextOrder()
-    let likelihoodToCompleteOrders = [100, conversionRate[0]]
+    let likelihoodToCompleteOrders = [100]
     let product = conversionRate[0]
     for(let j =1; j<conversionRate.length; j++) {  
         product = product * conversionRate[j]/100
@@ -83,9 +106,9 @@ function likelihoodToCompletedOrders(){
     let allDays = []
     for(let i = 0; i<customer.length; i++){
         let ts = []
-        for (let j =0; j<nonRecentData.length; j++ ){
-            if(nonRecentData[j].customer === customer[i]){
-                ts.push(nonRecentData[j].ts)
+        for (let j =0; j<filteredData.length; j++ ){
+            if(filteredData[j].customer === customer[i]){
+                ts.push(filteredData[j].ts)
                 ts.sort(function(a, b) {     
                     a = new Date(a);
                     b = new Date(b);
@@ -135,9 +158,9 @@ let occurenceCount = createOccurenceArray()
 let averageOrderOccurence = []
 for(let i = 0; i<occurenceCount.length; i++){
     let sum = 0
-    for(let j =0; j<nonRecentData.length; j++){   
-        if( i+1 === nonRecentData[j].occurrence) {
-            sum+= nonRecentData[j].revenue_impact
+    for(let j =0; j<filteredData.length; j++){   
+        if( i+1 === filteredData[j].occurrence) {
+            sum+= filteredData[j].revenue_impact
         }
     }
     let average = Math.round(sum/occurenceCount[i])
@@ -192,6 +215,9 @@ for(let i = 0; i<order_number; i++){
 }
 return totalTime
 }
+
+let customer = createCustomer()
+
 
 
 module.exports = {

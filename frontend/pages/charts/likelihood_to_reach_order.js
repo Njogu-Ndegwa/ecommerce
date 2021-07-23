@@ -15,7 +15,7 @@ export default function App({data}) {
   return (
        <Card title="Modeled Likelihood of reaching Each Completed order" style={{width: "850px", margin:"100px"}}> 
 <LineChart width={800} height={350} data={data}>
-    <XAxis dataKey="name" tickLine={false} tickCount="12" type="number" domain={[0, 'dataMax + 1']}>
+    <XAxis dataKey="name" tickLine={false} tickCount="30" minTickGap={1} type="number" domain={[0, 'dataMax']}>
     <Label value="Activity occurence" offset={0} position="insideBottom" />
     </XAxis>
     <YAxis dataKey="lco" axisLine={false} tickLine={false} type="number" tickCount="6" minTickGap="20" domain={[0, 'dataMax']}>
