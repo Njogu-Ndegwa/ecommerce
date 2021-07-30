@@ -1,0 +1,864 @@
+activity_id,ts,customer,activity,feature_1,revenue_impact
+10279,1996-08-13 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,351.0000086
+10280,1996-08-14 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,613.2000084
+10281,1996-08-14 00:00:00+05,Romero y tomillo,completed_order,Spain,86.49999809
+10282,1996-08-15 00:00:00+05,Romero y tomillo,completed_order,Spain,155.4000053
+10283,1996-08-16 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1414.80002
+10284,1996-08-19 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1170.374994
+10285,1996-08-20 00:00:00+05,QUICK-Stop,completed_order,Germany,1743.359996
+10286,1996-08-21 00:00:00+05,QUICK-Stop,completed_order,Germany,3016.000023
+10287,1996-08-22 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,818.9999839
+10288,1996-08-23 00:00:00+05,Reggiani Caseifici,completed_order,Italy,80.10000073
+10289,1996-08-26 00:00:00+05,B's Beverages,completed_order,UK,479.4000034
+10290,1996-08-27 00:00:00+05,Comércio Mineiro,completed_order,Brazil,2168.999996
+10291,1996-08-27 00:00:00+05,Que Delícia,completed_order,Brazil,497.5200054
+10292,1996-08-28 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,1296.000061
+10293,1996-08-29 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,848.6999903
+10294,1996-08-30 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,1887.600008
+10295,1996-09-02 00:00:00+05,Vins et alcools Chevalier,completed_order,France,121.5999985
+10296,1996-09-03 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1050.599968
+10297,1996-09-04 00:00:00+05,Blondesddsl père et fils,completed_order,France,1419.999962
+10298,1996-09-05 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2645.00001
+10299,1996-09-06 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,349.5000029
+10300,1996-09-09 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,608.0000114
+10301,1996-09-09 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,754.9999905
+10302,1996-09-10 00:00:00+05,Suprêmes délices,completed_order,Belgium,2708.800064
+10303,1996-09-11 00:00:00+05,Godos Cocina Típica,completed_order,Spain,1117.799971
+10304,1996-09-12 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,954.4000015
+10305,1996-09-13 00:00:00+05,Old World Delicatessen,completed_order,USA,3741.299984
+10306,1996-09-16 00:00:00+05,Romero y tomillo,completed_order,Spain,498.5000157
+10307,1996-09-17 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,424.0000153
+10308,1996-09-18 00:00:00+05,Ana Trujillo Emparedados y helados,completed_order,Mexico,88.79999924
+10309,1996-09-19 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1761.999994
+10310,1996-09-20 00:00:00+05,The Big Cheese,completed_order,USA,336.0000038
+10311,1996-09-20 00:00:00+05,Du monde entier,completed_order,France,268.7999935
+10312,1996-09-23 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,1614.800001
+10313,1996-09-24 00:00:00+05,QUICK-Stop,completed_order,Germany,182.3999977
+10314,1996-09-25 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,2094.300055
+10315,1996-09-26 00:00:00+05,Island Trading,completed_order,UK,516.7999973
+10316,1996-09-27 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,2835.000105
+10317,1996-09-30 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,287.9999924
+10318,1996-10-01 00:00:00+05,Island Trading,completed_order,UK,240.3999939
+10319,1996-10-02 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,1191.200016
+10320,1996-10-03 00:00:00+05,Wartian Herkku,completed_order,Finland,516.0000229
+10321,1996-10-03 00:00:00+05,Island Trading,completed_order,UK,143.9999962
+10322,1996-10-04 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,111.9999981
+10323,1996-10-07 00:00:00+05,Königlich Essen,completed_order,Germany,164.3999958
+10324,1996-10-08 00:00:00+05,Save-a-lot Markets,completed_order,USA,5275.714843
+10325,1996-10-09 00:00:00+05,Königlich Essen,completed_order,Germany,1496.999975
+10326,1996-10-10 00:00:00+05,Bólido Comidas preparadas,completed_order,Spain,982.0000057
+10327,1996-10-11 00:00:00+05,Folk och fä HB,completed_order,Sweden,1809.999989
+10328,1996-10-14 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,1167.999969
+10329,1996-10-15 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,4578.430058
+10330,1996-10-16 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1648.999956
+10331,1996-10-16 00:00:00+05,Bon app',completed_order,France,88.50000143
+10332,1996-10-17 00:00:00+05,Mère Paillarde,completed_order,Canada,1786.879991
+10333,1996-10-18 00:00:00+05,Wartian Herkku,completed_order,Finland,877.2000301
+10334,1996-10-21 00:00:00+05,Victuailles en stock,completed_order,France,144.7999992
+10335,1996-10-22 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2036.160052
+10336,1996-10-23 00:00:00+05,Princesa Isabel Vinhos,completed_order,Portugal,285.1200057
+10337,1996-10-24 00:00:00+05,Frankenversand,completed_order,Germany,2466.999939
+10338,1996-10-25 00:00:00+05,Old World Delicatessen,completed_order,USA,934.5000267
+10339,1996-10-28 00:00:00+05,Mère Paillarde,completed_order,Canada,3354.000096
+10340,1996-10-29 00:00:00+05,Bon app',completed_order,France,2436.179967
+10341,1996-10-29 00:00:00+05,Simons bistro,completed_order,Denmark,352.5999976
+10342,1996-10-30 00:00:00+05,Frankenversand,completed_order,Germany,1840.640008
+10343,1996-10-31 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1584.000013
+10344,1996-11-01 00:00:00+05,White Clover Markets,completed_order,USA,2296.000013
+10345,1996-11-04 00:00:00+05,QUICK-Stop,completed_order,Germany,2924.800014
+10346,1996-11-05 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,1618.880015
+10347,1996-11-06 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,814.4199756
+10348,1996-11-07 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,363.5999891
+10349,1996-11-08 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,141.6000023
+10350,1996-11-11 00:00:00+05,La maison d'Asie,completed_order,France,642.0599866
+10351,1996-11-11 00:00:00+05,Ernst Handel,completed_order,Austria,5398.725044
+10352,1996-11-12 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,136.3
+10353,1996-11-13 00:00:00+05,Piccolo und mehr,completed_order,Austria,8593.280083
+10354,1996-11-14 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,568.7999954
+10355,1996-11-15 00:00:00+05,Around the Horn,completed_order,UK,480.0000072
+10356,1996-11-18 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,1106.399994
+10357,1996-11-19 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1167.679978
+10358,1996-11-20 00:00:00+05,La maison d'Asie,completed_order,France,429.3999933
+10359,1996-11-21 00:00:00+05,Seven Seas Imports,completed_order,UK,3471.680035
+10360,1996-11-22 00:00:00+05,Blondesddsl père et fils,completed_order,France,7390.200079
+10361,1996-11-22 00:00:00+05,QUICK-Stop,completed_order,Germany,2046.240016
+10362,1996-11-25 00:00:00+05,Bon app',completed_order,France,1549.600023
+10363,1996-11-26 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,447.1999931
+10364,1996-11-26 00:00:00+05,Eastern Connection,completed_order,UK,949.9999809
+10365,1996-11-27 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,403.1999817
+10366,1996-11-28 00:00:00+05,Galería del gastrónomo,completed_order,Spain,135.9999943
+10367,1996-11-28 00:00:00+05,Vaffeljernet,completed_order,Denmark,834.1999807
+10368,1996-11-29 00:00:00+05,Ernst Handel,completed_order,Austria,1689.780037
+10369,1996-12-02 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,2390.399995
+10370,1996-12-03 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,1117.600004
+10371,1996-12-03 00:00:00+05,La maison d'Asie,completed_order,France,72.95999881
+10372,1996-12-04 00:00:00+05,Queen Cozinha,completed_order,Brazil,9210.900135
+10373,1996-12-05 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1366.40005
+10374,1996-12-05 00:00:00+05,Wolski  Zajazd,completed_order,Poland,459.0000057
+10375,1996-12-06 00:00:00+05,Hungry Coyote Import Store,completed_order,USA,338.0000067
+10376,1996-12-09 00:00:00+05,Mère Paillarde,completed_order,Canada,398.9999997
+10377,1996-12-09 00:00:00+05,Seven Seas Imports,completed_order,UK,863.6000134
+10378,1996-12-10 00:00:00+05,Folk och fä HB,completed_order,Sweden,103.2000046
+10379,1996-12-11 00:00:00+05,Que Delícia,completed_order,Brazil,863.2799615
+10380,1996-12-12 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1313.820029
+10381,1996-12-12 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,112
+10382,1996-12-13 00:00:00+05,Ernst Handel,completed_order,Austria,2900
+10383,1996-12-16 00:00:00+05,Around the Horn,completed_order,UK,898.9999962
+10384,1996-12-16 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,2222.400097
+10385,1996-12-17 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,691.2000096
+10386,1996-12-18 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,165.9999967
+10387,1996-12-18 00:00:00+05,Santé Gourmet,completed_order,Norway,1058.400019
+10388,1996-12-19 00:00:00+05,Seven Seas Imports,completed_order,UK,1228.800027
+10389,1996-12-20 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1832.80003
+10390,1996-12-23 00:00:00+05,Ernst Handel,completed_order,Austria,2090.879984
+10391,1996-12-23 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,86.40000343
+10392,1996-12-24 00:00:00+05,Piccolo und mehr,completed_order,Austria,1439.999962
+10393,1996-12-25 00:00:00+05,Save-a-lot Markets,completed_order,USA,2556.949987
+10394,1996-12-25 00:00:00+05,Hungry Coyote Import Store,completed_order,USA,442.0000172
+10395,1996-12-26 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,2122.920048
+10396,1996-12-27 00:00:00+05,Frankenversand,completed_order,Germany,1903.800022
+10397,1996-12-27 00:00:00+05,Princesa Isabel Vinhos,completed_order,Portugal,716.7200183
+10398,1996-12-30 00:00:00+05,Save-a-lot Markets,completed_order,USA,2505.600068
+10399,1996-12-31 00:00:00+05,Vaffeljernet,completed_order,Denmark,1765.600004
+10400,1997-01-01 00:00:00+05,Eastern Connection,completed_order,UK,3062.999987
+10401,1997-01-01 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,3868.600018
+10402,1997-01-02 00:00:00+05,Ernst Handel,completed_order,Austria,2713.499889
+10403,1997-01-03 00:00:00+05,Ernst Handel,completed_order,Austria,855.0149758
+10404,1997-01-03 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,1591.249981
+10405,1997-01-06 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,400
+10406,1997-01-07 00:00:00+05,Queen Cozinha,completed_order,Brazil,1830.78005
+10407,1997-01-07 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1193.999977
+10408,1997-01-08 00:00:00+05,Folies gourmandes,completed_order,France,1622.400046
+10409,1997-01-09 00:00:00+05,Océano Atlántico Ltda.,completed_order,Argentina,319.2000046
+10410,1997-01-10 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,802
+10411,1997-01-10 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,966.7999926
+10412,1997-01-13 00:00:00+05,Wartian Herkku,completed_order,Finland,334.8000063
+10413,1997-01-14 00:00:00+05,La maison d'Asie,completed_order,France,2123.200047
+10414,1997-01-14 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,224.8300032
+10415,1997-01-15 00:00:00+05,Hungry Coyote Import Store,completed_order,USA,102.4000015
+10416,1997-01-16 00:00:00+05,Wartian Herkku,completed_order,Finland,720.0000191
+10417,1997-01-16 00:00:00+05,Simons bistro,completed_order,Denmark,11188.40014
+10418,1997-01-17 00:00:00+05,QUICK-Stop,completed_order,Germany,1814.799971
+10419,1997-01-20 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,2097.600027
+10420,1997-01-21 00:00:00+05,Wellington Importadora,completed_order,Brazil,1707.83997
+10421,1997-01-21 00:00:00+05,Que Delícia,completed_order,Brazil,1194.269993
+10422,1997-01-22 00:00:00+05,Franchi S.p.A.,completed_order,Italy,49.79999924
+10423,1997-01-23 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,1020
+10424,1997-01-23 00:00:00+05,Mère Paillarde,completed_order,Canada,9194.560067
+10425,1997-01-24 00:00:00+05,La maison d'Asie,completed_order,France,360
+10426,1997-01-27 00:00:00+05,Galería del gastrónomo,completed_order,Spain,338.2000008
+10427,1997-01-27 00:00:00+05,Piccolo und mehr,completed_order,Austria,651.0000134
+10428,1997-01-28 00:00:00+05,Reggiani Caseifici,completed_order,Italy,192.0000076
+10429,1997-01-29 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1441.37496
+10430,1997-01-30 00:00:00+05,Ernst Handel,completed_order,Austria,4899.200003
+10431,1997-01-30 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1892.250019
+10432,1997-01-31 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,485
+10433,1997-02-03 00:00:00+05,Princesa Isabel Vinhos,completed_order,Portugal,851.1999893
+10434,1997-02-03 00:00:00+05,Folk och fä HB,completed_order,Sweden,321.119988
+10435,1997-02-04 00:00:00+05,Consolidated Holdings,completed_order,UK,631.5999813
+10436,1997-02-05 00:00:00+05,Blondesddsl père et fils,completed_order,France,1994.519991
+10437,1997-02-05 00:00:00+05,Wartian Herkku,completed_order,Finland,393.0000114
+10438,1997-02-06 00:00:00+05,Toms Spezialitäten,completed_order,Germany,454.0000021
+10439,1997-02-07 00:00:00+05,Mère Paillarde,completed_order,Canada,1077.99999
+10440,1997-02-10 00:00:00+05,Save-a-lot Markets,completed_order,USA,4924.134884
+10441,1997-02-10 00:00:00+05,Old World Delicatessen,completed_order,USA,1754.999924
+10442,1997-02-11 00:00:00+05,Ernst Handel,completed_order,Austria,1792.000008
+10443,1997-02-12 00:00:00+05,Reggiani Caseifici,completed_order,Italy,517.4400143
+10444,1997-02-12 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1031.699993
+10445,1997-02-13 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,174.8999991
+10446,1997-02-14 00:00:00+05,Toms Spezialitäten,completed_order,Germany,246.2399986
+10447,1997-02-14 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,914.3999825
+10448,1997-02-17 00:00:00+05,Rancho grande,completed_order,Argentina,443.3999939
+10449,1997-02-18 00:00:00+05,Blondesddsl père et fils,completed_order,France,1838.200041
+10450,1997-02-19 00:00:00+05,Victuailles en stock,completed_order,France,425.1199867
+10451,1997-02-19 00:00:00+05,QUICK-Stop,completed_order,Germany,3849.66005
+10452,1997-02-20 00:00:00+05,Save-a-lot Markets,completed_order,USA,2018.500022
+10453,1997-02-21 00:00:00+05,Around the Horn,completed_order,UK,407.6999968
+10454,1997-02-21 00:00:00+05,La maison d'Asie,completed_order,France,331.1999957
+10455,1997-02-24 00:00:00+05,Wartian Herkku,completed_order,Finland,2684.000034
+10456,1997-02-25 00:00:00+05,Königlich Essen,completed_order,Germany,557.5999961
+10457,1997-02-25 00:00:00+05,Königlich Essen,completed_order,Germany,1584
+10458,1997-02-26 00:00:00+05,Suprêmes délices,completed_order,Belgium,3891.000051
+10459,1997-02-27 00:00:00+05,Victuailles en stock,completed_order,France,1659.199976
+10460,1997-02-28 00:00:00+05,Folk och fä HB,completed_order,Sweden,176.0999994
+10461,1997-02-28 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1538.70005
+10462,1997-03-03 00:00:00+05,Consolidated Holdings,completed_order,UK,155.9999962
+10463,1997-03-04 00:00:00+05,Suprêmes délices,completed_order,Belgium,713.2999945
+10464,1997-03-04 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,1609.280005
+10465,1997-03-05 00:00:00+05,Vaffeljernet,completed_order,Denmark,2517.999988
+10466,1997-03-06 00:00:00+05,Comércio Mineiro,completed_order,Brazil,215.9999943
+10467,1997-03-06 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,235.199995
+10468,1997-03-07 00:00:00+05,Königlich Essen,completed_order,Germany,717.5999947
+10469,1997-03-10 00:00:00+05,White Clover Markets,completed_order,USA,956.6749755
+10470,1997-03-11 00:00:00+05,Bon app',completed_order,France,1820.8
+10471,1997-03-11 00:00:00+05,B's Beverages,completed_order,UK,1327.999992
+10472,1997-03-12 00:00:00+05,Seven Seas Imports,completed_order,UK,1036.80002
+10473,1997-03-13 00:00:00+05,Island Trading,completed_order,UK,230.4000092
+10474,1997-03-13 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,1249.100026
+10475,1997-03-14 00:00:00+05,Suprêmes délices,completed_order,Belgium,1505.179995
+10476,1997-03-17 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,180.4800014
+10477,1997-03-17 00:00:00+05,Princesa Isabel Vinhos,completed_order,Portugal,557.9999886
+10478,1997-03-18 00:00:00+05,Victuailles en stock,completed_order,France,471.1999851
+10479,1997-03-19 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,10495.60012
+10480,1997-03-20 00:00:00+05,Folies gourmandes,completed_order,France,755.9999971
+10481,1997-03-20 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,1472.000031
+10482,1997-03-21 00:00:00+05,Lazy K Kountry Store,completed_order,USA,146.9999981
+10483,1997-03-24 00:00:00+05,White Clover Markets,completed_order,USA,668.7999823
+10484,1997-03-24 00:00:00+05,B's Beverages,completed_order,UK,386.2000027
+10485,1997-03-25 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,1584.000015
+10486,1997-03-26 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,1272.000034
+10487,1997-03-26 00:00:00+05,Queen Cozinha,completed_order,Brazil,889.6999912
+10488,1997-03-27 00:00:00+05,Frankenversand,completed_order,Germany,1511.999999
+10489,1997-03-28 00:00:00+05,Piccolo und mehr,completed_order,Austria,439.1999846
+10490,1997-03-31 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,3163.199993
+10491,1997-03-31 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,259.5049959
+10492,1997-04-01 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,851.1999848
+10493,1997-04-02 00:00:00+05,La maison d'Asie,completed_order,France,608.3999853
+10494,1997-04-02 00:00:00+05,Comércio Mineiro,completed_order,Brazil,911.9999886
+10495,1997-04-03 00:00:00+05,Laughing Bacchus Wine Cellars,completed_order,Canada,277.9999924
+10496,1997-04-04 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,189.9999999
+10497,1997-04-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1380.599966
+10498,1997-04-07 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,574.9999981
+10499,1997-04-08 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1411.999969
+10500,1997-04-09 00:00:00+05,La maison d'Asie,completed_order,France,523.259988
+10501,1997-04-09 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,148.9999962
+10502,1997-04-10 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,816.2999954
+10503,1997-04-11 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2048.499985
+10504,1997-04-11 00:00:00+05,White Clover Markets,completed_order,USA,1388.499992
+10505,1997-04-14 00:00:00+05,Mère Paillarde,completed_order,Canada,147.8999977
+10506,1997-04-15 00:00:00+05,Königlich Essen,completed_order,Germany,415.7999993
+10507,1997-04-15 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,749.0624947
+10508,1997-04-16 00:00:00+05,Ottilies Käseladen,completed_order,Germany,240
+10509,1997-04-17 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,136.7999954
+10510,1997-04-18 00:00:00+05,Save-a-lot Markets,completed_order,USA,4707.540033
+10511,1997-04-18 00:00:00+05,Bon app',completed_order,France,2549.999982
+10512,1997-04-21 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,525.2999963
+10513,1997-04-22 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,1941.999993
+10514,1997-04-22 00:00:00+05,Ernst Handel,completed_order,Austria,8623.449917
+10515,1997-04-23 00:00:00+05,QUICK-Stop,completed_order,Germany,9921.300195
+10516,1997-04-24 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2381.049969
+10517,1997-04-24 00:00:00+05,North/South,completed_order,UK,352
+10518,1997-04-25 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,4150.050007
+10519,1997-04-28 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,2314.199999
+10520,1997-04-29 00:00:00+05,Santé Gourmet,completed_order,Norway,199.9999962
+10521,1997-04-29 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,225.4999962
+10522,1997-04-30 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,2318.239978
+10523,1997-05-01 00:00:00+05,Seven Seas Imports,completed_order,UK,2444.309994
+10524,1997-05-01 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,3192.649991
+10525,1997-05-02 00:00:00+05,Bon app',completed_order,France,818.3999944
+10526,1997-05-05 00:00:00+05,Wartian Herkku,completed_order,Finland,1151.399992
+10527,1997-05-05 00:00:00+05,QUICK-Stop,completed_order,Germany,1502.999998
+10528,1997-05-06 00:00:00+05,Great Lakes Food Market,completed_order,USA,392.1999931
+10529,1997-05-07 00:00:00+05,Maison Dewey,completed_order,Belgium,946
+10530,1997-05-08 00:00:00+05,Piccolo und mehr,completed_order,Austria,4180
+10531,1997-05-08 00:00:00+05,Océano Atlántico Ltda.,completed_order,Argentina,110
+10532,1997-05-09 00:00:00+05,Eastern Connection,completed_order,UK,796.3499908
+10533,1997-05-12 00:00:00+05,Folk och fä HB,completed_order,Sweden,2222.199981
+10534,1997-05-12 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,465.6999885
+10535,1997-05-13 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,1940.849993
+10536,1997-05-14 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1645
+10537,1997-05-14 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,1823.799984
+10538,1997-05-15 00:00:00+05,B's Beverages,completed_order,UK,139.7999992
+10539,1997-05-16 00:00:00+05,B's Beverages,completed_order,UK,355.5
+10540,1997-05-19 00:00:00+05,QUICK-Stop,completed_order,Germany,10191.69998
+10541,1997-05-19 00:00:00+05,Hanari Carnes,completed_order,Brazil,1946.519972
+10542,1997-05-20 00:00:00+05,Königlich Essen,completed_order,Germany,469.1099953
+10543,1997-05-21 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1504.499989
+10544,1997-05-21 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,417.1999893
+10545,1997-05-22 00:00:00+05,Lazy K Kountry Store,completed_order,USA,210
+10546,1997-05-23 00:00:00+05,Victuailles en stock,completed_order,France,2811.999969
+10547,1997-05-23 00:00:00+05,Seven Seas Imports,completed_order,UK,1792.799995
+10548,1997-05-26 00:00:00+05,Toms Spezialitäten,completed_order,Germany,240.0999947
+10549,1997-05-27 00:00:00+05,QUICK-Stop,completed_order,Germany,3554.274975
+10550,1997-05-28 00:00:00+05,Godos Cocina Típica,completed_order,Spain,683.2999971
+10551,1997-05-28 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,1677.30005
+10552,1997-05-29 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,880.5
+10553,1997-05-30 00:00:00+05,Wartian Herkku,completed_order,Finland,1546.300011
+10554,1997-05-30 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1728.525006
+10555,1997-06-02 00:00:00+05,Save-a-lot Markets,completed_order,USA,2944.399984
+10556,1997-06-03 00:00:00+05,Simons bistro,completed_order,Denmark,835.1999817
+10557,1997-06-03 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1152.5
+10558,1997-06-04 00:00:00+05,Around the Horn,completed_order,UK,2142.899986
+10559,1997-06-05 00:00:00+05,Blondesddsl père et fils,completed_order,France,520.4099952
+10560,1997-06-06 00:00:00+05,Frankenversand,completed_order,Germany,1072.424979
+10561,1997-06-06 00:00:00+05,Folk och fä HB,completed_order,Sweden,2844.500008
+10562,1997-06-09 00:00:00+05,Reggiani Caseifici,completed_order,Italy,488.6999923
+10563,1997-06-10 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,965
+10564,1997-06-10 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,1234.049999
+10565,1997-06-11 00:00:00+05,Mère Paillarde,completed_order,Canada,639.8999989
+10566,1997-06-12 00:00:00+05,Blondesddsl père et fils,completed_order,France,1760.999989
+10567,1997-06-12 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2518.999991
+10568,1997-06-13 00:00:00+05,Galería del gastrónomo,completed_order,Spain,155
+10569,1997-06-16 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,889.9999987
+10570,1997-06-17 00:00:00+05,Mère Paillarde,completed_order,Canada,2465.249998
+10571,1997-06-17 00:00:00+05,Ernst Handel,completed_order,Austria,550.5874961
+10572,1997-06-18 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1501.084988
+10573,1997-06-19 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,2081.999981
+10574,1997-06-19 00:00:00+05,Trail's Head Gourmet Provisioners,completed_order,USA,764.2999916
+10575,1997-06-20 00:00:00+05,Morgenstern Gesundkost,completed_order,Germany,2147.399986
+10576,1997-06-23 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,838.450016
+10577,1997-06-23 00:00:00+05,Trail's Head Gourmet Provisioners,completed_order,USA,569
+10578,1997-06-24 00:00:00+05,B's Beverages,completed_order,UK,477
+10579,1997-06-25 00:00:00+05,Let's Stop N Shop,completed_order,USA,317.75
+10580,1997-06-26 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1013.744974
+10581,1997-06-26 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,309.9999988
+10582,1997-06-27 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,330
+10583,1997-06-30 00:00:00+05,Wartian Herkku,completed_order,Finland,2237.500002
+10584,1997-06-30 00:00:00+05,Blondesddsl père et fils,completed_order,France,593.7499995
+10585,1997-07-01 00:00:00+05,Wellington Importadora,completed_order,Brazil,142.5
+10586,1997-07-02 00:00:00+05,Reggiani Caseifici,completed_order,Italy,23.79999983
+10587,1997-07-02 00:00:00+05,Que Delícia,completed_order,Brazil,807.3799973
+10588,1997-07-03 00:00:00+05,QUICK-Stop,completed_order,Germany,3119.999988
+10589,1997-07-04 00:00:00+05,Great Lakes Food Market,completed_order,USA,72
+10590,1997-07-07 00:00:00+05,Mère Paillarde,completed_order,Canada,1100.999999
+10591,1997-07-07 00:00:00+05,Vaffeljernet,completed_order,Denmark,812.4999905
+10592,1997-07-08 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,516.4674974
+10593,1997-07-09 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1994.399993
+10594,1997-07-09 00:00:00+05,Old World Delicatessen,completed_order,USA,565.5
+10595,1997-07-10 00:00:00+05,Ernst Handel,completed_order,Austria,4725
+10596,1997-07-11 00:00:00+05,White Clover Markets,completed_order,USA,1180.880025
+10597,1997-07-11 00:00:00+05,Piccolo und mehr,completed_order,Austria,718.0799915
+10598,1997-07-14 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,2388.500076
+10599,1997-07-15 00:00:00+05,B's Beverages,completed_order,UK,492.9999924
+10600,1997-07-16 00:00:00+05,Hungry Coyote Import Store,completed_order,USA,479.7999992
+10601,1997-07-16 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,2285
+10602,1997-07-17 00:00:00+05,Vaffeljernet,completed_order,Denmark,48.75
+10603,1997-07-18 00:00:00+05,Save-a-lot Markets,completed_order,USA,1483
+10604,1997-07-18 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,230.8499996
+10605,1997-07-21 00:00:00+05,Mère Paillarde,completed_order,Canada,4109.700019
+10606,1997-07-22 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,1130.39999
+10607,1997-07-22 00:00:00+05,Save-a-lot Markets,completed_order,USA,6475.399975
+10608,1997-07-23 00:00:00+05,Toms Spezialitäten,completed_order,Germany,1064
+10609,1997-07-24 00:00:00+05,Du monde entier,completed_order,France,424
+10610,1997-07-25 00:00:00+05,La maison d'Asie,completed_order,France,299.25
+10611,1997-07-25 00:00:00+05,Wolski  Zajazd,completed_order,Poland,808
+10612,1997-07-28 00:00:00+05,Save-a-lot Markets,completed_order,USA,6375
+10613,1997-07-29 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,353.1999999
+10614,1997-07-29 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,464
+10615,1997-07-30 00:00:00+05,Wilman Kala,completed_order,Finland,120
+10616,1997-07-31 00:00:00+05,Great Lakes Food Market,completed_order,USA,4806.999997
+10617,1997-07-31 00:00:00+05,Great Lakes Food Market,completed_order,USA,1402.49999
+10618,1997-08-01 00:00:00+05,Mère Paillarde,completed_order,Canada,2697.5
+10619,1997-08-04 00:00:00+05,Mère Paillarde,completed_order,Canada,1260
+10620,1997-08-05 00:00:00+05,Laughing Bacchus Wine Cellars,completed_order,Canada,57.5
+10621,1997-08-05 00:00:00+05,Island Trading,completed_order,UK,758.499999
+10622,1997-08-06 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,559.9999993
+10623,1997-08-07 00:00:00+05,Frankenversand,completed_order,Germany,1336.949996
+10624,1997-08-07 00:00:00+05,The Cracker Box,completed_order,USA,1393.239998
+10625,1997-08-08 00:00:00+05,Ana Trujillo Emparedados y helados,completed_order,Mexico,479.75
+10626,1997-08-11 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1503.599991
+10627,1997-08-11 00:00:00+05,Save-a-lot Markets,completed_order,USA,1185.749985
+10628,1997-08-12 00:00:00+05,Blondesddsl père et fils,completed_order,France,450
+10629,1997-08-12 00:00:00+05,Godos Cocina Típica,completed_order,Spain,2775.050018
+10630,1997-08-13 00:00:00+05,Königlich Essen,completed_order,Germany,903.5999998
+10631,1997-08-14 00:00:00+05,La maison d'Asie,completed_order,France,55.79999991
+10632,1997-08-14 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,588.9999995
+10633,1997-08-15 00:00:00+05,Ernst Handel,completed_order,Austria,5510.592396
+10634,1997-08-15 00:00:00+05,Folies gourmandes,completed_order,France,4985.5
+10635,1997-08-18 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,1326.225004
+10636,1997-08-19 00:00:00+05,Wartian Herkku,completed_order,Finland,629.5
+10637,1997-08-19 00:00:00+05,Queen Cozinha,completed_order,Brazil,2761.937498
+10638,1997-08-20 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,2720.049938
+10639,1997-08-20 00:00:00+05,Santé Gourmet,completed_order,Norway,500
+10640,1997-08-21 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,708.75
+10641,1997-08-22 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,2053.999977
+10642,1997-08-22 00:00:00+05,Simons bistro,completed_order,Denmark,695.9999974
+10643,1997-08-25 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,814.4999828
+10644,1997-08-25 00:00:00+05,Wellington Importadora,completed_order,Brazil,1371.799999
+10645,1997-08-26 00:00:00+05,Hanari Carnes,completed_order,Brazil,1535
+10646,1997-08-27 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1446
+10647,1997-08-27 00:00:00+05,Que Delícia,completed_order,Brazil,635.9999943
+10648,1997-08-28 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,372.3749996
+10649,1997-08-28 00:00:00+05,Maison Dewey,completed_order,Belgium,1433.999958
+10650,1997-08-29 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,1779.199957
+10651,1997-09-01 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,397.7999983
+10652,1997-09-01 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,318.8349991
+10653,1997-09-02 00:00:00+05,Frankenversand,completed_order,Germany,1083.150019
+10654,1997-09-02 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,601.829998
+10655,1997-09-03 00:00:00+05,Reggiani Caseifici,completed_order,Italy,154.3999933
+10656,1997-09-04 00:00:00+05,Great Lakes Food Market,completed_order,USA,604.2150182
+10657,1997-09-04 00:00:00+05,Save-a-lot Markets,completed_order,USA,4371.599991
+10658,1997-09-05 00:00:00+05,QUICK-Stop,completed_order,Germany,4464.599972
+10659,1997-09-05 00:00:00+05,Queen Cozinha,completed_order,Brazil,1227.01999
+10660,1997-09-08 00:00:00+05,Hungry Coyote Import Store,completed_order,USA,1701
+10661,1997-09-09 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,562.5999979
+10662,1997-09-09 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,125
+10663,1997-09-10 00:00:00+05,Bon app',completed_order,France,1930.399988
+10664,1997-09-10 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,1288.387481
+10665,1997-09-11 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,1295
+10666,1997-09-12 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,4666.940025
+10667,1997-09-12 00:00:00+05,Ernst Handel,completed_order,Austria,1536.799994
+10668,1997-09-15 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,625.274999
+10669,1997-09-15 00:00:00+05,Simons bistro,completed_order,Denmark,570
+10670,1997-09-16 00:00:00+05,Frankenversand,completed_order,Germany,2301.75
+10671,1997-09-17 00:00:00+05,France restauration,completed_order,France,920.0999908
+10672,1997-09-17 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,3815.249994
+10673,1997-09-18 00:00:00+05,Wilman Kala,completed_order,Finland,412.3500023
+10674,1997-09-18 00:00:00+05,Island Trading,completed_order,UK,45
+10675,1997-09-19 00:00:00+05,Frankenversand,completed_order,Germany,1422.999992
+10676,1997-09-22 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,534.8500147
+10677,1997-09-22 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,813.3649826
+10678,1997-09-23 00:00:00+05,Save-a-lot Markets,completed_order,USA,5256.499949
+10679,1997-09-23 00:00:00+05,Blondesddsl père et fils,completed_order,France,660
+10680,1997-09-24 00:00:00+05,Old World Delicatessen,completed_order,USA,1261.875029
+10681,1997-09-25 00:00:00+05,Great Lakes Food Market,completed_order,USA,1287.399994
+10682,1997-09-25 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,375.5
+10683,1997-09-26 00:00:00+05,Du monde entier,completed_order,France,63
+10684,1997-09-26 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1767.999992
+10685,1997-09-29 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,801.0999985
+10686,1997-09-30 00:00:00+05,Piccolo und mehr,completed_order,Austria,1404.44999
+10687,1997-09-30 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,4960.900009
+10688,1997-10-01 00:00:00+05,Vaffeljernet,completed_order,Denmark,3160.599913
+10689,1997-10-01 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,472.5
+10690,1997-10-02 00:00:00+05,Hanari Carnes,completed_order,Brazil,862.5
+10691,1997-10-03 00:00:00+05,QUICK-Stop,completed_order,Germany,10164.80002
+10692,1997-10-03 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,878.0000305
+10693,1997-10-06 00:00:00+05,White Clover Markets,completed_order,USA,2071.19998
+10694,1997-10-06 00:00:00+05,QUICK-Stop,completed_order,Germany,4825
+10695,1997-10-07 00:00:00+05,Wilman Kala,completed_order,Finland,642
+10696,1997-10-08 00:00:00+05,White Clover Markets,completed_order,USA,996
+10697,1997-10-08 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,805.424999
+10698,1997-10-09 00:00:00+05,Ernst Handel,completed_order,Austria,3436.443461
+10699,1997-10-09 00:00:00+05,Morgenstern Gesundkost,completed_order,Germany,114
+10700,1997-10-10 00:00:00+05,Save-a-lot Markets,completed_order,USA,1638.399994
+10701,1997-10-13 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2864.49998
+10702,1997-10-13 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,330
+10703,1997-10-14 00:00:00+05,Folk och fä HB,completed_order,Sweden,2545
+10704,1997-10-14 00:00:00+05,Queen Cozinha,completed_order,Brazil,595.5
+10705,1997-10-15 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,378
+10706,1997-10-16 00:00:00+05,Old World Delicatessen,completed_order,USA,1893.000015
+10707,1997-10-16 00:00:00+05,Around the Horn,completed_order,UK,1640.999997
+10708,1997-10-17 00:00:00+05,The Big Cheese,completed_order,USA,180.4000015
+10709,1997-10-17 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,3424
+10710,1997-10-20 00:00:00+05,Franchi S.p.A.,completed_order,Italy,93.49999905
+10711,1997-10-21 00:00:00+05,Save-a-lot Markets,completed_order,USA,4451.69989
+10712,1997-10-21 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1233.479998
+10713,1997-10-22 00:00:00+05,Save-a-lot Markets,completed_order,USA,2827.899986
+10714,1997-10-22 00:00:00+05,Save-a-lot Markets,completed_order,USA,2205.75
+10715,1997-10-23 00:00:00+05,Bon app',completed_order,France,1296
+10716,1997-10-24 00:00:00+05,Rancho grande,completed_order,Argentina,706
+10717,1997-10-24 00:00:00+05,Frankenversand,completed_order,Germany,1270.749996
+10718,1997-10-27 00:00:00+05,Königlich Essen,completed_order,Germany,3463
+10719,1997-10-27 00:00:00+05,Let's Stop N Shop,completed_order,USA,844.2524929
+10720,1997-10-28 00:00:00+05,Que Delícia,completed_order,Brazil,550
+10721,1997-10-29 00:00:00+05,QUICK-Stop,completed_order,Germany,923.8750355
+10722,1997-10-29 00:00:00+05,Save-a-lot Markets,completed_order,USA,1570
+10723,1997-10-30 00:00:00+05,White Clover Markets,completed_order,USA,468.4499931
+10724,1997-10-30 00:00:00+05,Mère Paillarde,completed_order,Canada,638.5
+10725,1997-10-31 00:00:00+05,Familia Arquibaldo,completed_order,Brazil,287.7999954
+10726,1997-11-03 00:00:00+05,Eastern Connection,completed_order,UK,655
+10727,1997-11-03 00:00:00+05,Reggiani Caseifici,completed_order,Italy,1624.499999
+10728,1997-11-04 00:00:00+05,Queen Cozinha,completed_order,Brazil,1296.749989
+10729,1997-11-04 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,1850
+10730,1997-11-05 00:00:00+05,Bon app',completed_order,France,484.2625032
+10731,1997-11-06 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,1890.499999
+10732,1997-11-06 00:00:00+05,Bon app',completed_order,France,360
+10733,1997-11-07 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1458.999969
+10734,1997-11-07 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,1498.349991
+10735,1997-11-10 00:00:00+05,Let's Stop N Shop,completed_order,USA,536.3999991
+10736,1997-11-11 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,996.9999695
+10737,1997-11-11 00:00:00+05,Vins et alcools Chevalier,completed_order,France,139.7999954
+10738,1997-11-12 00:00:00+05,Spécialités du monde,completed_order,France,52.35000229
+10739,1997-11-12 00:00:00+05,Vins et alcools Chevalier,completed_order,France,240
+10740,1997-11-13 00:00:00+05,White Clover Markets,completed_order,USA,1415.999989
+10741,1997-11-14 00:00:00+05,Around the Horn,completed_order,UK,227.9999992
+10742,1997-11-14 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,3117.999973
+10743,1997-11-17 00:00:00+05,Around the Horn,completed_order,UK,319.1999997
+10744,1997-11-17 00:00:00+05,Vaffeljernet,completed_order,Denmark,735.999982
+10745,1997-11-18 00:00:00+05,QUICK-Stop,completed_order,Germany,4529.800007
+10746,1997-11-19 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,2311.699993
+10747,1997-11-19 00:00:00+05,Piccolo und mehr,completed_order,Austria,1912.85
+10749,1997-11-20 00:00:00+05,Island Trading,completed_order,UK,1080
+10750,1997-11-21 00:00:00+05,Wartian Herkku,completed_order,Finland,1590.562489
+10751,1997-11-24 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,1631.483976
+10748,1997-11-20 00:00:00+05,Save-a-lot Markets,completed_order,USA,2195.999985
+10752,1997-11-24 00:00:00+05,North/South,completed_order,UK,252
+10753,1997-11-25 00:00:00+05,Franchi S.p.A.,completed_order,Italy,88
+10754,1997-11-25 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,55.19999886
+10755,1997-11-26 00:00:00+05,Bon app',completed_order,France,1948.5
+10756,1997-11-27 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,1989.999993
+10757,1997-11-27 00:00:00+05,Save-a-lot Markets,completed_order,USA,3081.999977
+10758,1997-11-28 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,1644.599991
+10759,1997-11-28 00:00:00+05,Ana Trujillo Emparedados y helados,completed_order,Mexico,320
+10760,1997-12-01 00:00:00+05,Maison Dewey,completed_order,Belgium,2917.000061
+10761,1997-12-02 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,507
+10762,1997-12-02 00:00:00+05,Folk och fä HB,completed_order,Sweden,4337
+10763,1997-12-03 00:00:00+05,Folies gourmandes,completed_order,France,616
+10764,1997-12-03 00:00:00+05,Ernst Handel,completed_order,Austria,2285.999996
+10765,1997-12-04 00:00:00+05,QUICK-Stop,completed_order,Germany,1515.599943
+10766,1997-12-05 00:00:00+05,Ottilies Käseladen,completed_order,Germany,2310
+10767,1997-12-05 00:00:00+05,Suprêmes délices,completed_order,Belgium,28
+10768,1997-12-08 00:00:00+05,Around the Horn,completed_order,UK,1477
+10769,1997-12-08 00:00:00+05,Vaffeljernet,completed_order,Denmark,1684.274977
+10770,1997-12-09 00:00:00+05,Hanari Carnes,completed_order,Brazil,236.25
+10771,1997-12-10 00:00:00+05,Ernst Handel,completed_order,Austria,344
+10772,1997-12-10 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,3603.220016
+10773,1997-12-11 00:00:00+05,Ernst Handel,completed_order,Austria,2030.399997
+10774,1997-12-11 00:00:00+05,Folk och fä HB,completed_order,Sweden,868.75
+10775,1997-12-12 00:00:00+05,The Cracker Box,completed_order,USA,228
+10776,1997-12-15 00:00:00+05,Ernst Handel,completed_order,Austria,6635.274995
+10777,1997-12-15 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,223.9999992
+10778,1997-12-16 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,96.49999619
+10779,1997-12-16 00:00:00+05,Morgenstern Gesundkost,completed_order,Germany,1335
+10780,1997-12-16 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,720
+10781,1997-12-17 00:00:00+05,Wartian Herkku,completed_order,Finland,975.8799972
+10782,1997-12-17 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,12.5
+10783,1997-12-18 00:00:00+05,Hanari Carnes,completed_order,Brazil,1442.5
+10784,1997-12-18 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,1487.999974
+10785,1997-12-18 00:00:00+05,GROSELLA-Restaurante,completed_order,Venezuela,387.5
+10786,1997-12-19 00:00:00+05,Queen Cozinha,completed_order,Brazil,1531.079987
+10787,1997-12-19 00:00:00+05,La maison d'Asie,completed_order,France,2622.760015
+10788,1997-12-22 00:00:00+05,QUICK-Stop,completed_order,Germany,731.4999904
+10789,1997-12-22 00:00:00+05,Folies gourmandes,completed_order,France,3687.000046
+10790,1997-12-22 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,722.4999949
+10791,1997-12-23 00:00:00+05,Frankenversand,completed_order,Germany,1829.757003
+10792,1997-12-23 00:00:00+05,Wolski  Zajazd,completed_order,Poland,399.8499994
+10793,1997-12-24 00:00:00+05,Around the Horn,completed_order,UK,191.0999947
+10794,1997-12-24 00:00:00+05,Que Delícia,completed_order,Brazil,314.7599979
+10795,1997-12-24 00:00:00+05,Ernst Handel,completed_order,Austria,2158.00005
+10796,1997-12-25 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,2341.363992
+10797,1997-12-25 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,420
+10798,1997-12-26 00:00:00+05,Island Trading,completed_order,UK,446.5999908
+10799,1997-12-26 00:00:00+05,Königlich Essen,completed_order,Germany,1553.499999
+10800,1997-12-26 00:00:00+05,Seven Seas Imports,completed_order,UK,1468.934996
+10801,1997-12-29 00:00:00+05,Bólido Comidas preparadas,completed_order,Spain,3026.850014
+10802,1997-12-29 00:00:00+05,Simons bistro,completed_order,Denmark,2942.812486
+10803,1997-12-30 00:00:00+05,Wellington Importadora,completed_order,Brazil,1193.009995
+10804,1997-12-30 00:00:00+05,Seven Seas Imports,completed_order,UK,2278.399963
+10805,1997-12-30 00:00:00+05,The Big Cheese,completed_order,USA,2775
+10806,1997-12-31 00:00:00+05,Victuailles en stock,completed_order,France,439.5999985
+10807,1997-12-31 00:00:00+05,Franchi S.p.A.,completed_order,Italy,18.39999962
+10808,1998-01-01 00:00:00+05,Old World Delicatessen,completed_order,USA,1410.99999
+10809,1998-01-01 00:00:00+05,Wellington Importadora,completed_order,Brazil,140
+10810,1998-01-01 00:00:00+05,Laughing Bacchus Wine Cellars,completed_order,Canada,187
+10811,1998-01-02 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,851.9999857
+10812,1998-01-02 00:00:00+05,Reggiani Caseifici,completed_order,Italy,1692.79997
+10813,1998-01-05 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,602.3999993
+10814,1998-01-05 00:00:00+05,Victuailles en stock,completed_order,France,1788.449981
+10815,1998-01-05 00:00:00+05,Save-a-lot Markets,completed_order,USA,40
+10816,1998-01-06 00:00:00+05,Great Lakes Food Market,completed_order,USA,8446.449979
+10817,1998-01-06 00:00:00+05,Königlich Essen,completed_order,Germany,10952.84493
+10818,1998-01-07 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,832.9999924
+10819,1998-01-07 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,477
+10820,1998-01-07 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,1140
+10821,1998-01-08 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,678
+10822,1998-01-08 00:00:00+05,Trail's Head Gourmet Provisioners,completed_order,USA,237.8999977
+10823,1998-01-09 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,2825.999996
+10824,1998-01-09 00:00:00+05,Folk och fä HB,completed_order,Sweden,250.7999954
+10825,1998-01-09 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,1030.759979
+10826,1998-01-12 00:00:00+05,Blondesddsl père et fils,completed_order,France,730
+10827,1998-01-12 00:00:00+05,Bon app',completed_order,France,843
+10828,1998-01-13 00:00:00+05,Rancho grande,completed_order,Argentina,932
+10829,1998-01-13 00:00:00+05,Island Trading,completed_order,UK,1764
+10830,1998-01-13 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,1974
+10831,1998-01-14 00:00:00+05,Santé Gourmet,completed_order,Norway,2684.4
+10832,1998-01-14 00:00:00+05,La maison d'Asie,completed_order,France,475.1100084
+10833,1998-01-15 00:00:00+05,Ottilies Käseladen,completed_order,Germany,906.9299923
+10834,1998-01-15 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,1432.713994
+10835,1998-01-15 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,845.7999999
+10836,1998-01-16 00:00:00+05,Ernst Handel,completed_order,Austria,4705.5
+10837,1998-01-16 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1064.49999
+10838,1998-01-19 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,1938.375
+10839,1998-01-19 00:00:00+05,Tradição Hipermercados,completed_order,Brazil,827.5499883
+10840,1998-01-19 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,211.1999992
+10841,1998-01-20 00:00:00+05,Suprêmes délices,completed_order,Belgium,4581
+10842,1998-01-20 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,975
+10843,1998-01-21 00:00:00+05,Victuailles en stock,completed_order,France,159
+10844,1998-01-21 00:00:00+05,Piccolo und mehr,completed_order,Austria,735
+10845,1998-01-21 00:00:00+05,QUICK-Stop,completed_order,Germany,3812.699996
+10846,1998-01-22 00:00:00+05,Suprêmes délices,completed_order,Belgium,1112
+10847,1998-01-22 00:00:00+05,Save-a-lot Markets,completed_order,USA,4931.91998
+10848,1998-01-23 00:00:00+05,Consolidated Holdings,completed_order,UK,931.5000114
+10849,1998-01-23 00:00:00+05,Königlich Essen,completed_order,Germany,967.8189896
+10850,1998-01-23 00:00:00+05,Victuailles en stock,completed_order,France,628.9999956
+10851,1998-01-26 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,2602.999998
+10852,1998-01-26 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,2983.999962
+10853,1998-01-27 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,625
+10854,1998-01-27 00:00:00+05,Ernst Handel,completed_order,Austria,2966.499979
+10855,1998-01-27 00:00:00+05,Old World Delicatessen,completed_order,USA,2227.887527
+10856,1998-01-28 00:00:00+05,Antonio Moreno Taquería,completed_order,Mexico,660
+10857,1998-01-28 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,2048.212495
+10858,1998-01-29 00:00:00+05,La corne d'abondance,completed_order,France,649.0000153
+10859,1998-01-29 00:00:00+05,Frankenversand,completed_order,Germany,1078.687495
+10860,1998-01-29 00:00:00+05,France restauration,completed_order,France,519
+10861,1998-01-30 00:00:00+05,White Clover Markets,completed_order,USA,3523.399998
+10862,1998-01-30 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,581
+10863,1998-02-02 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,441.1499969
+10864,1998-02-02 00:00:00+05,Around the Horn,completed_order,UK,282
+10865,1998-02-02 00:00:00+05,QUICK-Stop,completed_order,Germany,16387.49999
+10866,1998-02-03 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1096.199982
+11022,1998-04-14 00:00:00+05,Hanari Carnes,completed_order,Brazil,1401.999993
+10867,1998-02-03 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,98.39999771
+10868,1998-02-04 00:00:00+05,Queen Cozinha,completed_order,Brazil,1920.59999
+10869,1998-02-04 00:00:00+05,Seven Seas Imports,completed_order,UK,1630
+10870,1998-02-04 00:00:00+05,Wolski  Zajazd,completed_order,Poland,160
+10871,1998-02-05 00:00:00+05,Bon app',completed_order,France,1979.230007
+10872,1998-02-05 00:00:00+05,Godos Cocina Típica,completed_order,Spain,2058.459969
+10873,1998-02-06 00:00:00+05,Wilman Kala,completed_order,Finland,336.7999954
+10874,1998-02-06 00:00:00+05,Godos Cocina Típica,completed_order,Spain,310
+10875,1998-02-06 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,709.5499949
+10876,1998-02-09 00:00:00+05,Bon app',completed_order,France,917
+10877,1998-02-09 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,1955.125017
+10878,1998-02-10 00:00:00+05,QUICK-Stop,completed_order,Germany,1538.999999
+10879,1998-02-10 00:00:00+05,Wilman Kala,completed_order,Finland,611.2999878
+10880,1998-02-10 00:00:00+05,Folk och fä HB,completed_order,Sweden,1499.999994
+10881,1998-02-11 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,150
+10882,1998-02-11 00:00:00+05,Save-a-lot Markets,completed_order,USA,892.639991
+10883,1998-02-12 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,36
+10884,1998-02-12 00:00:00+05,Let's Stop N Shop,completed_order,USA,1378.06999
+10885,1998-02-12 00:00:00+05,Suprêmes délices,completed_order,Belgium,1209
+10886,1998-02-13 00:00:00+05,Hanari Carnes,completed_order,Brazil,3127.5
+10887,1998-02-13 00:00:00+05,Galería del gastrónomo,completed_order,Spain,70
+10888,1998-02-16 00:00:00+05,Godos Cocina Típica,completed_order,Spain,605
+10248,1996-07-04 00:00:00+05,Vins et alcools Chevalier,completed_order,France,439.9999981
+10249,1996-07-05 00:00:00+05,Toms Spezialitäten,completed_order,Germany,1863.400064
+10251,1996-07-08 00:00:00+05,Victuailles en stock,completed_order,France,654.0599856
+10252,1996-07-09 00:00:00+05,Suprêmes délices,completed_order,Belgium,3597.900145
+10253,1996-07-10 00:00:00+05,Hanari Carnes,completed_order,Brazil,1444.799984
+10250,1996-07-08 00:00:00+05,Hanari Carnes,completed_order,Brazil,1552.600023
+11057,1998-04-29 00:00:00+05,North/South,completed_order,UK,45
+10889,1998-02-16 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,11380
+10890,1998-02-16 00:00:00+05,Du monde entier,completed_order,France,860.0999947
+10891,1998-02-17 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,368.932491
+10892,1998-02-17 00:00:00+05,Maison Dewey,completed_order,Belgium,2089.999998
+10893,1998-02-18 00:00:00+05,Königlich Essen,completed_order,Germany,5502.110001
+10894,1998-02-18 00:00:00+05,Save-a-lot Markets,completed_order,USA,2753.099998
+10895,1998-02-18 00:00:00+05,Ernst Handel,completed_order,Austria,6379.399965
+10896,1998-02-19 00:00:00+05,Maison Dewey,completed_order,Belgium,750.5
+10897,1998-02-19 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,10835.24005
+10898,1998-02-20 00:00:00+05,Océano Atlántico Ltda.,completed_order,Argentina,30
+10899,1998-02-20 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,122.3999991
+10900,1998-02-20 00:00:00+05,Wellington Importadora,completed_order,Brazil,33.75
+10901,1998-02-23 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,934.4999886
+10902,1998-02-23 00:00:00+05,Folk och fä HB,completed_order,Sweden,863.4299901
+10903,1998-02-24 00:00:00+05,Hanari Carnes,completed_order,Brazil,932.049984
+10904,1998-02-24 00:00:00+05,White Clover Markets,completed_order,USA,1924.249973
+10905,1998-02-24 00:00:00+05,Wellington Importadora,completed_order,Brazil,341.9999997
+10906,1998-02-25 00:00:00+05,Wolski  Zajazd,completed_order,Poland,427.5
+10907,1998-02-25 00:00:00+05,Spécialités du monde,completed_order,France,108.5
+10908,1998-02-26 00:00:00+05,Reggiani Caseifici,completed_order,Italy,663.0999995
+10909,1998-02-26 00:00:00+05,Santé Gourmet,completed_order,Norway,670.0000095
+10910,1998-02-26 00:00:00+05,Wilman Kala,completed_order,Finland,452.8999977
+10911,1998-02-26 00:00:00+05,Godos Cocina Típica,completed_order,Spain,858
+10912,1998-02-26 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,6200.550041
+10913,1998-02-26 00:00:00+05,Queen Cozinha,completed_order,Brazil,768.75
+10914,1998-02-27 00:00:00+05,Queen Cozinha,completed_order,Brazil,537.5
+10915,1998-02-27 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,539.4999981
+10916,1998-02-27 00:00:00+05,Rancho grande,completed_order,Argentina,686.7000046
+10917,1998-03-02 00:00:00+05,Romero y tomillo,completed_order,Spain,365.8899994
+10918,1998-03-02 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1447.5
+10919,1998-03-02 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,1122.800011
+10920,1998-03-03 00:00:00+05,Around the Horn,completed_order,UK,390
+10921,1998-03-03 00:00:00+05,Vaffeljernet,completed_order,Denmark,1936.000061
+10922,1998-03-03 00:00:00+05,Hanari Carnes,completed_order,Brazil,742.5
+10923,1998-03-03 00:00:00+05,La maison d'Asie,completed_order,France,748.7999972
+10924,1998-03-04 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1835.699956
+10925,1998-03-04 00:00:00+05,Hanari Carnes,completed_order,Brazil,475.1499967
+10926,1998-03-04 00:00:00+05,Ana Trujillo Emparedados y helados,completed_order,Mexico,514.399991
+10927,1998-03-05 00:00:00+05,La corne d'abondance,completed_order,France,800
+10928,1998-03-05 00:00:00+05,Galería del gastrónomo,completed_order,Spain,137.5
+10929,1998-03-05 00:00:00+05,Frankenversand,completed_order,Germany,1174.75
+10930,1998-03-06 00:00:00+05,Suprêmes délices,completed_order,Belgium,2255.500035
+10931,1998-03-06 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,799.1999985
+10932,1998-03-06 00:00:00+05,Bon app',completed_order,France,1788.629997
+10933,1998-03-06 00:00:00+05,Island Trading,completed_order,UK,920.5999985
+10934,1998-03-09 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,500
+10935,1998-03-09 00:00:00+05,Wellington Importadora,completed_order,Brazil,619.5
+10936,1998-03-09 00:00:00+05,Great Lakes Food Market,completed_order,USA,455.9999983
+10937,1998-03-10 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,644.7999878
+10938,1998-03-10 00:00:00+05,QUICK-Stop,completed_order,Germany,2731.875
+10939,1998-03-10 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,637.4999955
+10940,1998-03-11 00:00:00+05,Bon app',completed_order,France,360
+10941,1998-03-11 00:00:00+05,Save-a-lot Markets,completed_order,USA,4011.749945
+10942,1998-03-11 00:00:00+05,Reggiani Caseifici,completed_order,Italy,560
+10943,1998-03-11 00:00:00+05,B's Beverages,completed_order,UK,711
+10944,1998-03-12 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1025.32501
+10945,1998-03-12 00:00:00+05,Morgenstern Gesundkost,completed_order,Germany,245
+10946,1998-03-12 00:00:00+05,Vaffeljernet,completed_order,Denmark,1407.5
+10947,1998-03-13 00:00:00+05,B's Beverages,completed_order,UK,220
+10948,1998-03-13 00:00:00+05,Godos Cocina Típica,completed_order,Spain,2362.25
+10949,1998-03-13 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,4421.999954
+10950,1998-03-16 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,110
+10951,1998-03-16 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,458.7549975
+10952,1998-03-16 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,471.1999967
+10974,1998-03-25 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,439.0000153
+10975,1998-03-25 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,717.5
+10976,1998-03-25 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,911.9999695
+10977,1998-03-26 00:00:00+05,Folk och fä HB,completed_order,Sweden,2233.000031
+10978,1998-03-26 00:00:00+05,Maison Dewey,completed_order,Belgium,1303.194992
+10979,1998-03-26 00:00:00+05,Ernst Handel,completed_order,Austria,4813.500099
+10980,1998-03-27 00:00:00+05,Folk och fä HB,completed_order,Sweden,247.9999991
+10254,1996-07-11 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,556.6200097
+10255,1996-07-12 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,2490.499978
+10256,1996-07-15 00:00:00+05,Wellington Importadora,completed_order,Brazil,517.8000069
+10257,1996-07-16 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,1119.899954
+10258,1996-07-17 00:00:00+05,Ernst Handel,completed_order,Austria,1614.879988
+10259,1996-07-18 00:00:00+05,Centro comercial Moctezuma,completed_order,Mexico,100.7999992
+10260,1996-07-19 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1504.650034
+10261,1996-07-19 00:00:00+05,Que Delícia,completed_order,Brazil,447.9999924
+10262,1996-07-22 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,583.9999986
+10263,1996-07-23 00:00:00+05,Ernst Handel,completed_order,Austria,1873.800014
+10264,1996-07-24 00:00:00+05,Folk och fä HB,completed_order,Sweden,695.6249881
+10265,1996-07-25 00:00:00+05,Blondesddsl père et fils,completed_order,France,1176.000023
+10266,1996-07-26 00:00:00+05,Wartian Herkku,completed_order,Finland,346.5599954
+10267,1996-07-29 00:00:00+05,Frankenversand,completed_order,Germany,3536.599966
+10268,1996-07-30 00:00:00+05,GROSELLA-Restaurante,completed_order,Venezuela,1101.199997
+10269,1996-07-31 00:00:00+05,White Clover Markets,completed_order,USA,642.199985
+10270,1996-08-01 00:00:00+05,Wartian Herkku,completed_order,Finland,1375.999975
+10271,1996-08-01 00:00:00+05,Split Rail Beer & Ale,completed_order,USA,48
+10272,1996-08-02 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,1456
+10273,1996-08-05 00:00:00+05,QUICK-Stop,completed_order,Germany,2037.279958
+10274,1996-08-06 00:00:00+05,Vins et alcools Chevalier,completed_order,France,538.6000099
+10275,1996-08-07 00:00:00+05,Magazzini Alimentari Riuniti,completed_order,Italy,291.8399987
+10276,1996-08-08 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,419.9999905
+10277,1996-08-09 00:00:00+05,Morgenstern Gesundkost,completed_order,Germany,1200.800049
+10278,1996-08-12 00:00:00+05,Berglunds snabbköp,completed_order,Sweden,1488.799988
+10981,1998-03-27 00:00:00+05,Hanari Carnes,completed_order,Brazil,15810
+10982,1998-03-27 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1014
+10983,1998-03-27 00:00:00+05,Save-a-lot Markets,completed_order,USA,720.899997
+10984,1998-03-30 00:00:00+05,Save-a-lot Markets,completed_order,USA,1809.750042
+10985,1998-03-30 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,2023.380021
+10986,1998-03-30 00:00:00+05,Océano Atlántico Ltda.,completed_order,Argentina,2220
+10987,1998-03-31 00:00:00+05,Eastern Connection,completed_order,UK,2771.999985
+10988,1998-03-31 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,3574.79997
+10989,1998-03-31 00:00:00+05,Que Delícia,completed_order,Brazil,1353.599998
+10990,1998-04-01 00:00:00+05,Ernst Handel,completed_order,Austria,4288.849974
+10991,1998-04-01 00:00:00+05,QUICK-Stop,completed_order,Germany,2295.999991
+10992,1998-04-01 00:00:00+05,The Big Cheese,completed_order,USA,69.59999847
+10993,1998-04-01 00:00:00+05,Folk och fä HB,completed_order,Sweden,4895.437524
+10994,1998-04-02 00:00:00+05,Vaffeljernet,completed_order,Denmark,940.4999993
+10995,1998-04-02 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,1196
+10996,1998-04-02 00:00:00+05,QUICK-Stop,completed_order,Germany,560
+10997,1998-04-03 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,1885
+10998,1998-04-03 00:00:00+05,Wolski  Zajazd,completed_order,Poland,686
+10999,1998-04-03 00:00:00+05,Ottilies Käseladen,completed_order,Germany,1197.949992
+11000,1998-04-06 00:00:00+05,Rattlesnake Canyon Grocery,completed_order,USA,903.75
+11001,1998-04-06 00:00:00+05,Folk och fä HB,completed_order,Sweden,2769
+11002,1998-04-06 00:00:00+05,Save-a-lot Markets,completed_order,USA,1811.099996
+11003,1998-04-06 00:00:00+05,The Cracker Box,completed_order,USA,325.9999962
+11004,1998-04-07 00:00:00+05,Maison Dewey,completed_order,Belgium,295.3799973
+11005,1998-04-07 00:00:00+05,Wilman Kala,completed_order,Finland,586
+11006,1998-04-07 00:00:00+05,Great Lakes Food Market,completed_order,USA,329.6850014
+11007,1998-04-08 00:00:00+05,Princesa Isabel Vinhos,completed_order,Portugal,2633.900009
+11008,1998-04-08 00:00:00+05,Ernst Handel,completed_order,Austria,4680.899895
+11009,1998-04-08 00:00:00+05,Godos Cocina Típica,completed_order,Spain,616.5
+11010,1998-04-09 00:00:00+05,Reggiani Caseifici,completed_order,Italy,645
+11011,1998-04-09 00:00:00+05,Alfreds Futterkiste,completed_order,Germany,933.4999996
+11012,1998-04-09 00:00:00+05,Frankenversand,completed_order,Germany,2825.299989
+11013,1998-04-09 00:00:00+05,Romero y tomillo,completed_order,Spain,361
+11014,1998-04-10 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,243.17999
+11015,1998-04-10 00:00:00+05,Santé Gourmet,completed_order,Norway,622.3499908
+11016,1998-04-10 00:00:00+05,Around the Horn,completed_order,UK,491.5
+11017,1998-04-13 00:00:00+05,Ernst Handel,completed_order,Austria,6750
+11018,1998-04-13 00:00:00+05,Lonesome Pine Restaurant,completed_order,USA,1575
+11019,1998-04-13 00:00:00+05,Rancho grande,completed_order,Argentina,76
+11020,1998-04-14 00:00:00+05,Ottilies Käseladen,completed_order,Germany,632.3999956
+11021,1998-04-14 00:00:00+05,QUICK-Stop,completed_order,Germany,6306.239944
+11023,1998-04-14 00:00:00+05,B's Beverages,completed_order,UK,1500
+11024,1998-04-15 00:00:00+05,Eastern Connection,completed_order,UK,1966.809978
+11025,1998-04-15 00:00:00+05,Wartian Herkku,completed_order,Finland,269.9999996
+11026,1998-04-15 00:00:00+05,Franchi S.p.A.,completed_order,Italy,1030
+11027,1998-04-16 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,877.724988
+11028,1998-04-16 00:00:00+05,Königlich Essen,completed_order,Germany,2160
+11029,1998-04-16 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,1286.800018
+11030,1998-04-17 00:00:00+05,Save-a-lot Markets,completed_order,USA,12615.05007
+11031,1998-04-17 00:00:00+05,Save-a-lot Markets,completed_order,USA,2393.5
+11032,1998-04-17 00:00:00+05,White Clover Markets,completed_order,USA,8902.5
+11033,1998-04-17 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,3232.799947
+11034,1998-04-20 00:00:00+05,Old World Delicatessen,completed_order,USA,539.4000089
+11035,1998-04-20 00:00:00+05,Suprêmes délices,completed_order,Belgium,1754.499998
+11036,1998-04-20 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,1692
+11037,1998-04-21 00:00:00+05,Godos Cocina Típica,completed_order,Spain,60
+11038,1998-04-21 00:00:00+05,Suprêmes délices,completed_order,Belgium,732.5999982
+11039,1998-04-21 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,3089.999969
+11040,1998-04-22 00:00:00+05,Great Lakes Food Market,completed_order,USA,200
+11041,1998-04-22 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,1773.000044
+11042,1998-04-22 00:00:00+05,Comércio Mineiro,completed_order,Brazil,405.7500114
+11043,1998-04-22 00:00:00+05,Spécialités du monde,completed_order,France,210
+11044,1998-04-23 00:00:00+05,Wolski  Zajazd,completed_order,Poland,591.5999908
+10953,1998-03-16 00:00:00+05,Around the Horn,completed_order,UK,4441.249997
+10954,1998-03-17 00:00:00+05,LINO-Delicateses,completed_order,Venezuela,1659.535009
+10955,1998-03-17 00:00:00+05,Folk och fä HB,completed_order,Sweden,74.39999972
+10956,1998-03-17 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,677
+10957,1998-03-18 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,1762.699982
+10958,1998-03-18 00:00:00+05,Océano Atlántico Ltda.,completed_order,Argentina,781.0000038
+10959,1998-03-18 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,131.7499991
+10960,1998-03-19 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,265.3499908
+10961,1998-03-19 00:00:00+05,Queen Cozinha,completed_order,Brazil,1119.9
+10962,1998-03-19 00:00:00+05,QUICK-Stop,completed_order,Germany,3583.999985
+10963,1998-03-19 00:00:00+05,Furia Bacalhau e Frutos do Mar,completed_order,Portugal,57.79999959
+10964,1998-03-20 00:00:00+05,Spécialités du monde,completed_order,France,2052.5
+10965,1998-03-20 00:00:00+05,Old World Delicatessen,completed_order,USA,848
+10966,1998-03-20 00:00:00+05,Chop-suey Chinese,completed_order,Switzerland,1098.459986
+10967,1998-03-23 00:00:00+05,Toms Spezialitäten,completed_order,Germany,910.3999977
+10968,1998-03-23 00:00:00+05,Ernst Handel,completed_order,Austria,1408
+10969,1998-03-23 00:00:00+05,Comércio Mineiro,completed_order,Brazil,108
+10970,1998-03-24 00:00:00+05,Bólido Comidas preparadas,completed_order,Spain,223.9999992
+10971,1998-03-24 00:00:00+05,France restauration,completed_order,France,1733.060013
+10972,1998-03-24 00:00:00+05,La corne d'abondance,completed_order,France,251.5
+10973,1998-03-24 00:00:00+05,La corne d'abondance,completed_order,France,291.5499954
+11045,1998-04-23 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,1309.5
+11046,1998-04-23 00:00:00+05,Die Wandernde Kuh,completed_order,Germany,1485.799999
+11047,1998-04-24 00:00:00+05,Eastern Connection,completed_order,UK,817.8750086
+11048,1998-04-24 00:00:00+05,Bottom-Dollar Markets,completed_order,Canada,525
+11049,1998-04-24 00:00:00+05,Gourmet Lanchonetes,completed_order,Brazil,273.599999
+11050,1998-04-27 00:00:00+05,Folk och fä HB,completed_order,Sweden,809.9999987
+11051,1998-04-27 00:00:00+05,La maison d'Asie,completed_order,France,35.99999987
+11052,1998-04-27 00:00:00+05,Hanari Carnes,completed_order,Brazil,1331.999995
+11053,1998-04-27 00:00:00+05,Piccolo und mehr,completed_order,Austria,3054.999991
+11054,1998-04-28 00:00:00+05,Cactus Comidas para llevar,completed_order,Argentina,305
+11055,1998-04-28 00:00:00+05,HILARION-Abastos,completed_order,Venezuela,1727.5
+11056,1998-04-28 00:00:00+05,Eastern Connection,completed_order,UK,3740
+11058,1998-04-29 00:00:00+05,Blauer See Delikatessen,completed_order,Germany,858
+11059,1998-04-29 00:00:00+05,Ricardo Adocicados,completed_order,Brazil,1838
+11060,1998-04-30 00:00:00+05,Franchi S.p.A.,completed_order,Italy,266
+11061,1998-04-30 00:00:00+05,Great Lakes Food Market,completed_order,USA,510
+11062,1998-04-30 00:00:00+05,Reggiani Caseifici,completed_order,Italy,406.3999924
+11063,1998-04-30 00:00:00+05,Hungry Owl All-Night Grocers,completed_order,Ireland,1342.949974
+11064,1998-05-01 00:00:00+05,Save-a-lot Markets,completed_order,USA,4330.399972
+11065,1998-05-01 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,189.4199953
+11066,1998-05-01 00:00:00+05,White Clover Markets,completed_order,USA,928.7499943
+11067,1998-05-04 00:00:00+05,Drachenblut Delikatessen,completed_order,Germany,86.84999657
+11068,1998-05-04 00:00:00+05,Queen Cozinha,completed_order,Brazil,2027.079975
+11069,1998-05-04 00:00:00+05,Tortuga Restaurante,completed_order,Mexico,360
+11070,1998-05-05 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1629.97501
+11071,1998-05-05 00:00:00+05,LILA-Supermercado,completed_order,Venezuela,484.4999996
+11072,1998-05-05 00:00:00+05,Ernst Handel,completed_order,Austria,5217.999985
+11073,1998-05-05 00:00:00+05,Pericles Comidas clásicas,completed_order,Mexico,300
+11074,1998-05-06 00:00:00+05,Simons bistro,completed_order,Denmark,232.08501
+11075,1998-05-06 00:00:00+05,Richter Supermarkt,completed_order,Switzerland,498.0999965
+11076,1998-05-06 00:00:00+05,Bon app',completed_order,France,792.7499986
+11077,1996-08-14 00:00:00+05,Lehmanns Marktstand,email,Germany,
+11078,1996-08-20 00:00:00+05,Lehmanns Marktstand,email,Germany,
+11079,1996-08-21 00:00:00+05,Lehmanns Marktstand,email,Germany,
+11080,1996-10-21 00:00:00+05,Lehmanns Marktstand,email,Germany,
+11081,1996-08-11 00:00:00+05,Berglunds snabbköp,email,Germany,
+11082,1996-12-15 00:00:00+05,Berglunds snabbköp,email,Germany,
+11083,1997-02-10 00:00:00+05,Berglunds snabbköp,email,Germany,
+11084,1998-03-02 00:00:00+05,Berglunds snabbköp,email,Germany,
+11085,1998-04-07 00:00:00+05,Berglunds snabbköp,email,Germany,
+11086,1998-03-01 00:00:00+05,Berglunds snabbköp,viewed_page,Sweden,
+11087,1998-02-07 00:00:00+05,Berglunds snabbköp,viewed_page,Sweden,
+11088,1996-08-18 00:00:00+05,Lehmanns Marktstand,viewed_page,Germany,
+11089,1996-08-12 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,
+11090,1996-11-01 00:00:00+05,Lehmanns Marktstand,viewed_page,Germany,
+11091,1996-11-02 00:00:00+05,Lehmanns Marktstand,email,Germany,
+11092,1996-08-17 00:00:00+05,Lehmanns Marktstand,viewed_page,Germany,
+11093,1996-08-14 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,
+11094,2021-06-01 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,
+11095,2021-06-02 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,
+11096,2021-06-03 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,
+11097,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,
+11098,2021-06-04 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,
+11099,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,
+11100,2021-06-04 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,
+11101,2021-06-04 00:00:00+05,Lehmanns Marktstand,purchased_product,Germany,1863.400064
+11102,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1863.400064
+11103,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11104,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11105,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11107,2021-05-05 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11108,2021-05-05 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11109,2021-05-05 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1552.600023
+11110,2021-06-04 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,1553.600023
+11111,2021-07-14 00:00:00+05,Lehmanns Marktstand,completed_order,Germany,2500

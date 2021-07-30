@@ -1,8 +1,34 @@
 const { json } = require('express')
 var data = require('./datafile.json')
 var unRecentData = require('./recent_data.js')
+var { PostGressConnection } = require('../modules/database');
+const RealPostgress = new PostGressConnection();
 
 // let filteredData =  unRecentfilteredData(filteredData)
+
+async function getData(){
+    let a = await RealPostgress.ReadQuery("SELECT * FROM activity_stream as s CROSS JOIN viewdemo_stream as v WHERE s.activity_id = v.activity_id", function (data_set) {
+        return data_set.rows
+        // res.setHeader('Content-Type', 'application/json');
+        // res.send(data_set.rows);
+      });
+      return a
+      
+}
+
+const a =  getData()
+
+console.log(a)
+
+function dateDiff() {
+    let sql = "SELECT datediff('days', '1996-08-13 00:00:00+05', '1996-08-27 00:00:00+05')"
+    RealPostgress.ReadQuery(sql, function (data_set) {
+        console.log(data_set.rows)
+      })
+}
+
+dateDiff()
+
 
 function filterByCompletedOrders(data){
     let filteredData = []
@@ -29,6 +55,23 @@ function createCustomer(){
 
 }
 
+// function createTotalValuePerOccurence(){
+//     let occurenceCount = createOccurenceArray()
+//     let totals = []
+//     for(let i = 0; i<occurenceCount.length; i++){
+//         let sum = 0
+//         for(let j =0; j<filteredData.length; j++){
+//             if(data[j].occurrence === i+1 ) {
+//                 sum += data[j].revenue_impact
+//             }
+//         }
+//         totals.push(sum)
+//     }
+//     console.log(totals)
+// }
+ 
+// createTotalValuePerOccurence()
+
 
 function createOccurenceArray(){
     //  Get a list of occurences
@@ -48,7 +91,7 @@ occurence.sort(function(a, b) {
 const countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
 const occurenceCount = countOccurrences(occurence)
 const occurenceCountArray = Object.values(occurenceCount)
-console.log(occurenceCountArray.length)
+
 return occurenceCountArray
 }
 

@@ -10,7 +10,6 @@ import {
 import {Card} from 'antd'
 
 export default function App({data}) {
-  console.log(data)
   return (
 <Card title="Median Days Between Each Other" style={{width: "850px", margin:"100px"}}> 
   <BarChart width={800} height={300} data={data}>

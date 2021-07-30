@@ -11,7 +11,6 @@ import {Card} from 'antd'
 
 
 export default function App({data}) {
-  console.log(data)
   return (
        <Card title="Modeled Likelihood of reaching Each Completed order" style={{width: "850px", margin:"100px"}}> 
 <LineChart width={800} height={350} data={data}>
