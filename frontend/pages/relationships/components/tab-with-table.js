@@ -60,6 +60,7 @@ const Relationships = () => {
   const [modalField, setModalField] = useState(undefined);
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
+  const [column, setColumn] = useState('')
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -152,6 +153,14 @@ const Relationships = () => {
     },
   ];
 
+  const handleOnClickGroupByColumn = async (object) =>{
+    console.log(object.key)
+    const customerResponse = await fetch(API_URL + object.key)
+    const customerData = await customerResponse.json()
+    console.log(customerData,"body")
+  }
+
+
   return (
 
 
@@ -169,77 +178,77 @@ const Relationships = () => {
       <Menu
         mode="vertical">
 <SubMenu key="sub1" title="Activity Id">
-          <Menu.Item key="1">Only Column</Menu.Item>
+          <Menu.Item key="group_by_activityid" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="2">Day</Menu.Item>
           <Menu.Item key="3">Week</Menu.Item>
           <Menu.Item key="4">Month</Menu.Item>
           <Menu.Item key="5">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub2" title="Timestamp">
-          <Menu.Item key="6">Only Column</Menu.Item>
+          <Menu.Item key="group_by_timestamp" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="7">Day</Menu.Item>
           <Menu.Item key="8">Week</Menu.Item>
           <Menu.Item key="9">Month</Menu.Item>
           <Menu.Item key="10">Year</Menu.Item>
 </SubMenu>
-<SubMenu key="sub3" title="Source">
-          <Menu.Item key="11">Only Column</Menu.Item>
+<SubMenu key="sub3" title="Source" >
+          <Menu.Item key="group_by_source" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="12">Day</Menu.Item>
           <Menu.Item key="13">Week</Menu.Item>
           <Menu.Item key="14">Month</Menu.Item>
           <Menu.Item key="15">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub4" title="Source_id">
-          <Menu.Item key="16">Only Column</Menu.Item>
+          <Menu.Item key="group_by_sourceid" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="17">Day</Menu.Item>
           <Menu.Item key="18">Week</Menu.Item>
           <Menu.Item key="19">Month</Menu.Item>
           <Menu.Item key="20">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub5" title="Customer">
-          <Menu.Item key="21">Only Column</Menu.Item>
+          <Menu.Item onClick={(item) => handleOnClickGroupByColumn(item)} key="group_by_customer">Only Column</Menu.Item>
           <Menu.Item key="22">Day</Menu.Item>
           <Menu.Item key="23">Week</Menu.Item>
           <Menu.Item key="24">Month</Menu.Item>
           <Menu.Item key="25">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub6" title="activity">
-          <Menu.Item key="26">Only Column</Menu.Item>
+          <Menu.Item key="group_by_activity" onClick={(object) => handleOnClickGroupByColumn(object)}>Only Column</Menu.Item>
           <Menu.Item key="27">Day</Menu.Item>
           <Menu.Item key="28">Week</Menu.Item>
           <Menu.Item key="29">Month</Menu.Item>
           <Menu.Item key="30">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub7" title="feature_1">
-          <Menu.Item key="31">Only Column</Menu.Item>
+          <Menu.Item key="group_by_feature1" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="32">Day</Menu.Item>
           <Menu.Item key="33">Week</Menu.Item>
           <Menu.Item key="34">Month</Menu.Item>
           <Menu.Item key="35">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub8" title="feature_2">
-          <Menu.Item key="36">Only Column</Menu.Item>
+          <Menu.Item key="group_by_feature2" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="37">Day</Menu.Item>
           <Menu.Item key="38">Week</Menu.Item>
           <Menu.Item key="39">Month</Menu.Item>
           <Menu.Item key="40">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub9" title="feature_3">
-          <Menu.Item key="41">Only Column</Menu.Item>
+          <Menu.Item key="group_by_feature3" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="42">Day</Menu.Item>
           <Menu.Item key="43">Week</Menu.Item>
           <Menu.Item key="44">Month</Menu.Item>
           <Menu.Item key="45">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub10" title="revenue_impact">
-          <Menu.Item key="46">Only Column</Menu.Item>
+          <Menu.Item key="group_by_revenue_impact" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="47">Day</Menu.Item>
           <Menu.Item key="48">Week</Menu.Item>
           <Menu.Item key="49">Month</Menu.Item>
           <Menu.Item key="50">Year</Menu.Item>
 </SubMenu>
 <SubMenu key="sub11" title="link">
-          <Menu.Item key="51">Only Column</Menu.Item>
+          <Menu.Item key="group_by_link" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="52">Day</Menu.Item>
           <Menu.Item key="53">Week</Menu.Item>
           <Menu.Item key="54">Month</Menu.Item>
@@ -253,31 +262,31 @@ const Relationships = () => {
         // style={{ height: '50%' }}
       >
         <SubMenu key="sub12" title="Activity Id">
-        <Menu.Item key="1">Only Column</Menu.Item>
-          <Menu.Item key="2">Day</Menu.Item>
-          <Menu.Item key="3">Week</Menu.Item>
-          <Menu.Item key="4">Month</Menu.Item>
-          <Menu.Item key="5">Year</Menu.Item>
+        <Menu.Item key="group_by_activityid" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
+          <Menu.Item key="57">Day</Menu.Item>
+          <Menu.Item key="58">Week</Menu.Item>
+          <Menu.Item key="59">Month</Menu.Item>
+          <Menu.Item key="60">Year</Menu.Item>
         </SubMenu>
         <SubMenu key="sub13" title="Occurence">
-        <Menu.Item key="6">Only Column</Menu.Item>
-          <Menu.Item key="7">Day</Menu.Item>
-          <Menu.Item key="8">Week</Menu.Item>
-          <Menu.Item key="9">Month</Menu.Item>
-          <Menu.Item key="10">Year</Menu.Item>
+        <Menu.Item key="61" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
+          <Menu.Item key="62">Day</Menu.Item>
+          <Menu.Item key="63">Week</Menu.Item>
+          <Menu.Item key="64">Month</Menu.Item>
+          <Menu.Item key="65">Year</Menu.Item>
         </SubMenu>
         <SubMenu key="sub14" title="Activity Repeated at">
-        <Menu.Item key="11">Only Column</Menu.Item>
-          <Menu.Item key="12">Day</Menu.Item>
-          <Menu.Item key="13">Week</Menu.Item>
-          <Menu.Item key="14">Month</Menu.Item>
-          <Menu.Item key="15">Year</Menu.Item>
+        <Menu.Item key="66" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
+          <Menu.Item key="67">Day</Menu.Item>
+          <Menu.Item key="68">Week</Menu.Item>
+          <Menu.Item key="69">Month</Menu.Item>
+          <Menu.Item key="70">Year</Menu.Item>
         </SubMenu>
       </Menu>
       </Card>
     </Sider>
     <Content style={{ padding: '0 24px', minHeight: 280 }}>
-    {dataset? <Card className="custom-card" title="Results" bordered={false}>
+    {dataset? <Card className="custom-card" title="Results"  bordered={false}>
               <Table size="small" rowKey="activity_id" columns={columns} dataSource={activities} />
             </Card> :
             <Card className="custom-card" title="Dataset Generation" bordered={false}>

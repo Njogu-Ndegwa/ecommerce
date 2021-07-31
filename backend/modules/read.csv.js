@@ -44,6 +44,17 @@ class CsvHandeller {
       fs.createReadStream(files)
         .pipe(csv())
         .on('data', (row) => {
+
+            if(row.revenue_impact){
+                row.revenue_impact = parseInt(row.revenue_impact)
+            }
+            else if(row.revenue_impact === "") {
+                    row.revenue_impact = 0
+                }
+            if(row.occurence){
+                    row.occurence = parseInt(row.occurence)
+            }
+            else if(row.occurence === "") {row.occurence = 0}         
           done.push(row);
         })
         .on('end', () => {

@@ -6,19 +6,19 @@ const RealPostgress = new PostGressConnection();
 
 // let filteredData =  unRecentfilteredData(filteredData)
 
-async function getData(){
-    let a = await RealPostgress.ReadQuery("SELECT * FROM activity_stream as s CROSS JOIN viewdemo_stream as v WHERE s.activity_id = v.activity_id", function (data_set) {
-        return data_set.rows
-        // res.setHeader('Content-Type', 'application/json');
-        // res.send(data_set.rows);
-      });
-      return a
+// async function getData(){
+//     let a = await RealPostgress.ReadQuery("SELECT * FROM activity_stream as s CROSS JOIN viewdemo_stream as v WHERE s.activity_id = v.activity_id", function (data_set) {
+//         return data_set.rows
+//         // res.setHeader('Content-Type', 'application/json');
+//         // res.send(data_set.rows);
+//       });
+//       return a
       
-}
+// }
 
-const a =  getData()
+// const a =  getData()
 
-console.log(a)
+// console.log(a)
 
 function dateDiff() {
     let sql = "SELECT datediff('days', '1996-08-13 00:00:00+05', '1996-08-27 00:00:00+05')"

@@ -19,7 +19,7 @@ class KnexStaticDatabases {
         table.string('feature_1');
         table.string('feature_2');
         table.string('feature_3');
-        table.string('revenue_impact');
+        table.integer('revenue_impact');
         table.string('link');
       })
       .then(() => callback())
@@ -36,7 +36,7 @@ class KnexStaticDatabases {
       .createTable('viewdemo_stream', (table) => {
         table.increments('id');
         table.string('activity_id');
-        table.string('occurence');
+        table.integer('occurence');
         table.string('activity_repeated_at');
       })
       .then(() => callback())
