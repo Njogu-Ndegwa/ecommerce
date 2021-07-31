@@ -1,57 +1,25 @@
-import {useState} from 'react';
-import {Card, Select, Button, Row, Col, Modal } from 'antd';
-import { PlayCircleOutlined, LineChartOutlined} from '@ant-design/icons';
-const { Meta } = Card;
+import {Card, Select, Row, Col} from 'antd';
+import { useState } from 'react';
 import {
-  ComposedChart,
-  Line,
-  Label,
-  LabelList,
-  Bar,
-  XAxis,
-  YAxis,
-  Legend,
-} from "recharts";
+    ComposedChart,
+    Line,
+    Label,
+    LabelList,
+    Bar,
+    XAxis,
+    YAxis,
+    Legend,
+  } from "recharts";
 const {Option} = Select
 
-export default function PlotChart({data}) {
-  const [isModalVisible, setisModalVisible] = useState(false)
-  const [graphType, setGraphType] = useState('line_graph')
-  const handleShowChart = () => {
-    setisModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setisModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setisModalVisible(false)
-  }
-
-  const handleChange = (value) => {
-      setGraphType(value)
-      console.log(graphType)
-  }
+export default function graphTemplate({data}) {
+    const [graphType, setGraphType] = useState('line_graph')
+    const handleChange = (value) => {
+        setGraphType(value)
+        console.log(graphType)
+    }
     return (
-        <Card style={{ width: 200, marginBottom: 16 }}>
-                <Row>
-      <Col span={6}>
-      <Button type="primary" icon={<PlayCircleOutlined />}/>
-      </Col>
-      <Col span={6} offset={12}>
-      <Button type="primary" onClick={handleShowChart} icon={<LineChartOutlined />}/>
-      </Col>
-    </Row>
-      <Modal
-      title="Basic Modal" 
-      visible={isModalVisible}
-      centered
-      width={1000}
-      onOk={handleOk} 
-      onCancel={handleCancel}
-      >
-                <Card title='New Plot' style={{ width: 900, margin: "20px" }}>
+        <Card title='New Plot' style={{ width: 900, margin: "20px" }}>
             <div style={{display: "flex", justifyContent:"space-between" }} >
                 <div>
                 <span>Y1 Column</span>
@@ -99,7 +67,6 @@ export default function PlotChart({data}) {
                 <Option value="line_graph">Line Graph</Option>
     </Select>
   </Card>
-      </Modal>
-      </Card>
+
     )
 }

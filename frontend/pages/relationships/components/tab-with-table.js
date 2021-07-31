@@ -17,6 +17,8 @@ import NestedFieldArray from './NestedFieldArray';
 import moment from 'moment';
 import PlotChart from './chart-button'
 
+import {group_by_columns} from './group_by_column_table'
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -48,19 +50,45 @@ export const customerAttrs = [
   { label: 'Link', value: 'link' },
 ];
 
+const columns = [
+  {
+    title: 'Activity Id',
+    dataIndex: 'activity_id',
+    key: 'activity_id',
+  },
+  {
+    title: 'Customer',
+    dataIndex: 'customer',
+    key: 'customer',
+  },
+  {
+    title: 'Activity',
+    dataIndex: 'activity',
+    render: (activity) => humanize(activity || ''),
+    key: 'activity',
+  },
+  {
+    title: 'Timestamp',
+    dataIndex: 'ts',
+    render: (ts) => moment(ts).format('ll'),
+    key: 'ts',
+  },
+];
+
 
 const API_URL = "http://localhost:5000/"
 
 const Relationships = () => {
   const [form] = Form.useForm();
   const [activityTypes, setActivityTypes] = useState([]);
-  const [activities, setActivities] = useState([]);
+  const [data, setData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [modalField, setModalField] = useState(undefined);
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
-  const [column, setColumn] = useState('')
+  const [column, setColumn] = useState(columns)
+
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -89,7 +117,7 @@ const Relationships = () => {
       body: JSON.stringify({ appends, filters, primary_activity, measure, occurrence }),
     });
     const activityTypesJson = await activityTypesResponse.json();
-      setActivities(activityTypesJson)
+      setData(activityTypesJson)
       setDataset(true)
     
   };
@@ -128,36 +156,15 @@ const Relationships = () => {
     return form.getFieldValue('appends') && form.getFieldValue('appends').length > 0;
   };
 
-  const columns = [
-    {
-      title: 'Activity Id',
-      dataIndex: 'activity_id',
-      key: 'activity_id',
-    },
-    {
-      title: 'Customer',
-      dataIndex: 'customer',
-      key: 'customer',
-    },
-    {
-      title: 'Activity',
-      dataIndex: 'activity',
-      render: (activity) => humanize(activity || ''),
-      key: 'activity',
-    },
-    {
-      title: 'Timestamp',
-      dataIndex: 'ts',
-      render: (ts) => moment(ts).format('ll'),
-      key: 'ts',
-    },
-  ];
+
 
   const handleOnClickGroupByColumn = async (object) =>{
-    console.log(object.key)
+    console.log(API_URL + object.key)
+    setColumn(group_by_columns[object.key]) 
     const customerResponse = await fetch(API_URL + object.key)
     const customerData = await customerResponse.json()
     console.log(customerData,"body")
+    setData(customerData)
   }
 
 
@@ -170,6 +177,12 @@ const Relationships = () => {
 <div>
       <h2>Create New Dataset</h2>
       <h3>{dataset ? "Parent Dataset": "Editing Definitions"}</h3>
+      <Form.Item>
+                        <div style={{ display: 'flex', justifyContent: "flex-end", marginTop: hasAppends() ? '1.7rem' : 0 }}>
+                  <PrimaryButtonPurple>Analyze dataset</PrimaryButtonPurple>
+                  <PrimaryButtonPurple style={{ marginLeft: 8 }}>download Dataset</PrimaryButtonPurple>
+                        </div>
+                      </Form.Item>
   </div>
   <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
   <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
@@ -269,14 +282,14 @@ const Relationships = () => {
           <Menu.Item key="60">Year</Menu.Item>
         </SubMenu>
         <SubMenu key="sub13" title="Occurence">
-        <Menu.Item key="61" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
+        <Menu.Item key="group_by_occurence" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="62">Day</Menu.Item>
           <Menu.Item key="63">Week</Menu.Item>
           <Menu.Item key="64">Month</Menu.Item>
           <Menu.Item key="65">Year</Menu.Item>
         </SubMenu>
         <SubMenu key="sub14" title="Activity Repeated at">
-        <Menu.Item key="66" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
+        <Menu.Item key="group_by_activity_repeated_at" onClick={(object) => handleOnClickGroupByColumn(object)} >Only Column</Menu.Item>
           <Menu.Item key="67">Day</Menu.Item>
           <Menu.Item key="68">Week</Menu.Item>
           <Menu.Item key="69">Month</Menu.Item>
@@ -287,7 +300,7 @@ const Relationships = () => {
     </Sider>
     <Content style={{ padding: '0 24px', minHeight: 280 }}>
     {dataset? <Card className="custom-card" title="Results"  bordered={false}>
-              <Table size="small" rowKey="activity_id" columns={columns} dataSource={activities} />
+              <Table size="small" rowKey="activity_id" columns={column} dataSource={data} />
             </Card> :
             <Card className="custom-card" title="Dataset Generation" bordered={false}>
               <p className="spacer-bottom">Relationship define how you append activities to your dataset</p>

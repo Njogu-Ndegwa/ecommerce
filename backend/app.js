@@ -304,10 +304,9 @@ var server = app.listen(5000, function () {
 
 // Group by Activity Id.
 app.get('/group_by_activityid', (req, res) => {
-  let sql = "SELECT customer,  SUM(revenue_impact) from activity_stream GROUP BY customer;"
+  let sql = "SELECT activity_id, customer,  SUM(revenue_impact) from activity_stream GROUP BY activity_id, customer;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -316,16 +315,14 @@ app.get('/group_by_customer', (req, res) => {
   let sql = "SELECT customer,  SUM(revenue_impact) from activity_stream GROUP BY customer;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
 // Group by timestamp.
 app.get('/group_by_timestamp', (req, res) => {
-  let sql = "SELECT ts,  SUM(revenue_impact) from activity_stream GROUP BY ts;"
+  let sql = "SELECT ts, customer, activity,  SUM(revenue_impact) from activity_stream GROUP BY ts, customer, activity;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -334,7 +331,6 @@ app.get('/group_by_source', (req, res) => {
   let sql = "SELECT source,  SUM(revenue_impact) from activity_stream GROUP BY source;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -344,7 +340,6 @@ app.get('/group_by_sourceid', (req, res) => {
   let sql = "SELECT source_id,  SUM(revenue_impact) from activity_stream GROUP BY source_id;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -354,17 +349,15 @@ app.get('/group_by_activity', (req, res) => {
   let sql = "SELECT activity,  SUM(revenue_impact) from activity_stream GROUP BY activity;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
 
 // Group by feature_1.
 app.get('/group_by_feature1', (req, res) => {
-  let sql = "SELECT feature1,  SUM(revenue_impact) from activity_stream GROUP BY feature1;"
+  let sql = "SELECT feature_1,  SUM(revenue_impact) from activity_stream GROUP BY feature_1;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -375,7 +368,6 @@ app.get('/group_by_feature2', (req, res) => {
   let sql = "SELECT feature_2,  SUM(revenue_impact) from activity_stream GROUP BY feature_2;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -385,17 +377,15 @@ app.get('/group_by_feature3', (req, res) => {
   let sql = "SELECT feature_3,  SUM(revenue_impact) from activity_stream GROUP BY feature_3;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
 
 // Group by revenue_impact.
 app.get('/group_by_revenue_impact', (req, res) => {
-  let sql = "SELECT revenue_impact,  SUM(revenue_impact) from activity_stream GROUP BY revenue_impact;"
+  let sql = "SELECT activity_id, revenue_impact, customer  from activity_stream GROUP BY revenue_impact, activity_id, customer;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
@@ -405,17 +395,24 @@ app.get('/group_by_link', (req, res) => {
   let sql = "SELECT link,  SUM(revenue_impact) from activity_stream GROUP BY link;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
     res.send(data_set.rows);
   })
 })
 
 // Group by Occurence.
 app.get('/group_by_occurence', (req, res) => {
-  let sql = "SELECT link,  SUM(revenue_impact) from activity_stream GROUP BY link;"
+  let sql = "SELECT v.activity_id, v.occurence, s.customer, s.activity, SUM(s.revenue_impact) from activity_stream as s CROSS JOIN viewdemo_stream as v where s.activity_id = v.activity_id GROUP BY s.customer, v.activity_id, s.activity, v.occurence;"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    console.log(data_set.rows)
+    res.send(data_set.rows);
+  })
+})
+
+// Group by Activity Repeated at.
+app.get('/group_by_activity_repeated_at', (req, res) => {
+  let sql = "SELECT v.activity_repeated_at, v.activity_id, s.customer, s.activity, SUM(s.revenue_impact) from activity_stream as s CROSS JOIN viewdemo_stream as v where s.activity_id = v.activity_id GROUP BY s.customer, v.activity_id, s.activity, v.activity_repeated_at;"
+  RealPostgress.ReadQuery(sql, (data_set) =>{
+    res.setHeader('Content-Type', 'application/json');
     res.send(data_set.rows);
   })
 })
