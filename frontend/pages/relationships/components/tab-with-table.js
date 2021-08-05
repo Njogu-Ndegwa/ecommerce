@@ -333,8 +333,8 @@ const Relationships = () => {
         mode="vertical"
         // style={{ height: '50%' }}
       >
-        <SubMenu key="sub12" title="Activit onClick={(object) => handleOnClickGroupByColumn(object)}y Id">
-        <Menu.Item key="group_by_activityid" onClick={(item) => handleOnClickGroupByColumn(item)} >Only Column</Menu.Item>
+        <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} >
+        <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
         <Menu.Item key="day">Day</Menu.Item>
           <Menu.Item key="week">Week</Menu.Item>
           <Menu.Item key="month">Month</Menu.Item>
