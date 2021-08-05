@@ -79,7 +79,6 @@ export default function CreateDatasetTable(){
     
 
     const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
-        console.log(API_URL + 'generate-dataset')
         const activityTypesResponse = await fetch(API_URL + 'generate-dataset', {
           method: 'post',
           headers: {
@@ -121,7 +120,6 @@ export default function CreateDatasetTable(){
       };
     
       const showFilterModal2 = (fieldName) => {
-        console.log(fieldName)
         setIsModalVisible2(true);
         setModalField(fieldName);
       };

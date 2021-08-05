@@ -11,7 +11,7 @@ class KnexStaticDatabases {
       .createTable('activity_stream', (table) => {
         table.increments('id');
         table.string('activity_id');
-        table.string('ts');
+        table.timestamp('ts');
         table.string('source');
         table.string('source_id');
         table.string('customer');

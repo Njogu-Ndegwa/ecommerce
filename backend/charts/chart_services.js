@@ -165,7 +165,7 @@ function likelihoodToCompletedOrders(){
     for(let i = 0; i<allDays.length; i++){
         let difference = []
         for(let j = 0; j<allDays[i].length; j++){
-            let a = new Date(allDays[i][j])
+            let a = new Date(allDays[i][j]) 
             let b = new Date(allDays[i][j+1])
             let diff = (b - a)/(1000*3600*24);
             if(diff) {

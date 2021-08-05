@@ -16,7 +16,6 @@ export default function graphTemplate({data}) {
     const [graphType, setGraphType] = useState('line_graph')
     const handleChange = (value) => {
         setGraphType(value)
-        console.log(graphType)
     }
     return (
         <Card title='New Plot' style={{ width: 900, margin: "20px" }}>

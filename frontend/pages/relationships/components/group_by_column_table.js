@@ -149,17 +149,32 @@ import { humanize } from '../utils/index';
         {
             title: "ActivityId",
             dataIndex: "activity_id",
-            key: "activity_id"
-        },
-        {
-            title: "Customer",
-            dataIndex: 'customer',
-            key: "customer"
+            key: "id"
         },
         {
             title: "Total Revenue Impact",
             dataIndex: 'sum',
             key: "sum"
+        },
+        {
+            title: "Total Completed Orders Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -173,6 +188,26 @@ import { humanize } from '../utils/index';
             title: "Total Revenue Impact",
             dataIndex: "sum",
             key: 'sum'
+        },
+        {
+            title: "Total Completed orders Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -184,21 +219,29 @@ import { humanize } from '../utils/index';
             key: "ts"
         },
         {
-            title: "Customer",
-            dataIndex: "customer",
-            key: "customer"
-        },
-
-        {
-            title: "Activity",
-            dataIndex: "activity",
-            render: (activity) => humanize(activity || ''),
-            key: "activity"
-        },
-        {
-            title: "Revenue_Impact",
+            title: " Total Revenue_impact",
             dataIndex: "sum",
             key: "sum"
+        },
+        {
+            title: "Total Completed Orders Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -212,6 +255,26 @@ import { humanize } from '../utils/index';
             title: " Total Revenue_impact",
             dataIndex: "sum",
             key: "sum"
+        },
+        {
+            title: "Total Completed Orders Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -225,6 +288,26 @@ import { humanize } from '../utils/index';
             title: "Total Revenue_impact",
             dataIndex: "sum",
             key: "sum"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -237,6 +320,26 @@ import { humanize } from '../utils/index';
         {
             title: "Total Revenue_Impact",
             dataIndex: "sum",
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -250,6 +353,26 @@ import { humanize } from '../utils/index';
             title: "Total Revenue_Impact",
             dataIndex: "sum",
             key: "sum"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -261,6 +384,26 @@ import { humanize } from '../utils/index';
         {
             title: "Total Revenue_Impact",
             dataIndex: "sum"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
@@ -272,21 +415,52 @@ import { humanize } from '../utils/index';
         {
             title: "Total Revenue_Impact",
             dataIndex: "sum"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
 
     group_by_revenue_impact: [
         {
-            title: "ActivityId",
-            dataIndex: "activity_id",
-        },
-        {
-            title: "Customer",
-            dataIndex: "customer",
-        },
-        {
             title: "Total Revenue Impact",
             dataIndex: "revenue_impact"
+        },
+        {
+            title: "Total Revenue Impact rows",
+            dataIndex: "revenue_impact"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
     group_by_link: [
@@ -297,44 +471,215 @@ import { humanize } from '../utils/index';
         {
             title: "Total Revenue Impact",
             dataIndex: "sum"
+        },
+        {
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Order Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
     group_by_occurence: [
-        {
-            title: "ActivityId",
-            dataIndex: "activity_id",
-        },
-        {
-            title: "Customer",
-            dataIndex: "customer",
-        },
-
         {
             title: "Occurence",
             dataIndex: "occurence",
         },
         {
-            title: "Total Revenue Impact",
-            dataIndex: "sum"
+            title: "Total Completed Order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ],
     group_by_activity_repeated_at: [
-        {
-            title: "ActivityId",
-            dataIndex: "activity_id",
-        }, 
         {
             title: "Activity Repeated at",
             render: (activity_repeated_at) => moment(activity_repeated_at).format('ll'),
             dataIndex: "activity_repeated_at",
         },
         {
-            title: "Customer",
-            dataIndex: "customer",
+            title: "Total Completed order Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
+        }
+    ],
+
+    day: [
+        {
+            title: "Group by Day",
+            render:(ts) => moment(ts).format('ll'),
+            dataIndex: "ts",
+            key: "ts"
+        },
+        {
+            title: "Total Activity Repeated at Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum"
+            dataIndex: 'sum',
+            key: "sum"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
+        }
+    ],
+
+    week: [
+        {
+            title: "Group by Week",
+            render:(ts) => moment(ts).format('ll'),
+            dataIndex: "ts",
+            key: "ts"
+        },
+        {
+            title: "Total Activity Repeated at Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Revenue Impact",
+            dataIndex: 'sum',
+            key: "sum"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
+        }
+    ],
+
+    month: [
+        {
+            title: "Group by Month",
+            render:(ts) => moment(ts).format('ll'),
+            dataIndex: "ts",
+            key: "ts"
+        },
+        {
+            title: "Total Activity Repeated at Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Revenue Impact",
+            dataIndex: 'sum',
+            key: "sum"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
+        }
+    ],
+
+    year: [
+        {
+            title: "Group by Year",
+            render:(ts) => moment(ts).format('ll'),
+            dataIndex: "ts",
+            key: "ts"
+        },
+        {
+            title: "Total Activity Repeated at Rows",
+            dataIndex: 'total_primary_activity',
+            key: "total_primary_activity"
+        },
+        {
+            title: "Total Revenue Impact",
+            dataIndex: 'sum',
+            key: "sum"
+        },
+        {
+            title: "Total Completed Activity Rows",
+            dataIndex: 'total_secondary_activity',
+            key: "total_secondary_activity"
+        },
+        {
+            title: "Conversion rate to completed activities",
+            dataIndex: 'conversion_rate',
+            key: "conversion_rate"
+        },
+        {
+            title: "Average days from completed activity",
+            dataIndex: 'average_days',
+            key: "average_days"
         }
     ]
 }
