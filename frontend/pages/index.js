@@ -14,11 +14,9 @@ export default function Main() {
     
     useEffect( async () => {
         const response = await getData().catch(error => console.log(error))
-        setData(response.data)
+        setData(response?.data)
         setLoading(false)
-
-      }, []);
-
+    }, []);
      
     return (
        
