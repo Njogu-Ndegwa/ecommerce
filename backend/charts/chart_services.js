@@ -23,7 +23,7 @@ const RealPostgress = new PostGressConnection();
 function dateDiff() {
     let sql = "SELECT datediff('days', '1996-08-13 00:00:00+05', '1996-08-27 00:00:00+05')"
     RealPostgress.ReadQuery(sql, function (data_set) {
-        console.log(data_set.rows)
+        // console.log(data_set.rows)
       })
 }
 
