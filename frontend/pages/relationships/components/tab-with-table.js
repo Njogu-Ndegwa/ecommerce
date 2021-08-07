@@ -177,8 +177,8 @@ const Relationships = () => {
       if (groupedBy.appends.length) {
         const primaryActivity = activityTypes.
           filter(v => v.value === groupedBy.primary_activity)
-        const appendType = groupedBy.appends[0].append_type.replace(/-/g, '_');
-        const activityType = groupedBy.appends[0].activity_type.replace(/-/g, '_')
+        const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
+        const activityType = groupedBy.appends[0].activity_type.replace(/-/g, ' ')
 
         const dynamColumns = [
           {
@@ -188,12 +188,14 @@ const Relationships = () => {
           },
           {
             title: `Conversion rate to ${appendType} ${activityType}`,
-            dataIndex: `conversion_rate_to_${appendType}_${activityType}`,
+            dataIndex: `conversion_rate_to_${ appendType.replace(/\s/g, '_') }_
+              ${ activityType.replace(/\s/g, '_') }`,
             key: `conversion_rate_to_${appendType}_${activityType}`
           },
           {
             title: `Average days from ${appendType} ${activityType}`,
-            dataIndex: `average_days_from_${appendType}_${activityType}`,
+            dataIndex: `average_days_from_${ appendType.replace(/\s/g, '_') }_
+              ${ activityType.replace(/\s/g, '_') }`,
             key: `average_days_from_${appendType}_${activityType}`
           }
         ]
@@ -358,7 +360,6 @@ const Relationships = () => {
       <Card title="Occurence Info" style={{marginBottom: "40px"}} >
       <Menu
         mode="vertical"
-        // style={{ height: '50%' }}
       >
         <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} >
         <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
@@ -383,7 +384,7 @@ const Relationships = () => {
               className="custom-card" 
               title={
                 <span>
-                  <ArrowLeftOutlined onClick={() => setDataset(false)} />
+                  <ArrowLeftOutlined onClick={handleBack} />
                   &nbsp;Results
                 </span>
               }
