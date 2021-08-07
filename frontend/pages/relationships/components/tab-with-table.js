@@ -142,7 +142,6 @@ const Relationships = () => {
       let str = appends[0].append_type
       let title = appends[0].append_type
       let activity = appends[0].activity_type
-      console.log(`did_${activity.split('-').join('_')}`)
       columns.push({
       title: `${title.split('-').join(' ')} ${appends[0].activity_type}`,
       dataIndex: `${str.split('-').join('_')}`,
@@ -274,7 +273,7 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState('');
 
   const postAppendState = async (key, view) => {
-    await fetch(API_URL + 'group_by_customer', {
+    const response = await fetch(API_URL + "group_by_customer", {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -282,17 +281,17 @@ const Relationships = () => {
       },
       body: JSON.stringify({time: key, view})
     });
+    console.log(API_URL + "group_by_customer")
   };
   
   const handleOnClickGroupByColumn = async (object) => {
     const columns = group_by_columns[object.key];
     setColumn(columns)
     setGroupedBy(prev => ({...prev, columns }));
-
     const customerResponse = await fetch(API_URL + object.key)
     const customerData = await customerResponse.json()
     setData(customerData)
-    
+    console.log(customerData)
     const { key } = object; 
     if (key === 'day' || key === 'week' || key === 'month' || key === 'year') {
       postAppendState(key, appendState)
