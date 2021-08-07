@@ -280,6 +280,17 @@ const Relationships = () => {
     location.reload();
   };
 
+  // user navigation state
+  const [userNavState, setUserNavState] = useState({
+    view: ''
+  });
+
+  // handle append onChange event
+  const handleAppendChange = value => {
+    const view = `${value.replace(/-/g, '_')}_view`;
+    setUserNavState(prev => ({...prev, view}));
+  }
+
   const MenuItem = (
     <>
     <Menu.Item key="day">Day</Menu.Item>
@@ -492,7 +503,7 @@ const Relationships = () => {
                                       name={[field.name, 'append_type']}
                                       fieldKey={[field.fieldKey, 'append_type']}
                                     >
-                                      <Select showSearch style={{ minWidth: 128 }} options={appendTypes} />
+                                      <Select showSearch style={{ minWidth: 128 }} options={appendTypes} onChange={handleAppendChange}/>
                                     </Form.Item>
                                     <Button onClick={() => showFilterModal2(field)}>
                                       <FilterOutlined />
