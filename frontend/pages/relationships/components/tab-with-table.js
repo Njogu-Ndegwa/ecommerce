@@ -143,7 +143,7 @@ const Relationships = () => {
       let title = appends[0].append_type
       let activity = appends[0].activity_type
       columns.push({
-      title: `${title.split('-').join(' ')} ${appends[0].activity_type}`,
+      title: `${title.split('-').join(' ')} ${appends[0].activity_type.replace(/_/g, ' ')}`,
       dataIndex: `${str.split('-').join('_')}`,
       key: `${str.split('-').join('_')}`
     })
@@ -151,12 +151,12 @@ const Relationships = () => {
     // Update dynamic fields
     columns.push(
       {
-        title: `Did ${appends[0].activity_type}`,
+        title: `Did ${appends[0].activity_type.replace(/_/g, ' ')}`,
         dataIndex: 'did_secondary_activity',
         key: 'did_secondary_activity'
       },
       {
-        title: `Days from ${appends[0].activity_type}`,
+        title: `Days from ${appends[0].activity_type.replace(/_/g, ' ')}`,
         dataIndex: 'days_from_secondary_activity',
         key: 'days_from_secondary_activity'
       }
