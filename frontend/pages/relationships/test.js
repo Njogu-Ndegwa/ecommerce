@@ -3,6 +3,6 @@ import Test from './components/tab-with-table'
 
 export default function Tester() {
     return (
-<Test/>
+        <Test/>
     )
 }
