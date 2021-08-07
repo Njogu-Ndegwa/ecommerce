@@ -177,7 +177,7 @@ const Relationships = () => {
         const primaryActivity = activityTypes.
           filter(v => v.value === groupedBy.primary_activity)
         const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
-        const activityType = groupedBy.appends[0].activity_type.replace(/-/g, ' ')
+        const activityType = groupedBy.appends[0].activity_type.replace(/_/g, ' ')
 
         const dynamColumns = [
           {
