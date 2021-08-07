@@ -695,7 +695,6 @@ app.get('/group_by_link', (req, res) => {
       })
     }
   }
-  })
 })
 
 // Group by Occurence.
