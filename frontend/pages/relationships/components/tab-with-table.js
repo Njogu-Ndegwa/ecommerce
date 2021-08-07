@@ -19,7 +19,7 @@ import PlotChart from './chart-button'
 
 import {group_by_columns} from './group_by_column_table'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const giveMeOptions = [
