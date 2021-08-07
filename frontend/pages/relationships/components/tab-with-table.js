@@ -1,5 +1,5 @@
 import { Form, Input, Button, Space, Select, Row, Col, Modal, message, Card, InputNumber, Table , Layout, Menu} from 'antd';
-import { FilterOutlined, DeleteOutlined } from '@ant-design/icons';
+import { FilterOutlined, DeleteOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import {
   AppendActivityButton,
   Container,
@@ -127,6 +127,7 @@ const Relationships = () => {
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
   const [selectedgroup, setSelectedGroup] = useState('')
+  
 
 
   const handleOk = () => {
@@ -358,7 +359,18 @@ const Relationships = () => {
       </Card>
     </Sider>
     <Content style={{ padding: '0 24px', minHeight: 280 }}>
-    {dataset? <Card className="custom-card" title="Results"  bordered={false}>
+    {       
+            dataset ? 
+            <Card 
+              bordered={false}
+              className="custom-card" 
+              title={
+                <span>
+                  <ArrowLeftOutlined onClick={() => setDataset(false)} />
+                  &nbsp;Results
+                </span>
+              }
+            >
               <Table size="small" rowKey="activity_id" scroll={{x: 400}} columns={column} dataSource={data} />
             </Card> :
             <Card className="custom-card" title="Dataset Generation" bordered={false}>
