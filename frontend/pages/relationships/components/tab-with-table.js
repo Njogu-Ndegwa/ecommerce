@@ -112,8 +112,6 @@ export const customerAttrs = [
 ];
 
 
-
-
 const API_URL = "http://localhost:5000/"
 
 const Relationships = () => {
@@ -126,9 +124,6 @@ const Relationships = () => {
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
-  const [selectedgroup, setSelectedGroup] = useState('')
-  
-
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -142,34 +137,76 @@ const Relationships = () => {
     setIsModalVisible2(false);
   };
 
-  const handleCancel2 = () => {
-    setIsModalVisible2(false);
-  };
-
   const setSecondaryColumn = (appends) => {
     if(appends.length >= 1){
       let str = appends[0].append_type
       let title = appends[0].append_type
       let activity = appends[0].activity_type
       console.log(`did_${activity.split('-').join('_')}`)
-    columns.push({
+      columns.push({
       title: `${title.split('-').join(' ')} ${appends[0].activity_type}`,
       dataIndex: `${str.split('-').join('_')}`,
       key: `${str.split('-').join('_')}`
     })
 
-    columns.push({
-      title: `Did ${appends[0].activity_type}`,
-      dataIndex: 'did_secondary_activity',
-      key: 'did_secondary_activity'
-    })
-  }
+    // Update dynamic fields
+    columns.push(
+      {
+        title: `Did ${appends[0].activity_type}`,
+        dataIndex: 'did_secondary_activity',
+        key: 'did_secondary_activity'
+      },
+      {
+        title: `Days from ${appends[0].activity_type}`,
+        dataIndex: 'days_from_secondary_activity',
+        key: 'days_from_secondary_activity'
+      }
+    )
+  };
+
   }
 
+  // Update groupBy columns dynamically
+  const [groupedBy, setGroupedBy] = useState({
+    primary_activity: '',
+    appends: [],
+    columns: []
+  });
+
+  useEffect(() => {
+      if (groupedBy.appends.length) {
+        const primaryActivity = activityTypes.
+          filter(v => v.value === groupedBy.primary_activity)
+        const appendType = groupedBy.appends[0].append_type.replace(/-/g, '_');
+        const activityType = groupedBy.appends[0].activity_type.replace(/-/g, '_')
+
+        const dynamColumns = [
+          {
+            title: `Total ${primaryActivity[0].label}`,
+            dataIndex: groupedBy.primary_activity,
+            key: groupedBy.primary_activity
+          },
+          {
+            title: `Conversion rate to ${appendType} ${activityType}`,
+            dataIndex: `conversion_rate_to_${appendType}_${activityType}`,
+            key: `conversion_rate_to_${appendType}_${activityType}`
+          },
+          {
+            title: `Average days from ${appendType} ${activityType}`,
+            dataIndex: `average_days_from_${appendType}_${activityType}`,
+            key: `average_days_from_${appendType}_${activityType}`
+          }
+        ]
+
+        setColumn(groupedBy.columns.concat(dynamColumns))
+      }
+  }, [groupedBy.columns])
+
   const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
-    setSecondaryColumn(appends)
-    console.log({ appends, filters, primary_activity, measure, occurrence }, 'hello')
-    console.log(API_URL)
+    setSecondaryColumn(appends) 
+    setGroupedBy(prev => ({...prev, appends, primary_activity}));
+    // console.log({ appends, filters, primary_activity, measure, occurrence }, 'hello')
+    // console.log(API_URL)
     const activityTypesResponse = await fetch(API_URL + 'generate-dataset', {
       method: 'post',
       headers: {
@@ -179,13 +216,21 @@ const Relationships = () => {
       body: JSON.stringify({ appends, filters, primary_activity, measure, occurrence }),
     });
     const activityTypesJson = await activityTypesResponse.json();
-      setData(activityTypesJson)
-      setDataset(true)
-    
+    setData(activityTypesJson)
+    setDataset(true)
   };
+
+  // Activity type label
+  const [activityLabel, setActivityLabel] = useState("Activity")
+  useEffect(() => {
+    if (activityTypes.length) setActivityLabel(activityTypes[0].label)
+  }, [activityTypes]);
 
   const handleChange = (val) => {
     setShowOccurenceInput(val === 'nth');
+    activityTypes.forEach(({label, value}) => {
+      if (value === val) setActivityLabel(label)
+    });
   };
 
   useEffect(async () => {
@@ -217,16 +262,24 @@ const Relationships = () => {
     return form.getFieldValue('appends') && form.getFieldValue('appends').length > 0;
   };
 
+  const handleOnClickGroupByColumn = async (object) => {
+    const columns = group_by_columns[object.key];
+    setColumn(columns)
+    setGroupedBy(prev => ({...prev, columns }));
 
-
-  const handleOnClickGroupByColumn = async (object) =>{
-    setColumn(group_by_columns[object.key]) 
     const customerResponse = await fetch(API_URL + object.key)
     const customerData = await customerResponse.json()
     setData(customerData)
-    setSelectedGroup(object.key)
   }
 
+  const MenuItem = (
+    <>
+    <Menu.Item key="day">Day</Menu.Item>
+    <Menu.Item key="week">Week</Menu.Item>
+    <Menu.Item key="month">Month</Menu.Item>
+    <Menu.Item key="year">Year</Menu.Item>
+    </>
+  )
 
   return (
 
@@ -247,85 +300,52 @@ const Relationships = () => {
   <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
   <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
         {dataset && <PlotChart data={data} columns={column} />}
-        <Card title="Activities" style={{marginBottom: "40px"}} >
+        <Card title={activityLabel} style={{marginBottom: "40px"}} >
       <Menu
         mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
 <SubMenu key="sub1" title="Activity Id"  >
           <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub2" title="Timestamp" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_timestamp"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub3" title="Source"  onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_source"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub4" title="Source_id" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_sourceid"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub5" title="Customer" onClick={(item) => handleOnClickGroupByColumn(item)} >
           <Menu.Item key="group_by_customer">Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub6" title="activity" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_activity" >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub7" title="feature_1" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_feature1"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub8" title="feature_2" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_feature2"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub9" title="feature_3" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_feature3"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub10" title="revenue_impact" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_revenue_impact"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
 <SubMenu key="sub11" title="link" onClick={(object) => handleOnClickGroupByColumn(object)}>
           <Menu.Item key="group_by_link"  >Only Column</Menu.Item>
-          <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+          { MenuItem } 
 </SubMenu>
       </Menu>
       </Card>
@@ -336,24 +356,15 @@ const Relationships = () => {
       >
         <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} >
         <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
-        <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+        { MenuItem } 
         </SubMenu>
         <SubMenu key="sub13" title="Occurence" onClick={(item) => handleOnClickGroupByColumn(item)}>
         <Menu.Item key="group_by_occurence"  >Only Column</Menu.Item>
-        <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+        { MenuItem } 
         </SubMenu>
         <SubMenu key="sub14" title="Activity Repeated at" onClick={(item) => handleOnClickGroupByColumn(item)} >
         <Menu.Item key="group_by_activity_repeated_at" >Only Column</Menu.Item>
-        <Menu.Item key="day">Day</Menu.Item>
-          <Menu.Item key="week">Week</Menu.Item>
-          <Menu.Item key="month">Month</Menu.Item>
-          <Menu.Item key="year">Year</Menu.Item>
+        { MenuItem } 
         </SubMenu>
       </Menu>
       </Card>
