@@ -410,7 +410,7 @@ app.post('/group_by_customer', (req, res) => {
   
 })
 // Group by timestamp.
-app.get('/group_by_timestamp', (req, res) => {
+app.post('/group_by_timestamp', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -441,7 +441,7 @@ app.get('/group_by_timestamp', (req, res) => {
   }
 })
 // Group by source.
-app.get('/group_by_source', (req, res) => {
+app.post('/group_by_source', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -473,7 +473,7 @@ app.get('/group_by_source', (req, res) => {
 })
 
 // Group by Source Id.
-app.get('/group_by_sourceid', (req, res) => {
+app.post('/group_by_sourceid', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -505,7 +505,7 @@ app.get('/group_by_sourceid', (req, res) => {
 })
 
 // Group by Activity.
-app.get('/group_by_activity', (req, res) => {
+app.post('/group_by_activity', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -537,7 +537,7 @@ app.get('/group_by_activity', (req, res) => {
 })
 
 // Group by feature_1.
-app.get('/group_by_feature1', (req, res) => {
+app.post('/group_by_feature1', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -570,7 +570,7 @@ app.get('/group_by_feature1', (req, res) => {
 
 
 // Group by feature_2.
-app.get('/group_by_feature2', (req, res) => {
+app.post('/group_by_feature2', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -602,7 +602,7 @@ app.get('/group_by_feature2', (req, res) => {
 })
 
 // Group by feature_3.
-app.get('/group_by_feature3', (req, res) => {
+app.post('/group_by_feature3', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -634,7 +634,7 @@ app.get('/group_by_feature3', (req, res) => {
 })
 
 // Group by revenue_impact.
-app.get('/group_by_revenue_impact', (req, res) => {
+app.post('/group_by_revenue_impact', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -666,7 +666,7 @@ app.get('/group_by_revenue_impact', (req, res) => {
 })
 
 // Group by Link.
-app.get('/group_by_link', (req, res) => {
+app.post('/group_by_link', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
@@ -698,7 +698,7 @@ app.get('/group_by_link', (req, res) => {
 })
 
 // Group by Occurence.
-app.get('/group_by_occurence', (req, res) => {
+app.post('/group_by_occurence', (req, res) => {
   const {time, view} = req.body
   if(view) {
     if(time){
