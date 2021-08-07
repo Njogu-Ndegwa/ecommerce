@@ -264,6 +264,20 @@ const Relationships = () => {
     return form.getFieldValue('appends') && form.getFieldValue('appends').length > 0;
   };
 
+  // append state
+  const [appendState, setAppendState] = useState('');
+
+  const postAppendState = async (key, view) => {
+    await fetch(API_URL + 'group_by_customer', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({time: key, view})
+    });
+  };
+  
   const handleOnClickGroupByColumn = async (object) => {
     const columns = group_by_columns[object.key];
     setColumn(columns)
@@ -272,24 +286,24 @@ const Relationships = () => {
     const customerResponse = await fetch(API_URL + object.key)
     const customerData = await customerResponse.json()
     setData(customerData)
+    
+    const { key } = object; 
+    if (key === 'day' || key === 'month' || key === 'year') {
+      postAppendState(key, appendState)
+    }
   }
 
   // handle back navigation 
   const handleBack = () => {
     setDataset(false);
-    location.reload();
+    window.location.reload();
   };
-
-  // user navigation state
-  const [userNavState, setUserNavState] = useState({
-    view: ''
-  });
 
   // handle append onChange event
   const handleAppendChange = value => {
     const view = `${value.replace(/-/g, '_')}_view`;
-    setUserNavState(prev => ({...prev, view}));
-  }
+    setAppendState(view)
+  };
 
   const MenuItem = (
     <>
