@@ -288,7 +288,7 @@ const Relationships = () => {
     setData(customerData)
     
     const { key } = object; 
-    if (key === 'day' || key === 'month' || key === 'year') {
+    if (key === 'day' || key === 'week' || key === 'month' || key === 'year') {
       postAppendState(key, appendState)
     }
   }
