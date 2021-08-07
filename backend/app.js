@@ -168,12 +168,18 @@ app.post('/generate-dataset', function (req, res) {
       break;
   }
 
-    let sql = `SELECT ${selectQuery}
-    FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}' ${filterQuery}
-    ${occurrenceQuery}
+    let generate_data_view = `CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}'
   `;
+  RealPostgress.ReadQuery(generate_data_view, function (data_set) {
+    console.log(data_set)
+  })
 
-  RealPostgress.ReadQuery(sql, function (data_set) {
+  RealPostgress.ReadQuery('select * from generate_data_view', function (data_set) {
+    console.log(data_set)
+  })
+
+
+  RealPostgress.ReadQuery('select * from generate_data_view', function (data_set) { 
     res.setHeader('Content-Type', 'application/json');
     if(appends.length >= 1) {
 
@@ -353,11 +359,15 @@ app.get('/group_by_activityid', (req, res) => {
 })
 // Group by customers.
 app.get('/group_by_customer', (req, res) => {
-  let sql = "SELECT customer , SUM(revenue_impact) from generate_dataset_view GROUP BY customer;" 
-  RealPostgress.ReadQuery(sql, (data_set) =>{
+  let month = 'month'
+  let time = `DATE TRUNC(${month}, c.ts)`
+  let selectQuery = `c.customer, DATE TRUNC(${month}, c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate`
+  let a = 'first_ever_view'
+  let view = `${a}`
+  let sql = `SELECT c.customer, DATE TRUNC(${month}, c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from first_ever_view as c group by c.customer, DATE_TRUC(${month}, c.ts)`
+  RealPostgress.ReadQuery(`SELECT c.customer, DATE_TRUNC('${month}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.customer, DATE_TRUNC('${month}', c.ts)`, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
+    res.send(data_set.rows);
   })
 })
 // Group by timestamp.
@@ -475,8 +485,7 @@ app.get('/day', (req, res) => {
   let sql = "SELECT DATE_TRUNC('day',ts) AS  ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('day',ts);"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByDay(data_set)
-    res.send(data_set1.rows);
+    res.send(data_set.rows);
   })
 })
 
