@@ -32,11 +32,12 @@ export default function PlotChart({data, columns}) {
     setisModalVisible(false)
   }
 
+  const [ Ylabel, setYlabel ] = useState('Y-axis')
   const handleYColumnChange = (value) => {
-    // console.log(value)
-    setyColumn(value)
-      
-      // console.log(graphType)
+    console.log('y_col: ', value)
+    columns.forEach(v => {
+      if (v.dataIndex === value) setYlabel(v.title)
+    })
   }
 
   const handleGraphTypeChange = (value) => {
