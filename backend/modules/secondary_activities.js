@@ -2,7 +2,6 @@ var { PostGressConnection } = require('./database');
 const {groupByColumn} = require('./grou_by_column')
 const RealPostgress = new PostGressConnection();
 
-
       function firstEver(data_set, appends, primary_activity, res) {
         if(appends[0].append_type === 'first-ever' ||
         appends[0].append_type === 'first-before' ) {
