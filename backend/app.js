@@ -168,12 +168,6 @@ app.post('/generate-dataset', function (req, res) {
       break;
   }
 
-    let generate_data_view = `CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}'
-  `;
-  RealPostgress.ReadQuery(generate_data_view, function (data_set) {
-    console.log(data_set)
-  })
-
   RealPostgress.ReadQuery(`CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}'
   `, function (data_set) {
     console.log(data_set)
