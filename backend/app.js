@@ -344,27 +344,22 @@ var server = app.listen(5000, function () {
 // GROUP BY COLUMNS
 
 // Group by Activity Id.
-app.get('/group_by_activityid', (req, res) => {
-  let appends = []
-  let month = 'month'
-  let time = `${'fdd'}`
-  let a = 'generate_data_view'
-  let view = `${a}`
-
-  if(appends.length >= 1) {
-    if(!time){
-      RealPostgress.ReadQuery(`SELECT c.activity_id, DATE_TRUNC('${month}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity_id, DATE_TRUNC('${month}', c.ts)`, (data_set) =>{
+app.post('/group_by_activityid', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.activity_id, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
         res.setHeader('Content-Type', 'application/json');
         res.send(data_set.rows);
       })
-    } else if(time) {
+    } else if(!time) {
       RealPostgress.ReadQuery(`
       SELECT c.activity_id, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity_id`, (data_set) =>{
         res.setHeader('Content-Type', 'application/json');
         res.send(data_set.rows);
       })
     }
-  } else if (appends.length < 1) {
+  } else {
     if(!time){
       RealPostgress.ReadQuery(`SELECT c.activity_id, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.activity_id`, (data_set) =>{
         res.setHeader('Content-Type', 'application/json');
@@ -372,7 +367,7 @@ app.get('/group_by_activityid', (req, res) => {
       })
     } else if(time) {
       RealPostgress.ReadQuery(`
-      SELECT c.activity_id, DATE_TRUNC('${month}', c.ts) as monthly from ${view} as c group by c.activity_id, DATE_TRUNC('${month}', c.ts)`, (data_set) =>{
+      SELECT c.activity_id, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.activity_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
         res.setHeader('Content-Type', 'application/json');
         res.send(data_set.rows);
       })
@@ -382,7 +377,6 @@ app.get('/group_by_activityid', (req, res) => {
 // Group by customers.
 app.post('/group_by_customer', (req, res) => {
   const {time, view} = req.body
-  let appends = []
 
   if(view) {
     console.log('cxvxcv')
@@ -398,7 +392,7 @@ app.post('/group_by_customer', (req, res) => {
         res.send(data_set.rows);
       })
     }
-  } else if (!view) {
+  } else {
     console.log('dxvcx')
     if(!time){
       RealPostgress.ReadQuery(`SELECT c.customer, SUM(c.revenue_impact) as total_revenue_impact from generate_data_view as c group by c.customer`, (data_set) =>{
@@ -416,113 +410,355 @@ app.post('/group_by_customer', (req, res) => {
   
 })
 // Group by timestamp.
-app.get('/group_by_timestamp', (req, res) => {
-  let sql = "SELECT ts, SUM(revenue_impact) from activity_stream GROUP BY ts"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_timestamp', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.ts, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.ts, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.ts, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.ts`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.ts, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.ts`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.ts, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.ts, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 // Group by source.
-app.get('/group_by_source', (req, res) => {
-  let sql = "SELECT source,  SUM(revenue_impact) from activity_stream GROUP BY source;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn2(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_source', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.source, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.source, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.source`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by Source Id.
-app.get('/group_by_sourceid', (req, res) => {
-  let sql = "SELECT source_id,  SUM(revenue_impact) from activity_stream GROUP BY source_id;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn2(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_sourceid', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.source_id, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source_id, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source_id`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.source_id, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.source_id`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source_id, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.source_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by Activity.
-app.get('/group_by_activity', (req, res) => {
-  let sql = "SELECT activity,  SUM(revenue_impact) from activity_stream GROUP BY activity;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_activity', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.activity, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.activity, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.activity, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.activity`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.activity, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.activity, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by feature_1.
-app.get('/group_by_feature1', (req, res) => {
-  let sql = "SELECT feature_1,  SUM(revenue_impact) from activity_stream GROUP BY feature_1;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_feature1', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.feature_1, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_1, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_1, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_1`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.feature_1, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.feature_1`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_1, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.feature_1, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 
 // Group by feature_2.
-app.get('/group_by_feature2', (req, res) => {
-  let sql = "SELECT feature_2,  SUM(revenue_impact)  from activity_stream GROUP BY feature_2;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn2(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_feature2', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.feature_2, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_2, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_2, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_2`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.feature_2, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.feature_2`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_2, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.feature_2, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by feature_3.
-app.get('/group_by_feature3', (req, res) => {
-  let sql = "SELECT feature_3,  SUM(revenue_impact) from activity_stream GROUP BY feature_3;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn2(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_feature3', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.feature_3, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_3, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_3, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.feature_3`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.feature_3, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.feature_3`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.feature_3, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.feature_3, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by revenue_impact.
-app.get('/group_by_revenue_impact', (req, res) => {
-  let sql = "SELECT revenue_impact from activity_stream GROUP BY revenue_impact;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_revenue_impact', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.revenue_impact, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.revenue_impact, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.revenue_impact, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.revenue_impact`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.revenue_impact, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.revenue_impact`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.revenue_impact, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.revenue_impact, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by Link.
-app.get('/group_by_link', (req, res) => {
-  let sql = "SELECT link,  SUM(revenue_impact) from activity_stream GROUP BY link;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn2(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_link', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.link, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.link, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.link, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.link`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.link, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.link`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.link, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.link, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by Occurence.
-app.get('/group_by_occurence', (req, res) => {
-  let sql = "SELECT v.activity_id, v.occurence, s.customer, s.activity, SUM(s.revenue_impact) from activity_stream as s CROSS JOIN viewdemo_stream as v where s.activity_id = v.activity_id GROUP BY s.customer, v.activity_id, s.activity, v.occurence;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+app.post('/group_by_occurence', (req, res) => {
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.occurence, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.occurence, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.occurence, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.occurence`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.occurence, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.occurence`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.occurence, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.occurence, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
-// Group by Activity Repeated at.
+// Group by Activity Repeated at. *
 app.get('/group_by_activity_repeated_at', (req, res) => {
-  let sql = "SELECT v.activity_repeated_at, v.activity_id, s.customer, s.activity, SUM(s.revenue_impact) from activity_stream as s CROSS JOIN viewdemo_stream as v where s.activity_id = v.activity_id GROUP BY s.customer, v.activity_id, s.activity, v.activity_repeated_at;"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByColumn(data_set)
-    res.send(data_set1.rows);
-  })
+  const {time, view} = req.body
+  if(view) {
+    if(time){
+      RealPostgress.ReadQuery(`SELECT c.source, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(!time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  } else {
+    if(!time){
+      RealPostgress.ReadQuery(`SELECT c.source, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.source`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    } else if(time) {
+      RealPostgress.ReadQuery(`
+      SELECT c.source, DATE_TRUNC('${time}', c.ts) as monthly from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+        res.setHeader('Content-Type', 'application/json');
+        res.send(data_set.rows);
+      })
+    }
+  }
 })
 
 // Group by Day
