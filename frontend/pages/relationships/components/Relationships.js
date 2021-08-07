@@ -73,8 +73,6 @@ const Relationships = () => {
   };
 
   const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
-    console.log({ appends, filters, primary_activity, measure, occurrence}, 'Dennis')
-    console.log(API_URL)
     const activityTypesResponse = await fetch(API_URL + 'generate-dataset', {
       method: 'post',
       headers: {

@@ -10,7 +10,6 @@ import Item from 'antd/lib/list/Item';
 const {Option} = Select
 
 export default function PlotChart({data, columns}) {
-  console.log('plot_data: ', {data, columns}) 
   const [isModalVisible, setisModalVisible] = useState(false)
   const [graphType, setGraphType] = useState('line_graph')
   const [yColumn, setyColumn] = useState(columns[1].dataIndex)
@@ -38,8 +37,6 @@ export default function PlotChart({data, columns}) {
   }
 
   const handleY2Change = () => {}
-
-    console.log((graphType === 'line_graph' || graphType === 'composite_graph') && 'amen')
 
     return (
       <Card style={{ width: 200, marginBottom: 16 }}>
