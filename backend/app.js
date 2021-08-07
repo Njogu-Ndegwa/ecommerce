@@ -167,10 +167,11 @@ app.post('/generate-dataset', function (req, res) {
       break;
   }
 
-  let sql = `SELECT ${selectQuery}
-    FROM public.activity_stream AS az1 where az1.activity = '${primary_activity}' ${filterQuery}
+    let sql = `SELECT ${selectQuery}
+    FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}' ${filterQuery}
     ${occurrenceQuery}
   `;
+
   RealPostgress.ReadQuery(sql, function (data_set) {
     res.setHeader('Content-Type', 'application/json');
     if(appends.length >= 1) {
@@ -207,7 +208,7 @@ app.post('/generate-dataset', function (req, res) {
 
 app.get('/first-ever', function (req, res) {
   const { primary_activity, append_activity, appends, filters } = req.query;
-  let sql = `SELECT az1.customer, az1.activity,
+  let generate_view = `CREATE VIEW generate_view as SELECT az1.customer, az1.activity,
   case
   when activity = 'completed_order'
   then
@@ -216,6 +217,13 @@ app.get('/first-ever', function (req, res) {
   end as first_ever
   FROM public.activity_stream as az1 group by first_ever, az1.customer, az1.activity
   `;
+  function create_view(sql){
+    RealPostgress.ReadQuery(sql, function (data_set) {
+      console.log("View Created")
+    });
+  }
+  create_view(generate_view)
+  let sql = `SELECT * from generate_view`;
   RealPostgress.ReadQuery(sql, function (data_set) {
     res.setHeader('Content-Type', 'application/json')
     ;
@@ -344,7 +352,7 @@ app.get('/group_by_activityid', (req, res) => {
 })
 // Group by customers.
 app.get('/group_by_customer', (req, res) => {
-  let sql = "SELECT customer , SUM(revenue_impact) from activity_stream GROUP BY customer;"
+  let sql = "SELECT customer , SUM(revenue_impact) from generate_dataset_view GROUP BY customer;" 
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
     let data_set1 = groupByColumn(data_set)
@@ -463,7 +471,7 @@ app.get('/group_by_activity_repeated_at', (req, res) => {
 
 // Group by Day
 app.get('/day', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('day',ts) AS  production_to_month, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('day',ts);"
+  let sql = "SELECT DATE_TRUNC('day',ts) AS  ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('day',ts);"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
     let data_set1 = groupByDay(data_set)
@@ -473,7 +481,7 @@ app.get('/day', (req, res) => {
 
 // Group by Week.
 app.get('/week', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('week',ts) AS  production_to_month, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('week',ts);"
+  let sql = "SELECT DATE_TRUNC('week',ts) AS ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('week',ts);"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
     let data_set1 = groupByWeek(data_set)
@@ -483,7 +491,7 @@ app.get('/week', (req, res) => {
 
 // Group by Month.
 app.get('/month', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('month',ts) AS  production_to_month, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('month',ts);"
+  let sql = "SELECT DATE_TRUNC('month',ts) AS  ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('month',ts);"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
     let data_set1 = groupByMonth(data_set)
@@ -493,7 +501,7 @@ app.get('/month', (req, res) => {
 
 // Group by Year.
 app.get('/year', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('year',ts) AS  production_to_month, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('year',ts);"
+  let sql = "SELECT DATE_TRUNC('year',ts) AS ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('year',ts);"
   RealPostgress.ReadQuery(sql, (data_set) =>{
     res.setHeader('Content-Type', 'application/json');
     let data_set1 = groupByYear(data_set)

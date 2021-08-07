@@ -3,14 +3,14 @@ const {groupByColumn} = require('./grou_by_column')
 const RealPostgress = new PostGressConnection();
 
 function firstEver(data_set, appends, primary_activity, res) {
-    let sql1 = `SELECT az1.customer, az1.activity,
+    let sql1 = `CREATE or REPLACE VIEW generate_dataset_view as SELECT az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link 
     case
     when activity = '${primary_activity}'
     then
       (select MIN(ts) as ts from activity_stream as az
       where activity = '${appends[0].activity_type}' and az1.customer = az.customer order by ts)
     end as first_ever
-    FROM public.activity_stream as az1 group by first_ever, az1.customer, az1.activity
+    FROM public.activity_stream as az1 group by first_ever, az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link 
     `;
     if(appends[0].append_type === 'first-ever' ||
     appends[0].append_type === 'first-before' ) {
