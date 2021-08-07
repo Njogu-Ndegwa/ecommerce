@@ -187,6 +187,11 @@ const Relationships = () => {
             key: groupedBy.primary_activity
           },
           {
+            title: `Total ${appendType}`,
+            dataIndex: `total_${appendType.replace(/\s/g, '_')}`,
+            key: `total_${appendType.replace(/\s/g, '_')}`
+          },
+          {
             title: `Conversion rate to ${appendType} ${activityType}`,
             dataIndex: `conversion_rate_to_${ appendType.replace(/\s/g, '_') }_
               ${ activityType.replace(/\s/g, '_') }`,
@@ -200,6 +205,7 @@ const Relationships = () => {
           }
         ]
 
+        // console.log('dynamColumns: ', dynamColumns);
         setColumn(groupedBy.columns.concat(dynamColumns))
       }
   }, [groupedBy.columns])
