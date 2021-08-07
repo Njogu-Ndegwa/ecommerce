@@ -272,6 +272,12 @@ const Relationships = () => {
     setData(customerData)
   }
 
+  // handle back navigation 
+  const handleBack = () => {
+    setDataset(false);
+    location.reload();
+  };
+
   const MenuItem = (
     <>
     <Menu.Item key="day">Day</Menu.Item>
