@@ -210,7 +210,7 @@ const Relationships = () => {
         const columns = groupedBy.columns.concat(dynamColumns);
         setColumn(columns);
       }
-  }, [groupedBy.columns])
+  }, [groupedBy])
 
   const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
     setSecondaryColumn(appends) 
