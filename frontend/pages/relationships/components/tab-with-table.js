@@ -271,29 +271,38 @@ const Relationships = () => {
 
   // append state
   const [appendState, setAppendState] = useState('');
-  
-  const handleOnClickGroupByColumn = async (object) => {
+  const [url, setUrl] = useState('');
+
+  const postAppendState = async time => {
+    if (url) {
+      const res = await fetch(API_URL + url, {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({time, view: appendState})
+      });
+
+      const data = await res.json();
+      setData(data)
+      // console.log('data: ', data);
+    }
+  }
+
+  const handleOnClickGroupByColumn = object => {
     const columns = group_by_columns[object.key];
     setColumn(columns)
     setGroupedBy(prev => ({...prev, columns }));
 
-    const res = await fetch(API_URL + "group_by_customer", {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        time: object.key, 
-        view: appendState,
-        key: object.key
-      })
-    });
+    const period = ['day','week','month','year'];
+    const time = period.includes(object.key) && object.key;
+    const endpoint = !period.includes(object.key) && object.key;
 
-    data = res.json();
-    setData(data)
-    // console.log('data: ', data)
-  }
+    // console.log({time, endpoint});
+    if (endpoint) setUrl(endpoint);
+    if (time) postAppendState(time);
+  };
 
   // handle back navigation 
   const handleBack = () => {
