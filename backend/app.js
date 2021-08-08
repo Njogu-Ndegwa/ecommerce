@@ -168,7 +168,8 @@ app.post('/generate-dataset', function (req, res) {
       break;
   }
 
-  RealPostgress.ReadQuery(`CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}'
+  RealPostgress.ReadQuery(`CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}' '${filterQuery}'
+  '${occurrenceQuery}'
   `, function (data_set) {
     console.log(data_set)
   })
@@ -377,7 +378,7 @@ app.post('/group_by_activityid', (req, res) => {
 // Group by customers.
 app.post('/group_by_customer', (req, res) => {
   const {time, view} = req.body
-
+console.log(view)
   if(view) {
     console.log('cxvxcv')
     if(time){
