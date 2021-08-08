@@ -139,7 +139,7 @@ const Relationships = () => {
 
   // Update dynamic fields
   const setSecondaryColumn = appends => {
-      console.log('appends: ', appends);
+      // console.log('appends: ', appends);
       if (!appends.length) return;
       const str = appends[0].append_type
       const title = appends[0].append_type
@@ -162,7 +162,7 @@ const Relationships = () => {
         }
       ];
 
-      console.log('Cols: ', dynamColumns)
+      // console.log('Cols: ', dynamColumns)
       setColumn([...columns, ...dynamColumns]);
   };
 
@@ -226,7 +226,7 @@ const Relationships = () => {
     const data = await res.json();
     setData(data)
     setDataset(true)
-    console.log('onFinishData: ', data);
+    // console.log('onFinishData: ', data);
   };
 
   // Activity type label
@@ -275,7 +275,6 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState('');
 
   const handleOnClickGroupByColumn = async object => {
-    console.log('byColumn: ', object);
     const columns = group_by_columns[object.key];
     setColumn(columns)
     setGroupedBy(prev => ({...prev, columns, columnKey: object.key }));
@@ -284,7 +283,6 @@ const Relationships = () => {
     const time = period.includes(object.key) && object.key;
     const endpoint = !period.includes(object.key) && object.key;
 
-    console.log({time, endpoint});
     if (endpoint) {
       const res = await fetch(API_URL + endpoint, {
         method: 'post',
@@ -297,7 +295,7 @@ const Relationships = () => {
 
       const data = await res.json();
       setData(data)
-      console.log('groupByColumn: ', data);
+      // console.log('groupByColumnData: ', data);
     }
   };
 
