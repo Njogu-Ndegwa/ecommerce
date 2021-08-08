@@ -286,7 +286,7 @@ const Relationships = () => {
 
       const data = await res.json();
       setData(data)
-      // console.log('data: ', data);
+      console.log('data: ', data);
     }
   }
 
@@ -299,9 +299,10 @@ const Relationships = () => {
     const time = period.includes(object.key) && object.key;
     const endpoint = !period.includes(object.key) && object.key;
 
-    // console.log({time, endpoint});
+    
+    console.log({time, endpoint});
     if (endpoint) setUrl(endpoint);
-    if (time) postAppendState(time);
+    if (true) postAppendState(time);
   };
 
   // handle back navigation 
