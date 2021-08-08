@@ -182,7 +182,7 @@ const Relationships = () => {
         const dynamColumns = [
           {
             title: `Total ${primaryActivity[0].label}`,
-            dataIndex: 'first_ever_secondary',
+            dataIndex: 'total_primary',
             key: groupedBy.primary_activity
           },
           {
