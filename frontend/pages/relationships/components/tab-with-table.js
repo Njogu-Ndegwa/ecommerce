@@ -139,6 +139,7 @@ const Relationships = () => {
 
   // Update dynamic fields
   const setSecondaryColumn = appends => {
+      console.log('appends: ', appends);
       if (!appends.length) return;
       const str = appends[0].append_type
       const title = appends[0].append_type
@@ -146,7 +147,7 @@ const Relationships = () => {
       const dynamColumns = [
         {
           title: `${title.split('-').join(' ')} ${activity.replace(/_/g, ' ')}`,
-          dataIndex: 'first_ever_secondary',
+          dataIndex: `${str.replace(/-/g, '_')}_secondary`,
           key: `${str.split('-').join('_')}`
         },
         {
