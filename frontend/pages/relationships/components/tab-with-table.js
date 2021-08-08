@@ -306,11 +306,11 @@ const Relationships = () => {
 
   // handle back navigation 
   const handleBack = () => {
+    setColumn(columns);
+    setGroupedBy({columns: []});
+    setData([]);
+    form.resetFields();
     setDataset(false);
-    window.location.reload();
-    // setActivityTypes([]);
-    // setData([]);
-    // setColumn([]);
   };
 
   // handle append onChange event
