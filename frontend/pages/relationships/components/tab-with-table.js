@@ -420,8 +420,8 @@ const Relationships = () => {
                 className="custom-card" 
                 title={
                   <span>
-                    <ArrowLeftOutlined onClick={handleBack} />
-                    &nbsp;Results
+                    <ArrowLeftOutlined onClick={handleBack} style={{ fontSize: '18px' }}/>
+                    &nbsp;&nbsp;Results
                   </span>
                 }
               >
