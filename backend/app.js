@@ -272,7 +272,8 @@ var server = app.listen(5000, function () {
 
 // Group by Activity Id.
 app.post('/group_by_activityid', (req, res) => {
-  const {time, view} = req.body
+  // const {time, view} = req.body
+  console.log(time, view)
   if(view) {
     if(time){
       RealPostgress.ReadQuery(`SELECT c.activity_id, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{

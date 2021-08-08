@@ -3,7 +3,7 @@ import {Card, Select, Button, Row, Col, Modal } from 'antd';
 import { PlayCircleOutlined, LineChartOutlined} from '@ant-design/icons';
 import { 
   ComposedChart, Line, Label, LabelList, Bar,
-  XAxis, YAxis, Legend,
+  XAxis, YAxis, Legend, Tooltip
 } from "recharts";
 
 const {Option} = Select
@@ -125,6 +125,7 @@ const ticks = [5000, 10000, 15000, 20000, 25000, 60000, 70000, 80000, 90000, 100
                 <LabelList dataKey={yValue} position="insideTop"/>
                 </Bar>
               }
+                <Tooltip />
               {/* <Bar dataKey= "total_revenue_impact" barSize={60} fill="#8884d8" ></Bar> */}
               {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line dataKey={graphType === 'composite_graph' ? y2Value : yValue} stroke="#000" fill="#000"  strokeDasharray="3 3"/> }
               {/* <Line dataKey= {yValue} stroke="#000" fill="#000"  strokeDasharray="3 3"/> */}
