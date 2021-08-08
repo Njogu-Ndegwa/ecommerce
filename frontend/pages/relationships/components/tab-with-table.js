@@ -116,11 +116,14 @@ const API_URL = "http://localhost:5000/"
 
 const Relationships = () => {
   const [form] = Form.useForm();
+
   const [activityTypes, setActivityTypes] = useState([]);
   const [data, setData] = useState([]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [modalField, setModalField] = useState(undefined);
+
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
@@ -140,7 +143,7 @@ const Relationships = () => {
 
   // Update dynamic fields
   const setSecondaryColumn = appends => {
-      console.log('appends: ', appends);
+      // console.log('appends: ', appends);
       if (!appends.length) return;
       const str = appends[0].append_type
       const title = appends[0].append_type
@@ -163,7 +166,7 @@ const Relationships = () => {
         }
       ];
 
-      console.log('Cols: ', dynamColumns)
+      // console.log('Cols: ', dynamColumns)
       setColumn([...columns, ...dynamColumns]);
   };
 
@@ -177,7 +180,9 @@ const Relationships = () => {
   });
 
   useEffect(() => {
-      if (groupedBy.appends.length) {
+      // console.log('groupedBy', groupedBy);
+
+      if (groupedBy.columns.length) {
         const primaryActivity = activityTypes.
           filter(v => v.value === groupedBy.primary_activity)
         const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
@@ -207,11 +212,11 @@ const Relationships = () => {
           }
         ]
 
-        // console.log('dynamColumns: ', dynamColumns);
         const columns = groupedBy.columns.concat(dynamColumns);
         setColumn(columns);
+        // console.log('columns: ', columns);
       }
-  }, [groupedBy.columns])
+  }, [groupedBy])
 
   const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
     setSecondaryColumn(appends) 
@@ -227,7 +232,7 @@ const Relationships = () => {
     const data = await res.json();
     setData(data)
     setDataset(true)
-    console.log('onFinishData: ', data);
+    // console.log('onFinishData: ', data);
   };
 
   // Activity type label
@@ -290,7 +295,6 @@ const Relationships = () => {
     const time = period.includes(object.key) && object.key;
     const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
 
-    console.log({time, endpoint});
     if (endpoint) {
       const res = await fetch(API_URL + endpoint, {
         method: 'post',
@@ -311,8 +315,11 @@ const Relationships = () => {
 
   // handle back navigation 
   const handleBack = () => {
+    setColumn(columns);
+    setGroupedBy({columns: []});
+    setData([]);
+    form.resetFields();
     setDataset(false);
-    window.location.reload();
   };
 
   // handle append onChange event
@@ -425,8 +432,8 @@ const Relationships = () => {
                 className="custom-card" 
                 title={
                   <span>
-                    <ArrowLeftOutlined onClick={handleBack} />
-                    &nbsp;Results
+                    <ArrowLeftOutlined onClick={handleBack} style={{ fontSize: '18px' }}/>
+                    &nbsp;&nbsp;Results
                   </span>
                 }
               >
