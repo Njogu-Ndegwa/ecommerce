@@ -192,8 +192,7 @@ const Relationships = () => {
           },
           {
             title: `Conversion rate to ${appendType} ${activityType}`,
-            dataIndex: `conversion_rate_to_${ appendType.replace(/\s/g, '_') }_
-              ${ activityType.replace(/\s/g, '_') }`,
+            dataIndex: 'conversion_rate',
             key: `conversion_rate_to_${appendType}_${activityType}`
           },
           {
