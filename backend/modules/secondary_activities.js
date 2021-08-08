@@ -12,6 +12,7 @@ const RealPostgress = new PostGressConnection();
           })
     RealPostgress.ReadQuery('select * from first_ever_view', function (data_set) { 
         res.setHeader('Content-Type', 'application/json')
+        // for(let i = 0; i<data_set.rows)
         res.send(data_set.rows)
       });
     }
@@ -34,10 +35,10 @@ res.send(data_set.rows)
 function firstBetween(data_set, appends, primary_activity, res) {
 
     if(appends[0].append_type === 'first-between') {
-      RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_between_view as select a.activity_id, a.ts, a.customer, a.activity, case when a.activity = ${primary_activity} and (select b.activity_id from generate_data_view b where a.customer = b.customer and b.activity = ${appends[0].activity_type} and b.ts between a.ts and (select c.ts from generate_data_view c where a.customer = c.customer and c.activity = ${primary_activity} and a.ts < c.ts limit 1) order by b.ts limit 1) IS NULL THEN 0 ELSE 1 end as first_in_between, CASE WHEN a.activity = ${primary_activity} THEN 1 ELSE 0 end as primary_activity, CASE WHEN a.activity = ${appends[0].activity_type} THEN 1 ELSE 0 end as secondary_activity from generate_data_view as a order by ts`, function (data_set1) { 
+      RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_between_view as SELECT a.activity_id, a.ts, a.source, a.source_id, a.customer, a.activity, a.feature_1,a.feature_2, a.feature_3, a.revenue_impact, a.link, case when a.activity = ${primary_activity} and (select b.activity_id from generate_data_view b where a.customer = b.customer and b.activity = ${appends[0].activity_type} and b.ts between a.ts and (select c.ts from generate_data_view c where a.customer = c.customer and c.activity = ${primary_activity} and a.ts < c.ts limit 1) order by b.ts limit 1) IS NULL THEN 0 ELSE 1 end as first_in_between, CASE WHEN a.activity = ${primary_activity} THEN 1 ELSE 0 end as primary_activity, CASE WHEN a.activity = ${appends[0].activity_type} THEN 1 ELSE 0 end as secondary_activity from generate_data_view as a order by ts`, function (data_set1) { 
         console.log("View Created")
       })
-    RealPostgress.ReadQuery('select * from first_between_view', function (data_set) { 
+    RealPostgress.ReadQuery(`select * from first_between_view`, function (data_set) { 
     res.setHeader('Content-Type', 'application/json')
     res.send(data_set.rows)
     });
@@ -46,7 +47,7 @@ function firstBetween(data_set, appends, primary_activity, res) {
 
 function lastBetween(data_set, appends, primary_activity, res) {
     if(appends[0].append_type === 'last-between') {
-      RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_between_view as select a.activity_id, a.ts, a.customer, a.activity, case when a.activity = ${primary_activity} and  (select b.activity_id from generate_data_view b where a.customer = b.customer and b.activity = ${appends[0].activity_type} and b.ts between a.ts and (select c.ts from generate_data_view c where a.customer = c.customer and c.activity = ${primary_activity} and a.ts < c.ts limit 1) order by b.ts desc limit 1) IS NULL THEN 0 ELSE 1 end as first_in_between, CASE WHEN a.activity = ${primary_activity} THEN 1 ELSE 0 end as primary_activity, CASE WHEN a.activity = ${appends[0].activity_type} THEN 1 ELSE 0 end as secondary_activity from generate_data_view as a order by ts`, function (data_set1) { 
+      RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_between_view as  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, case when a.activity = ${primary_activity} and  (select b.activity_id from generate_data_view b where a.customer = b.customer and b.activity = ${appends[0].activity_type} and b.ts between a.ts and (select c.ts from generate_data_view c where a.customer = c.customer and c.activity = ${primary_activity} and a.ts < c.ts limit 1) order by b.ts desc limit 1) IS NULL THEN 0 ELSE 1 end as first_in_between, CASE WHEN a.activity = ${primary_activity} THEN 1 ELSE 0 end as primary_activity, CASE WHEN a.activity = ${appends[0].activity_type} THEN 1 ELSE 0 end as secondary_activity from generate_data_view as a order by ts`, function (data_set1) { 
         console.log("View Created")
       })
     RealPostgress.ReadQuery('select * from last_between_view', function (data_set) { 
