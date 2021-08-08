@@ -9,13 +9,6 @@ import {
 const {Option} = Select
 
 export default function PlotChart({data, columns}) {
-  const [chartData, setChartdata] = useState([])
-  useEffect(() => {
-    if (data.length) {
-      console.log('dataSet: ', {data, columns})
-    }
-  }, [data]);
-
   const [isModalVisible, setisModalVisible] = useState(false)
   const [graphType, setGraphType] = useState('line_graph')
 
