@@ -116,11 +116,14 @@ const API_URL = "http://localhost:5000/"
 
 const Relationships = () => {
   const [form] = Form.useForm();
+
   const [activityTypes, setActivityTypes] = useState([]);
   const [data, setData] = useState([]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
   const [modalField, setModalField] = useState(undefined);
+
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
@@ -176,7 +179,9 @@ const Relationships = () => {
   });
 
   useEffect(() => {
-      if (groupedBy.appends.length) {
+      // console.log('groupedBy', groupedBy);
+
+      if (groupedBy.columns.length) {
         const primaryActivity = activityTypes.
           filter(v => v.value === groupedBy.primary_activity)
         const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
@@ -206,9 +211,9 @@ const Relationships = () => {
           }
         ]
 
-        // console.log('dynamColumns: ', dynamColumns);
         const columns = groupedBy.columns.concat(dynamColumns);
         setColumn(columns);
+        // console.log('columns: ', columns);
       }
   }, [groupedBy])
 
@@ -303,6 +308,9 @@ const Relationships = () => {
   const handleBack = () => {
     setDataset(false);
     window.location.reload();
+    // setActivityTypes([]);
+    // setData([]);
+    // setColumn([]);
   };
 
   // handle append onChange event
