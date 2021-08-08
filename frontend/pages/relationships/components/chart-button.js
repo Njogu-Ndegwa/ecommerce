@@ -1,18 +1,17 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Card, Select, Button, Row, Col, Modal } from 'antd';
 import { PlayCircleOutlined, LineChartOutlined} from '@ant-design/icons';
-const { Meta } = Card;
 import { 
   ComposedChart, Line, Label, LabelList, Bar,
   XAxis, YAxis, Legend,
 } from "recharts";
-import Item from 'antd/lib/list/Item';
+
 const {Option} = Select
 
 export default function PlotChart({data, columns}) {
   const [isModalVisible, setisModalVisible] = useState(false)
   const [graphType, setGraphType] = useState('line_graph')
-  const [yColumn, setyColumn] = useState(columns[1].dataIndex)
+
   const handleShowChart = () => {
     setisModalVisible(true)
   }
@@ -26,9 +25,12 @@ export default function PlotChart({data, columns}) {
   }
 
   const [ Ylabel, setYlabel ] = useState('Y-axis')
+  useEffect(() => {
+    if (columns.length) setYlabel(columns[0].title);    
+  }, [columns])
   const handleYColumnChange = (value) => {
     columns.forEach(v => {
-      if (v.dataIndex === value) setYlabel(v.title)
+      if (v.dataIndex === value) setYlabel(v.title);
     })
   }
 
@@ -67,7 +69,7 @@ export default function PlotChart({data, columns}) {
           </div>
           <Row>
               <Col span={12}>
-          <Select defaultValue="--select column--" onChange={handleYColumnChange} style={{width: 120}} >
+          <Select defaultValue={Ylabel} onChange={handleYColumnChange} style={{width: '250px'}} >
             {columns.map(item => (
               <Option value={item.dataIndex} key={item.key}>
                 {item.title}
@@ -76,17 +78,15 @@ export default function PlotChart({data, columns}) {
           </Select>
               </Col>
               <Col span={4} offset={8}>
-          <Select defaultValue="Refresh plot" style={{width: 120}} onChange={handleY2Change} >
-            {/* Refresh plot Button */}
-          </Select>
+                <Button type='default'>Refresh plot</Button>
               </Col>
           </Row>
           <div style={{padding: "20px"}}>
-          <ComposedChart width={800} height={320} data={data}>
+          <ComposedChart width={800} height={320} >
           <XAxis dataKey = {columns[0].dataIndex} >
           <Label value="Occurence" offset={0} position="insideBottom"/>
           </XAxis>
-          <YAxis dataKey={yColumn} domain = {[0, 'dataMax']} >
+          <YAxis dataKey={columns[1].dataIndex} domain = {[0, 'dataMax']} >
           <Label  value={Ylabel} angle={-90} position="insideBottomLeft" />
           </YAxis>
           {graphType === 'composite_graph' && <YAxis yAxisId="right" dataKey='tco' orientation='right' tickLine={false} axisLine={false} domain={[0, 100]} >
@@ -102,7 +102,7 @@ export default function PlotChart({data, columns}) {
           </ComposedChart>
           </div>
 
-          <Select defaultValue="lucy" style={{width: 120}} onChange={ handleGraphTypeChange}>
+          <Select defaultValue="Graph type" style={{width: 120}} onChange={ handleGraphTypeChange}>
             <Option value="composite_graph">Composite Graph</Option>
             <Option value="bar_graph">Bar Graph</Option>
             <Option value="line_graph">Line Graph</Option>
