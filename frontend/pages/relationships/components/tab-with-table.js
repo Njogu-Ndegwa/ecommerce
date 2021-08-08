@@ -300,14 +300,9 @@ const Relationships = () => {
     const time = period.includes(object.key) && object.key;
     const endpoint = !period.includes(object.key) && object.key;
 
-    
     console.log({time, endpoint});
     if (endpoint) setUrl(endpoint);
-<<<<<<< Updated upstream
-    if (true) postAppendState(time);
-=======
     postAppendState(time);
->>>>>>> Stashed changes
   };
 
   // handle back navigation 
