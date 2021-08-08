@@ -9,6 +9,13 @@ import {
 const {Option} = Select
 
 export default function PlotChart({data, columns}) {
+  const [chartData, setChartdata] = useState([])
+  useEffect(() => {
+    if (data.length) {
+      console.log('dataSet: ', {data, columns})
+    }
+  }, [data]);
+
   const [isModalVisible, setisModalVisible] = useState(false)
   const [graphType, setGraphType] = useState('line_graph')
 
@@ -37,8 +44,6 @@ export default function PlotChart({data, columns}) {
   const handleGraphTypeChange = (value) => {
     setGraphType(value)
   }
-
-  const handleY2Change = () => {}
 
     return (
       <Card style={{ width: 200, marginBottom: 16 }}>
@@ -82,27 +87,29 @@ export default function PlotChart({data, columns}) {
               </Col>
           </Row>
           <div style={{padding: "20px"}}>
-          <ComposedChart width={800} height={320} >
-          <XAxis dataKey = {columns[0].dataIndex} >
-          <Label value="Occurence" offset={0} position="insideBottom"/>
-          </XAxis>
-          <YAxis dataKey={columns[1].dataIndex} domain = {[0, 'dataMax']} >
-          <Label  value={Ylabel} angle={-90} position="insideBottomLeft" />
-          </YAxis>
-          {graphType === 'composite_graph' && <YAxis yAxisId="right" dataKey='tco' orientation='right' tickLine={false} axisLine={false} domain={[0, 100]} >
-          <Label value="Total Completed  Orders" angle={-90} position="insideTopRight" />
-          </YAxis>}
-          {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && <Bar barSize={60} fill="#8884d8" >
-          <LabelList dataKey="cto" position="insideTop"/>
-          </Bar>}
-          {/* <Bar dataKey={yColumn} barSize={60} fill="#8884d8" ></Bar> */}
-          {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line  stroke="#000" fill="#000"  strokeDasharray="3 3"/> }
-          {/* <Line dataKey={yColumn} stroke="#000" fill="#000"  strokeDasharray="3 3"/> */}
-          <Legend verticalAlign="top" height={36}/>
-          </ComposedChart>
+            <ComposedChart width={800} height={320} >
+              <XAxis dataKey = {columns[0].dataIndex} >
+                <Label value="Occurence" offset={0} position="insideBottom"/>
+              </XAxis>
+              <YAxis dataKey={columns[1].dataIndex} domain = {[0, 'dataMax']} >
+                <Label  value={Ylabel} angle={-90} position="insideBottomLeft" />
+              </YAxis>
+              {graphType === 'composite_graph' && <YAxis yAxisId="right" dataKey='tco' orientation='right' tickLine={false} axisLine={false} domain={[0, 100]} >
+                <Label value="Total Completed  Orders" angle={-90} position="insideTopRight" />
+                </YAxis>
+              }
+              {/* {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && <Bar dataKey={yColumn} barSize={60} fill="#8884d8" >
+                <LabelList dataKey="cto" position="insideTop"/>
+                </Bar>
+              } */}
+              {/* <Bar dataKey={yColumn} barSize={60} fill="#8884d8" ></Bar> */}
+              {/* {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line dataKey={yColumn} stroke="#000" fill="#000"  strokeDasharray="3 3"/> } */}
+              {/* <Line dataKey={yColumn} stroke="#000" fill="#000"  strokeDasharray="3 3"/> */}
+              <Legend verticalAlign="top" height={36}/>
+            </ComposedChart>
           </div>
 
-          <Select defaultValue="Graph type" style={{width: 120}} onChange={ handleGraphTypeChange}>
+          <Select defaultValue="Graph type" style={{width: 120}} onChange={handleGraphTypeChange}>
             <Option value="composite_graph">Composite Graph</Option>
             <Option value="bar_graph">Bar Graph</Option>
             <Option value="line_graph">Line Graph</Option>

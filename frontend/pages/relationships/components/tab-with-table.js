@@ -137,39 +137,39 @@ const Relationships = () => {
     setIsModalVisible2(false);
   };
 
-  const setSecondaryColumn = (appends) => {
-    if(appends.length >= 1){
-      let str = appends[0].append_type
-      let title = appends[0].append_type
-      let activity = appends[0].activity_type
-      columns.push({
-      title: `${title.split('-').join(' ')} ${appends[0].activity_type.replace(/_/g, ' ')}`,
-      dataIndex: `${str.split('-').join('_')}`,
-      key: `${str.split('-').join('_')}`
-    })
-
-    // Update dynamic fields
-    columns.push(
-      {
-        title: `Did ${appends[0].activity_type.replace(/_/g, ' ')}`,
-        dataIndex: 'secondary_activity',
-        key: 'secondary_activity'
-      },
-      {
-        title: `Days from ${appends[0].activity_type.replace(/_/g, ' ')}`,
-        dataIndex: 'days_from_secondary_activity',
-        key: 'days_from_secondary_activity'
-      }
-    )
+  // Update dynamic fields
+  const setSecondaryColumn = appends => {
+      if (!appends.length) return;
+      const str = appends[0].append_type
+      const title = appends[0].append_type
+      const activity = appends[0].activity_type
+      const cols = [
+        {
+          title: `${title.split('-').join(' ')} ${activity.replace(/_/g, ' ')}`,
+          dataIndex: `${str.split('-').join('_')}`,
+          key: `${str.split('-').join('_')}`
+        },
+        {
+          title: `Did ${activity.replace(/_/g, ' ')}`,
+          dataIndex: 'did_secondary_activity',
+          key: 'did_secondary_activity'
+        },
+        {
+          title: `Days from ${activity.replace(/_/g, ' ')}`,
+          dataIndex: 'days_from_secondary_activity',
+          key: 'days_from_secondary_activity'
+        }
+      ];
+      setColumn(prev => prev.concat(cols));
   };
 
-  }
 
   // Update groupBy columns dynamically
   const [groupedBy, setGroupedBy] = useState({
     primary_activity: '',
     appends: [],
-    columns: []
+    columns: [],
+    columnKey: ''
   });
 
   useEffect(() => {
@@ -182,12 +182,12 @@ const Relationships = () => {
         const dynamColumns = [
           {
             title: `Total ${primaryActivity[0].label}`,
-            dataIndex: groupedBy.primary_activity,
+            dataIndex: 'first_ever_secondary',
             key: groupedBy.primary_activity
           },
           {
             title: `Total ${appendType}`,
-            dataIndex: `total_${appendType.replace(/\s/g, '_')}`,
+            dataIndex: 'secondary_activity',
             key: `total_${appendType.replace(/\s/g, '_')}`
           },
           {
@@ -205,16 +205,15 @@ const Relationships = () => {
         ]
 
         // console.log('dynamColumns: ', dynamColumns);
-        setColumn(groupedBy.columns.concat(dynamColumns))
+        const columns = groupedBy.columns.concat(dynamColumns);
+        setColumn(columns);
       }
   }, [groupedBy.columns])
 
   const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
     setSecondaryColumn(appends) 
     setGroupedBy(prev => ({...prev, appends, primary_activity}));
-    // console.log({ appends, filters, primary_activity, measure, occurrence }, 'hello')
-    // console.log(API_URL)
-    const activityTypesResponse = await fetch(API_URL + 'generate-dataset', {
+    const res = await fetch(API_URL + 'generate-dataset', {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -222,10 +221,10 @@ const Relationships = () => {
       },
       body: JSON.stringify({ appends, filters, primary_activity, measure, occurrence }),
     });
-    const activityTypesJson = await activityTypesResponse.json();
-    setData(activityTypesJson)
+    const data = await res.json();
+    setData(data)
     setDataset(true)
-    console.log(activityTypesJson)
+    console.log('onFinish: ', data);
   };
 
   // Activity type label
@@ -282,7 +281,7 @@ const Relationships = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({time, view: appendState})
+        body: JSON.stringify({time: time && time, view: appendState})
       });
 
       const data = await res.json();
@@ -292,18 +291,18 @@ const Relationships = () => {
   }
 
   const handleOnClickGroupByColumn = object => {
+    console.log('byColumn: ', object);
     const columns = group_by_columns[object.key];
     setColumn(columns)
-    setGroupedBy(prev => ({...prev, columns }));
+    setGroupedBy(prev => ({...prev, columns, columnKey: object.key }));
 
     const period = ['day','week','month','year'];
     const time = period.includes(object.key) && object.key;
     const endpoint = !period.includes(object.key) && object.key;
 
-    
     console.log({time, endpoint});
     if (endpoint) setUrl(endpoint);
-    if (true) postAppendState(time);
+    postAppendState(time);
   };
 
   // handle back navigation 
@@ -328,253 +327,251 @@ const Relationships = () => {
   )
 
   return (
-
-
-<Layout>
-<Content style={{ padding: '0 50px' }}>
-    
-<div>
-      <h2>Create New Dataset</h2>
-      <h3>{dataset ? "Parent Dataset": "Editing Definitions"}</h3>
-      <Form.Item>
-                        <div style={{ display: 'flex', justifyContent: "flex-end", marginTop: hasAppends() ? '1.7rem' : 0 }}>
-                  <PrimaryButtonPurple>Analyze dataset</PrimaryButtonPurple>
-                  <PrimaryButtonPurple style={{ marginLeft: 8 }}>download Dataset</PrimaryButtonPurple>
-                        </div>
-                      </Form.Item>
-  </div>
-  <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-  <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
-        {dataset && <PlotChart data={data} columns={column} />}
-        <Card title={activityLabel} style={{marginBottom: "40px"}} >
-      <Menu
-        mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
-<SubMenu key="sub1" title="Activity Id"  >
+    <Layout>
+    <Content style={{ padding: '0 50px' }}>
+    <div>
+        <h2>Create New Dataset</h2>
+        <h3>{dataset ? "Parent Dataset": "Editing Definitions"}</h3>
+        <Form.Item>
+          <div style={{ display: 'flex', justifyContent: "flex-end", marginTop: hasAppends() ? '1.7rem' : 0 }}>
+            <PrimaryButtonPurple>Analyze dataset</PrimaryButtonPurple>
+            <PrimaryButtonPurple style={{ marginLeft: 8 }}>download Dataset</PrimaryButtonPurple>
+          </div>
+        </Form.Item>
+    </div>
+    <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+    <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
+          {dataset && <PlotChart data={data} columns={column} />}
+          <Card title={activityLabel} style={{marginBottom: "40px"}} >
+        <Menu
+          mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
+    <SubMenu key="sub1" title="Activity Id"  >
+            <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
+            { MenuItem } 
+    </SubMenu>
+    <SubMenu key="sub2" title="Timestamp" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_timestamp"  >Only Column</Menu.Item>
+            { MenuItem } 
+    </SubMenu>
+    <SubMenu key="sub3" title="Source"  onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_source"  >Only Column</Menu.Item>
+            { MenuItem } 
+    </SubMenu>
+    <SubMenu key="sub4" title="Source_id" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_sourceid"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub5" title="Customer" onClick={(item) => handleOnClickGroupByColumn(item)} >
+            <Menu.Item key="group_by_customer">Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub6" title="activity" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_activity" >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub7" title="feature_1" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_feature1"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub8" title="feature_2" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_feature2"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub9" title="feature_3" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_feature3"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub10" title="revenue_impact" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_revenue_impact"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+  <SubMenu key="sub11" title="link" onClick={(object) => handleOnClickGroupByColumn(object)}>
+            <Menu.Item key="group_by_link"  >Only Column</Menu.Item>
+            { MenuItem } 
+  </SubMenu>
+        </Menu>
+        </Card>
+        <Card title="Occurence Info" style={{marginBottom: "40px"}} >
+        <Menu
+          mode="vertical"
+        >
+          <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} >
           <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
           { MenuItem } 
-</SubMenu>
-<SubMenu key="sub2" title="Timestamp" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_timestamp"  >Only Column</Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub13" title="Occurence" onClick={(item) => handleOnClickGroupByColumn(item)}>
+          <Menu.Item key="group_by_occurence"  >Only Column</Menu.Item>
           { MenuItem } 
-</SubMenu>
-<SubMenu key="sub3" title="Source"  onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_source"  >Only Column</Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub14" title="Activity Repeated at" onClick={(item) => handleOnClickGroupByColumn(item)} >
+          <Menu.Item key="group_by_activity_repeated_at" >Only Column</Menu.Item>
           { MenuItem } 
-</SubMenu>
-<SubMenu key="sub4" title="Source_id" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_sourceid"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub5" title="Customer" onClick={(item) => handleOnClickGroupByColumn(item)} >
-          <Menu.Item key="group_by_customer">Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub6" title="activity" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_activity" >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub7" title="feature_1" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_feature1"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub8" title="feature_2" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_feature2"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub9" title="feature_3" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_feature3"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub10" title="revenue_impact" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_revenue_impact"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-<SubMenu key="sub11" title="link" onClick={(object) => handleOnClickGroupByColumn(object)}>
-          <Menu.Item key="group_by_link"  >Only Column</Menu.Item>
-          { MenuItem } 
-</SubMenu>
-      </Menu>
-      </Card>
-      <Card title="Occurence Info" style={{marginBottom: "40px"}} >
-      <Menu
-        mode="vertical"
-      >
-        <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} >
-        <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
-        { MenuItem } 
-        </SubMenu>
-        <SubMenu key="sub13" title="Occurence" onClick={(item) => handleOnClickGroupByColumn(item)}>
-        <Menu.Item key="group_by_occurence"  >Only Column</Menu.Item>
-        { MenuItem } 
-        </SubMenu>
-        <SubMenu key="sub14" title="Activity Repeated at" onClick={(item) => handleOnClickGroupByColumn(item)} >
-        <Menu.Item key="group_by_activity_repeated_at" >Only Column</Menu.Item>
-        { MenuItem } 
-        </SubMenu>
-      </Menu>
-      </Card>
-    </Sider>
-    <Content style={{ padding: '0 24px', minHeight: 280 }}>
-    {       
-            dataset ? 
-            <Card 
-              bordered={false}
-              className="custom-card" 
-              title={
-                <span>
-                  <ArrowLeftOutlined onClick={handleBack} />
-                  &nbsp;Results
-                </span>
-              }
-            >
-              <Table size="small" rowKey="activity_id" scroll={{x: 400}} columns={column} dataSource={data} />
-            </Card> :
-            <Card className="custom-card" title="Dataset Generation" bordered={false}>
-              <p className="spacer-bottom">Relationship define how you append activities to your dataset</p>
-              <InlineForm form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
-                <Modal
-                  okButtonProps={{ style: { borderColor: '#7865bf', backgroundColor: '#7865bf' } }}
-                  closable={false}
-                  width={'50%'}
-                  visible={isModalVisible2}
-                  cancelButtonProps={{ className: 'main-border' }}
-                  onOk={() => {
-                    const appends = form.getFieldValue('appends');
-                    const filters = form.getFieldValue(modalField.name);
-                    appends[modalField.name] = { ...appends[modalField.name], ...filters };
+          </SubMenu>
+        </Menu>
+        </Card>
+      </Sider>
+      <Content style={{ padding: '0 24px', minHeight: 280 }}>
+      {       
+              dataset ? 
+              <Card 
+                bordered={false}
+                className="custom-card" 
+                title={
+                  <span>
+                    <ArrowLeftOutlined onClick={handleBack} />
+                    &nbsp;Results
+                  </span>
+                }
+              >
+                <Table size="small" rowKey="activity_id" scroll={{x: 400}} columns={column} dataSource={data} />
+              </Card> :
+              <Card className="custom-card" title="Dataset Generation" bordered={false}>
+                <p className="spacer-bottom">Relationship define how you append activities to your dataset</p>
+                <InlineForm form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
+                  <Modal
+                    okButtonProps={{ style: { borderColor: '#7865bf', backgroundColor: '#7865bf' } }}
+                    closable={false}
+                    width={'50%'}
+                    visible={isModalVisible2}
+                    cancelButtonProps={{ className: 'main-border' }}
+                    onOk={() => {
+                      const appends = form.getFieldValue('appends');
+                      const filters = form.getFieldValue(modalField.name);
+                      appends[modalField.name] = { ...appends[modalField.name], ...filters };
 
-                    form.setFieldsValue({
-                      appends: appends,
-                      filters: form.getFieldValue('filters') || [],
-                    });
+                      form.setFieldsValue({
+                        appends: appends,
+                        filters: form.getFieldValue('filters') || [],
+                      });
 
-                    handleOk2();
-                  }}
-                  onCancel={handleCancel}
-                >
-                  {modalField && (
-                    <NestedFieldArray
-                      fieldProps={{
-                        ...modalField,
-                        name: [modalField.name, 'filters'],
-                        fieldKey: [modalField.fieldKey, 'filters'],
-                      }}
-                      form={form}
-                    />
-                  )}
-                </Modal>
-
-                <Modal
-                  okButtonProps={{ style: { borderColor: '#7865bf', backgroundColor: '#7865bf' } }}
-                  closable={false}
-                  width={'50%'}
-                  visible={isModalVisible}
-                  cancelButtonProps={{ className: 'main-border' }}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <NestedFieldArray fieldProps={{ name: 'filters' }} form={form} />
-                </Modal>
-
-                <Row gutter={16}>
-                  <Col>
-                    <Input.Group compact>
-                      <label className="input-group-label">
-                        <strong>Give me</strong>
-                      </label>
-                      <Form.Item name="measure">
-                        <Select options={giveMeOptions} onChange={handleChange} />
-                      </Form.Item>
-                      {showOccurenceInput && (
-                        <Form.Item name="occurrence">
-                          <InputNumber />
-                        </Form.Item>
-                      )}
-                      <Button onClick={showFilterModal}>
-                        <FilterOutlined />
-                      </Button>
-                    </Input.Group>
-                  </Col>
-                  <Col>
-                    <Form.Item name="primary_activity" label="">
-                      <SelectWithBackgroundColor
-                        style={{ minWidth: '150px' }}
-                        options={activityTypes}
-                        onChange={handleChange}
+                      handleOk2();
+                    }}
+                    onCancel={handleCancel}
+                  >
+                    {modalField && (
+                      <NestedFieldArray
+                        fieldProps={{
+                          ...modalField,
+                          name: [modalField.name, 'filters'],
+                          fieldKey: [modalField.fieldKey, 'filters'],
+                        }}
+                        form={form}
                       />
-                    </Form.Item>
-                  </Col>
-                  <Form.Item label="">
-                    <b>activities...</b>
-                  </Form.Item>
-                </Row>
+                    )}
+                  </Modal>
 
-                <Form.List name="appends">
-                  {(fields, { add, remove }) => (
-                    <>
-                      {fields.map((field, index) => (
-                        <Row key={field.key}>
-                          <Col span={24}>
-                            <Space align="start">
-                              <Form.Item
-                                noStyle
-                                shouldUpdate={(prevValues, curValues) =>
-                                  prevValues.measure !== curValues.measure || prevValues.appends !== curValues.appends
-                                }
-                              >
-                                {() => (
-                                  <Input.Group compact>
-                                    <label className="input-group-label">Append</label>
-                                    <Form.Item
-                                      {...field}
-                                      name={[field.name, 'append_type']}
-                                      fieldKey={[field.fieldKey, 'append_type']}
-                                    >
-                                      <Select showSearch style={{ minWidth: 128 }} options={appendTypes} onChange={handleAppendChange}/>
-                                    </Form.Item>
-                                    <Button onClick={() => showFilterModal2(field)}>
-                                      <FilterOutlined />
-                                    </Button>
-                                  </Input.Group>
-                                )}
-                              </Form.Item>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, 'activity_type']}
-                                fieldKey={[field.fieldKey, 'activity_type']}
-                              >
-                                <SelectWithBackgroundColor style={{ minWidth: '150px' }} options={activityTypes} />
-                              </Form.Item>
+                  <Modal
+                    okButtonProps={{ style: { borderColor: '#7865bf', backgroundColor: '#7865bf' } }}
+                    closable={false}
+                    width={'50%'}
+                    visible={isModalVisible}
+                    cancelButtonProps={{ className: 'main-border' }}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                  >
+                    <NestedFieldArray fieldProps={{ name: 'filters' }} form={form} />
+                  </Modal>
 
-                              <Form.Item>
-                                <DeleteOutlined onClick={() => remove(field.name)} />
-                              </Form.Item>
-                            </Space>
-                          </Col>
-                        </Row>
-                      ))}
-
-                      <Form.Item>
-                        <div style={{ display: 'flex', marginTop: hasAppends() ? '1.7rem' : 0 }}>
-                          <AppendActivityButton onClick={() => add()}>
-                            <span>Append Activity</span>
-                            <PlusIcon />
-                          </AppendActivityButton>
-                          <PrimaryButtonPurple style={{ marginLeft: 10 }} htmlType="submit">
-                            Generate Dataset
-                          </PrimaryButtonPurple>
-                        </div>
+                  <Row gutter={16}>
+                    <Col>
+                      <Input.Group compact>
+                        <label className="input-group-label">
+                          <strong>Give me</strong>
+                        </label>
+                        <Form.Item name="measure">
+                          <Select options={giveMeOptions} onChange={handleChange} />
+                        </Form.Item>
+                        {showOccurenceInput && (
+                          <Form.Item name="occurrence">
+                            <InputNumber />
+                          </Form.Item>
+                        )}
+                        <Button onClick={showFilterModal}>
+                          <FilterOutlined />
+                        </Button>
+                      </Input.Group>
+                    </Col>
+                    <Col>
+                      <Form.Item name="primary_activity" label="">
+                        <SelectWithBackgroundColor
+                          style={{ minWidth: '150px' }}
+                          options={activityTypes}
+                          onChange={handleChange}
+                        />
                       </Form.Item>
-                    </>
-                  )}
-                </Form.List>
-              </InlineForm>
-            </Card>}
-      </Content>
+                    </Col>
+                    <Form.Item label="">
+                      <b>activities...</b>
+                    </Form.Item>
+                  </Row>
+
+                  <Form.List name="appends">
+                    {(fields, { add, remove }) => (
+                      <>
+                        {fields.map((field, index) => (
+                          <Row key={field.key}>
+                            <Col span={24}>
+                              <Space align="start">
+                                <Form.Item
+                                  noStyle
+                                  shouldUpdate={(prevValues, curValues) =>
+                                    prevValues.measure !== curValues.measure || prevValues.appends !== curValues.appends
+                                  }
+                                >
+                                  {() => (
+                                    <Input.Group compact>
+                                      <label className="input-group-label">Append</label>
+                                      <Form.Item
+                                        {...field}
+                                        name={[field.name, 'append_type']}
+                                        fieldKey={[field.fieldKey, 'append_type']}
+                                      >
+                                        <Select showSearch style={{ minWidth: 128 }} options={appendTypes} onChange={handleAppendChange}/>
+                                      </Form.Item>
+                                      <Button onClick={() => showFilterModal2(field)}>
+                                        <FilterOutlined />
+                                      </Button>
+                                    </Input.Group>
+                                  )}
+                                </Form.Item>
+                                <Form.Item
+                                  {...field}
+                                  name={[field.name, 'activity_type']}
+                                  fieldKey={[field.fieldKey, 'activity_type']}
+                                >
+                                  <SelectWithBackgroundColor style={{ minWidth: '150px' }} options={activityTypes} />
+                                </Form.Item>
+
+                                <Form.Item>
+                                  <DeleteOutlined onClick={() => remove(field.name)} />
+                                </Form.Item>
+                              </Space>
+                            </Col>
+                          </Row>
+                        ))}
+
+                        <Form.Item>
+                          <div style={{ display: 'flex', marginTop: hasAppends() ? '1.7rem' : 0 }}>
+                            <AppendActivityButton onClick={() => add()}>
+                              <span>Append Activity</span>
+                              <PlusIcon />
+                            </AppendActivityButton>
+                            <PrimaryButtonPurple style={{ marginLeft: 10 }} htmlType="submit">
+                              Generate Dataset
+                            </PrimaryButtonPurple>
+                          </div>
+                        </Form.Item>
+                      </>
+                    )}
+                  </Form.List>
+                </InlineForm>
+              </Card>
+              }
+        </Content>
+        </Layout>
+        </Content>
       </Layout>
-      </Content>
-     </Layout>
   );
-};
+}
 
 export default Relationships
