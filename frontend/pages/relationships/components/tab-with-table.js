@@ -187,7 +187,7 @@ const Relationships = () => {
           },
           {
             title: `Total ${appendType}`,
-            dataIndex: 'secondary_activity',
+            dataIndex: 'total_secondary',
             key: `total_${appendType.replace(/\s/g, '_')}`
           },
           {
