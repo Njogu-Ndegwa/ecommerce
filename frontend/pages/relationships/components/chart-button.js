@@ -92,11 +92,11 @@ export default function PlotChart({data, columns}) {
           {graphType === 'composite_graph' && <YAxis yAxisId="right" dataKey='tco' orientation='right' tickLine={false} axisLine={false} domain={[0, 100]} >
           <Label value="Total Completed  Orders" angle={-90} position="insideTopRight" />
           </YAxis>}
-          {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && <Bar dataKey={yColumn} barSize={60} fill="#8884d8" >
+          {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && <Bar barSize={60} fill="#8884d8" >
           <LabelList dataKey="cto" position="insideTop"/>
           </Bar>}
           {/* <Bar dataKey={yColumn} barSize={60} fill="#8884d8" ></Bar> */}
-          {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line dataKey={yColumn} stroke="#000" fill="#000"  strokeDasharray="3 3"/> }
+          {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line  stroke="#000" fill="#000"  strokeDasharray="3 3"/> }
           {/* <Line dataKey={yColumn} stroke="#000" fill="#000"  strokeDasharray="3 3"/> */}
           <Legend verticalAlign="top" height={36}/>
           </ComposedChart>

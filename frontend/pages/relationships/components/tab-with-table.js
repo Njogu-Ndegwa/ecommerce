@@ -152,8 +152,8 @@ const Relationships = () => {
     columns.push(
       {
         title: `Did ${appends[0].activity_type.replace(/_/g, ' ')}`,
-        dataIndex: 'did_secondary_activity',
-        key: 'did_secondary_activity'
+        dataIndex: 'secondary_activity',
+        key: 'secondary_activity'
       },
       {
         title: `Days from ${appends[0].activity_type.replace(/_/g, ' ')}`,
@@ -225,6 +225,7 @@ const Relationships = () => {
     const activityTypesJson = await activityTypesResponse.json();
     setData(activityTypesJson)
     setDataset(true)
+    console.log(activityTypesJson)
   };
 
   // Activity type label
