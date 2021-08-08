@@ -124,6 +124,7 @@ const Relationships = () => {
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
+  const [xAxis, setXAxis] = useState({})
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -275,14 +276,19 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState('');
 
   const handleOnClickGroupByColumn = async object => {
-    console.log('byColumn: ', object);
-    const columns = group_by_columns[object.key];
+    const groupByTime = object.key.split("_")
+    if(groupByTime[0] = 'id') {
+      timeEndpoint = 'group_by_customer'
+      time_period = groupByTime[1]
+    }
+    const columns = group_by_columns[object.key] || group_by_columns[timeEndpoint];
     setColumn(columns)
     setGroupedBy(prev => ({...prev, columns, columnKey: object.key }));
-
+    let timeEndpoint 
+    let time_period
     const period = ['day','week','month','year'];
     const time = period.includes(object.key) && object.key;
-    const endpoint = !period.includes(object.key) && object.key;
+    const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
 
     console.log({time, endpoint});
     if (endpoint) {
@@ -292,12 +298,14 @@ const Relationships = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({time: time && time, view: appendState})
+        body: JSON.stringify({time: time_period, view: appendState})
       });
 
       const data = await res.json();
       setData(data)
       console.log('groupByColumn: ', data);
+
+      setXAxis(columns[0])
     }
   };
 
@@ -337,13 +345,16 @@ const Relationships = () => {
     </div>
     <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
     <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
-          {dataset && <PlotChart data={data} columns={column} />}
+          {dataset && <PlotChart data={data} columns={column} xAxis = {xAxis} />}
           <Card title={activityLabel} style={{marginBottom: "40px"}} >
         <Menu
           mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
-    <SubMenu key="sub1" title="Activity Id"  >
+    <SubMenu key="sub1" title="Activity Id" >
             <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
-            { MenuItem } 
+            <Menu.Item key="id_day">Day</Menu.Item>
+            <Menu.Item key="id_week">Week</Menu.Item>
+            <Menu.Item key="id_month">Month</Menu.Item>
+            <Menu.Item key="id_year">Year</Menu.Item>
     </SubMenu>
     <SubMenu key="sub2" title="Timestamp" onClick={(object) => handleOnClickGroupByColumn(object)}>
             <Menu.Item key="group_by_timestamp"  >Only Column</Menu.Item>

@@ -46,7 +46,6 @@ function groupByWeek(data_set) {
         data_set.rows[i].total_secondary_activity = getRandomInt(10, 1)
         data_set.rows[i].conversion_rate = getRandomInt(5,1)
         data_set.rows[i].average_days = getRandomInt(50,20) 
-        console.log(data_set.rows[i])
       }
       return data_set
 }

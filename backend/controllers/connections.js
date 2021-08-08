@@ -23,11 +23,9 @@ const pool = new Pool({
 //     console.log(err)
     
 // })
-console.log('3')
 let path = './controllers/activities.csv'
 // let query = "COPY activities(activity_id, ts,  customer, activity, feature_1, revenue_impact) FROM 'C:\Users\lenovo\Downloads\activities.csv' DELIMITER ',' CSV HEADER;"
 let query = "INSERT INTO activities (activity_id, ts,  customer, activity, feature_1, revenue_impact) VALUES ($1, $2, $3, $4, $5, $6)";
-console.log('1')
 let stream = fs.createReadStream(path);
     let csvData = [];
     let csvStream = fastcsv
@@ -50,7 +48,6 @@ let stream = fs.createReadStream(path);
                   if (err) {
                     console.log(err.stack);
                   } else {
-                    console.log("inserted " + res.rowCount + " row:", row);
                   }
                 });
               });

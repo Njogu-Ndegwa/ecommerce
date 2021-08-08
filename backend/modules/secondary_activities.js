@@ -3,12 +3,10 @@ const {groupByColumn} = require('./grou_by_column')
 const RealPostgress = new PostGressConnection();
 
     function firstEver(data_set, appends, primary_activity, res) {
-        console.log(appends[0].activity_type)
         if(appends[0].append_type === 'first-ever' ||
         appends[0].append_type === 'first-before' ) {
          
-    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_ever_view as SELECT az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, CASE WHEN az1.ts = (SELECT MIN(ts) FROM generate_data_view as az where az.customer = az1.customer and az.activity = '${appends[0].activity_type}') THEN 0 ELSE 1 end as first_ever_secondary, CASE WHEN az1.activity = ${appends[0].activity_type} THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity from generate_data_view as az1`, function (data_set1) { 
-            console.log("View Created")
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_ever_view as SELECT az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, CASE WHEN az1.ts = (SELECT MIN(ts) FROM generate_data_view as az where az.customer = az1.customer and az.activity = '${appends[0].activity_type}') THEN 1 ELSE 0 end as first_ever_secondary, CASE WHEN az1.activity = '${appends[0].activity_type}' THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity from generate_data_view as az1`, function (data_set1) { 
           })
     RealPostgress.ReadQuery('select * from first_ever_view', function (data_set) { 
         res.setHeader('Content-Type', 'application/json')
@@ -22,7 +20,7 @@ const RealPostgress = new PostGressConnection();
 function lastEver(data_set, appends, primary_activity, res) {
   if(appends[0].append_type === 'last-ever' ||
   appends[0].append_type === 'last-before' ) {
-  RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_ever_view as SELECT az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, CASE WHEN az1.ts = (SELECT MIN(ts) FROM generate_data_view as az where az.customer = az1.customer and az.activity = '${appends[0].activity_type}') THEN 0 ELSE 1 end as last_ever_secondary, CASE WHEN az1.activity = '${appends[0].activity_type}' THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity from generate_data_view as az1`, function (data_set1) { 
+  RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_ever_view as SELECT az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1,az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, CASE WHEN az1.ts = (SELECT MIN(ts) FROM generate_data_view as az where az.customer = az1.customer and az.activity = '${appends[0].activity_type}') THEN 1 ELSE 0 end as last_ever_secondary, CASE WHEN az1.activity = '${appends[0].activity_type}' THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity from generate_data_view as az1`, function (data_set1) { 
     console.log("View Created")
   })
 RealPostgress.ReadQuery('select * from last_ever_view', function (data_set) { 
@@ -84,11 +82,22 @@ FROM public.activity_stream as az1
     }
 }
 
+function customParseInt (data_set) {
+  for(let i = 0; i<data_set.rows.length; i++){
+    data_set.rows[i].conversion_rate = parseInt(data_set.rows[i].conversion_rate)
+    data_set.rows[i].total_primary = parseInt(data_set.rows[i].total_primary)
+    data_set.rows[i].total_revenue_impact = parseInt(data_set.rows[i].total_revenue_impact)
+    data_set.rows[i].total_secondary = parseInt(data_set.rows[i].total_secondary)
+  }
+  return data_set
+}
+
 module.exports = {
     firstEver,
     lastEver,
     firstBetween,
     lastBetween,
-    aggregationAll
+    aggregationAll,
+    customParseInt
 }
 
