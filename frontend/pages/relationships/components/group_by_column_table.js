@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { humanize } from '../utils/index';
 
  export const group_by_columns = {
     group_by_activityid: [
@@ -10,8 +9,8 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: 'sum',
-            key: "sum"
+            dataIndex: 'total_revenue_impact',
+            key: "total_revenue_impact"
         },
     ],
 
@@ -23,8 +22,8 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum",
-            key: 'sum'
+            dataIndex: "total_revenue_impact",
+            key: 'total_revenue_impact'
         },
     ],
 
@@ -36,9 +35,9 @@ import { humanize } from '../utils/index';
             key: "ts"
         },
         {
-            title: " Total Revenue_impact",
-            dataIndex: "sum",
-            key: "sum"
+            title: " Total Revenue impact",
+            dataIndex: "total_revenue_impact",
+            key: "total_revenue_impact"
         },
     ],
 
@@ -49,9 +48,9 @@ import { humanize } from '../utils/index';
             key: "source"
         },
         {
-            title: " Total Revenue_impact",
-            dataIndex: "sum",
-            key: "sum"
+            title: " Total Revenue impact",
+            dataIndex: "total_revenue_impact",
+            key: "total_revenue_impact"
         },
     ],
 
@@ -62,9 +61,9 @@ import { humanize } from '../utils/index';
             key: "source_id"
         },
         {
-            title: "Total Revenue_impact",
-            dataIndex: "sum",
-            key: "sum"
+            title: "Total Revenue impact",
+            dataIndex: "total_revenue_impact",
+            key: "total_revenue_impact"
         },
     ],
 
@@ -75,8 +74,8 @@ import { humanize } from '../utils/index';
             key: "activity"
         },
         {
-            title: "Total Revenue_Impact",
-            dataIndex: "sum",
+            title: "Total Revenue Impact",
+            dataIndex: "total_revenue_impact",
         },
     ],
 
@@ -88,8 +87,8 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum",
-            key: "sum"
+            dataIndex: "total_revenue_impact",
+            key: "total_revenue_impact"
         },
     ],
 
@@ -100,7 +99,7 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum"
+            dataIndex: "total_revenue_impact"
         },
     ],
 
@@ -111,18 +110,18 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum"
-        },
+            dataIndex: "total_revenue_impact"
+        }
     ],
 
     group_by_revenue_impact: [
         {
-            title: "Total Revenue Impact",
+            title: "Revenue Impact",
             dataIndex: "revenue_impact"
         },
         {
             title: "Total Revenue Impact rows",
-            dataIndex: "revenue_impact"
+            dataIndex: "total_revenue_impact"
         },
     ],
     group_by_link: [
@@ -132,7 +131,7 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: "sum"
+            dataIndex: "total_revenue_impact"
         },
     ],
     group_by_occurence: [
@@ -149,7 +148,7 @@ import { humanize } from '../utils/index';
         },
     ],
 
-    group_by_day: [
+    day: [
         {
             title: "Group by Day",
             render:(ts) => moment(ts).format('ll'),
@@ -158,12 +157,12 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: 'sum',
-            key: "sum"
+            dataIndex: 'total_revenue_impact',
+            key: "total_revenue_impact"
         },
     ],
 
-    group_by_week: [
+    week: [
         {
             title: "Group by Week",
             render:(ts) => moment(ts).format('ll'),
@@ -172,12 +171,12 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: 'sum',
-            key: "sum"
+            dataIndex: 'total_revenue_impact',
+            key: "total_revenue_impact"
         },
     ],
 
-    group_by_month: [
+    month: [
         {
             title: "Group by Month",
             render:(ts) => moment(ts).format('ll'),
@@ -186,12 +185,12 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: 'sum',
-            key: "sum"
+            dataIndex: 'total_revenue_impact',
+            key: "total_revenue_impact"
         },
     ],
 
-    group_by_year: [
+    year: [
         {
             title: "Group by Year",
             render:(ts) => moment(ts).format('ll'),
@@ -200,8 +199,8 @@ import { humanize } from '../utils/index';
         },
         {
             title: "Total Revenue Impact",
-            dataIndex: 'sum',
-            key: "sum"
+            dataIndex: 'total_revenue_impact',
+            key: "total_revenue_impact"
         },
     ]
 }
