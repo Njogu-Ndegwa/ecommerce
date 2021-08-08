@@ -139,19 +139,20 @@ const Relationships = () => {
 
   // Update dynamic fields
   const setSecondaryColumn = appends => {
+      console.log('appends: ', appends);
       if (!appends.length) return;
       const str = appends[0].append_type
       const title = appends[0].append_type
       const activity = appends[0].activity_type
-      const cols = [
+      const dynamColumns = [
         {
           title: `${title.split('-').join(' ')} ${activity.replace(/_/g, ' ')}`,
-          dataIndex: `${str.split('-').join('_')}`,
+          dataIndex: `${str.replace(/-/g, '_')}_secondary`,
           key: `${str.split('-').join('_')}`
         },
         {
           title: `Did ${activity.replace(/_/g, ' ')}`,
-          dataIndex: 'did_secondary_activity',
+          dataIndex: 'secondary_activity',
           key: 'did_secondary_activity'
         },
         {
@@ -160,7 +161,9 @@ const Relationships = () => {
           key: 'days_from_secondary_activity'
         }
       ];
-      setColumn(prev => prev.concat(cols));
+
+      console.log('Cols: ', dynamColumns)
+      setColumn([...columns, ...dynamColumns]);
   };
 
 
@@ -182,18 +185,17 @@ const Relationships = () => {
         const dynamColumns = [
           {
             title: `Total ${primaryActivity[0].label}`,
-            dataIndex: 'first_ever_secondary',
+            dataIndex: 'total_primary',
             key: groupedBy.primary_activity
           },
           {
             title: `Total ${appendType}`,
-            dataIndex: 'secondary_activity',
+            dataIndex: 'total_secondary',
             key: `total_${appendType.replace(/\s/g, '_')}`
           },
           {
             title: `Conversion rate to ${appendType} ${activityType}`,
-            dataIndex: `conversion_rate_to_${ appendType.replace(/\s/g, '_') }_
-              ${ activityType.replace(/\s/g, '_') }`,
+            dataIndex: 'conversion_rate',
             key: `conversion_rate_to_${appendType}_${activityType}`
           },
           {
@@ -224,7 +226,7 @@ const Relationships = () => {
     const data = await res.json();
     setData(data)
     setDataset(true)
-    console.log('onFinish: ', data);
+    console.log('onFinishData: ', data);
   };
 
   // Activity type label
@@ -271,26 +273,8 @@ const Relationships = () => {
 
   // append state
   const [appendState, setAppendState] = useState('');
-  const [url, setUrl] = useState('');
 
-  const postAppendState = async time => {
-    if (url) {
-      const res = await fetch(API_URL + url, {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({time: time && time, view: appendState})
-      });
-
-      const data = await res.json();
-      setData(data)
-      console.log('data: ', data);
-    }
-  }
-
-  const handleOnClickGroupByColumn = object => {
+  const handleOnClickGroupByColumn = async object => {
     console.log('byColumn: ', object);
     const columns = group_by_columns[object.key];
     setColumn(columns)
@@ -301,8 +285,20 @@ const Relationships = () => {
     const endpoint = !period.includes(object.key) && object.key;
 
     console.log({time, endpoint});
-    if (endpoint) setUrl(endpoint);
-    postAppendState(time);
+    if (endpoint) {
+      const res = await fetch(API_URL + endpoint, {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({time: time && time, view: appendState})
+      });
+
+      const data = await res.json();
+      setData(data)
+      console.log('groupByColumn: ', data);
+    }
   };
 
   // handle back navigation 
