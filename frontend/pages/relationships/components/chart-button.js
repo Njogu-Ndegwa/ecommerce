@@ -3,7 +3,7 @@ import {Card, Select, Button, Row, Col, Modal } from 'antd';
 import { PlayCircleOutlined, LineChartOutlined} from '@ant-design/icons';
 import { 
   ComposedChart, Line, Label, LabelList, Bar,
-  XAxis, YAxis, Legend,
+  XAxis, YAxis, Legend, Tooltip
 } from "recharts";
 
 const {Option} = Select
@@ -90,46 +90,50 @@ const ticks = [5000, 10000, 15000, 20000, 25000, 60000, 70000, 80000, 90000, 100
               </div>}
           </div>
           <Row>
-              <Col span={12}>
-          <Select defaultValue="Total Revenue Impact" onChange={handleYColumnChange} style={{width: '250px'}} >
-            {columns.map(item => (
-              <Option value={item.dataIndex} key={item.key}>
-                {item.title}
-              </Option>
-            ))}
-          </Select>
-              </Col>
-              <Col span={4} offset={4}>
+            <Col span={12}>
+              <Select defaultValue={columns[1]?.title || "Total Revenue Impact"} onChange={handleYColumnChange} style={{width: '250px'}} >
+                {columns.map(item => (
+                  <Option value={item.dataIndex} key={item.key}>
+                    {item.title}
+                  </Option>
+                ))}
+              </Select>
+            </Col>
+            <Col span={4} offset={4}>
               <Select defaultValue={Y2label} onChange={handleY2ColumnChange} style={{width: '250px'}} >
-            {columns.map(item => (
-              <Option value={item.dataIndex} key={item.key}>
-                {item.title}
-              </Option>
-            ))}
-          </Select>
-              </Col>
+                {columns.map(item => (
+                  <Option value={item.dataIndex} key={item.key}>
+                    {item.title}
+                  </Option>
+                ))}
+              </Select>
+            </Col>
           </Row>
           <div style={{padding: "20px"}}>
             <ComposedChart width={800} height={500} style={{maginTop: '100px'}} data={data} >
               <XAxis dataKey = {xAxis.dataIndex} >
                 <Label value={xAxis.title} offset={0} position="insideBottom"/>
               </XAxis>
-              <YAxis dataKey={yValue} domain = {[0, 'dataMax']} minTickGap={5000}>
+              <YAxis dataKey={yValue} domain = {[0, 'dataMax']}>
                 <Label  value={Ylabel} angle={-90} position="insideBottomLeft" />
               </YAxis>
               {graphType === 'composite_graph' && <YAxis yAxisId="right" dataKey={y2Value} orientation='right' tickLine={false} axisLine={false} domain={[0, 100]} >
                 <Label value={y2Value} angle={-90} position="insideTopRight" />
                 </YAxis>
               }
-              {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && <Bar dataKey={graphType === 'composite_graph' ? yValue : y2Value} barSize={60} fill="#8884d8" >
-                <LabelList dataKey={yValue} position="insideTop"/>
+              {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && 
+                <Bar dataKey={graphType === 'composite_graph' ? yValue : y2Value} barSize={60} fill="#1890ff" >
+                  <LabelList dataKey={yValue} position="insideTop"/>
                 </Bar>
               }
               {/* <Bar dataKey= "total_revenue_impact" barSize={60} fill="#8884d8" ></Bar> */}
-              {(graphType === 'line_graph' || graphType === 'composite_graph') && <Line dataKey={graphType === 'composite_graph' ? y2Value : yValue} stroke="#000" fill="#000"  strokeDasharray="3 3"/> }
+              {(graphType === 'line_graph' || graphType === 'composite_graph') && 
+                <Line dataKey={graphType === 'composite_graph' ? y2Value : yValue} stroke="#1890ff" fill="#1890ff" strokeDasharray="3 3"/> 
+              }
               {/* <Line dataKey= {yValue} stroke="#000" fill="#000"  strokeDasharray="3 3"/> */}
               <Legend verticalAlign="top" height={36}/>
-            </ComposedChart>
+              <Tooltip />
+            </ComposedChart>            
           </div>
 
           <Select defaultValue="Graph type" style={{width: 120}} onChange={handleGraphTypeChange}>
