@@ -195,7 +195,7 @@ const Relationships = () => {
             key: groupedBy.primary_activity
           },
           {
-            title: `Total ${appendType}`,
+            title: `Total ${appendType} ${activityType}`,
             dataIndex: 'total_secondary',
             key: `total_${appendType.replace(/\s/g, '_')}`
           },
