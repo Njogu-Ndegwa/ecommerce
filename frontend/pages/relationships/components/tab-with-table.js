@@ -214,7 +214,9 @@ const Relationships = () => {
 
         const columns = groupedBy.columns.concat(dynamColumns);
         setColumn(columns);
-        // console.log('columns: ', columns);
+        // console.log('useEffectColumns: ', columns);
+        setXAxis(columns[0]);
+        // console.log('columns[0]', columns[0]);
       }
   }, [groupedBy])
 
@@ -307,9 +309,7 @@ const Relationships = () => {
 
       const data = await res.json();
       setData(data)
-      console.log('groupByColumn: ', data);
-
-      setXAxis(columns[0])
+      // console.log('groupByColumn: ', data);
     }
   };
 
