@@ -183,8 +183,8 @@ const Relationships = () => {
       // console.log('groupedBy', groupedBy);
 
       if (groupedBy.columns.length) {
-        const primaryActivity = activityTypes.
-          filter(v => v.value === groupedBy.primary_activity)
+        const primaryActivity = activityTypes
+          .filter(v => v.value === groupedBy.primary_activity)
         const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
         const activityType = groupedBy.appends[0].activity_type.replace(/_/g, ' ')
 
