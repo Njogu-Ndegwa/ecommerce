@@ -299,8 +299,12 @@ const Relationships = () => {
     </div>
     <div style={{margin: '.5em 0'}}>
       <div style={{width: '25em', marginLeft: 'auto'}}>
-        <PrimaryButtonPurple style={{display: 'inline-block'}}>Analyze dataset</PrimaryButtonPurple>
-        <PrimaryButtonPurple style={{marginLeft: '.5em', display: 'inline-block'}}>Download dataset</PrimaryButtonPurple>
+        <PrimaryButtonPurple className='primary-button-purple' style={{display: 'inline-block'}}>
+          Analyze dataset
+        </PrimaryButtonPurple>
+        <PrimaryButtonPurple className='primary-btn-purple' style={{marginLeft: '.5em', display: 'inline-block'}}>
+          Download dataset
+        </PrimaryButtonPurple>
       </div>
     </div>
     <Layout className="site-layout-background">
@@ -317,7 +321,7 @@ const Relationships = () => {
         }
 
         <Card title={activityLabel} style={{marginBottom: "1em"}} >
-          <ActivityMenuContainer>
+          <ActivityMenuContainer className='activity-menu-container'>
             <Menu mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
               <SubMenu key="sub1" title="Activity Id" >
                 <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
@@ -501,6 +505,7 @@ const Relationships = () => {
                 <Col>
                   <Form.Item name="primary_activity" label="">
                     <SelectWithBackgroundColor
+                      className='select-with-bg-color'
                       style={{ minWidth: '150px' }}
                       options={activityTypes}
                       onChange={handleChange}
@@ -559,7 +564,7 @@ const Relationships = () => {
 
                     <Form.Item>
                       <div style={{ display: 'flex'}}>
-                        <AppendActivityButton onClick={() => add()}>
+                        <AppendActivityButton className='append-activity-btn' onClick={() => add()}>
                           Append Activity<PlusIcon />
                         </AppendActivityButton>
                         {
@@ -572,7 +577,7 @@ const Relationships = () => {
                               <b>{`${count.toFixed(1)} seconds`}</b>
                             </p>
                           </div>:
-                          <PrimaryButtonPurple style={{marginLeft: 10}} htmlType="submit">
+                          <PrimaryButtonPurple className='primary-btn-purple' style={{marginLeft: 10}} htmlType="submit">
                             Generate Dataset
                           </PrimaryButtonPurple>
                         }
