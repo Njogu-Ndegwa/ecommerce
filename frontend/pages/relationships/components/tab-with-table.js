@@ -539,11 +539,9 @@ const Relationships = () => {
               <Row gutter={16}>
                 <Col>
                   <Input.Group compact>
-                    <label className="input-group-label">
-                      <strong>Give me</strong>
-                    </label>
+                    <Form.Item label={<b>Give me</b>} />
                     <Form.Item name="measure">
-                      <Select options={giveMeOptions} onChange={handleChange} />
+                      <Select options={giveMeOptions} onChange={handleChange} style={{width:'5em'}}/>
                     </Form.Item>
                     {showOccurenceInput && (
                       <Form.Item name="occurrence">
@@ -584,7 +582,7 @@ const Relationships = () => {
                             >
                               {() => (
                                 <Input.Group compact>
-                                  <label className="input-group-label">Append</label>
+                                  <Form.Item label={<b>Append</b>} />
                                   <Form.Item
                                     {...field}
                                     name={[field.name, 'append_type']}
@@ -615,10 +613,9 @@ const Relationships = () => {
                     ))}
 
                     <Form.Item>
-                      <div style={{ display: 'flex', marginTop: hasAppends() ? '1.7rem' : 0 }}>
+                      <div style={{ display: 'flex'}}>
                         <AppendActivityButton onClick={() => add()}>
-                          <span>Append Activity</span>
-                          <PlusIcon />
+                          Append Activity<PlusIcon />
                         </AppendActivityButton>
                         {
                           isLoading?
