@@ -120,6 +120,7 @@ const Relationships = () => {
 
   const [activityTypes, setActivityTypes] = useState([]);
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalVisible2, setIsModalVisible2] = useState(false);
@@ -128,16 +129,21 @@ const Relationships = () => {
   const [showOccurenceInput, setShowOccurenceInput] = useState(false);
   const [dataset, setDataset] = useState(false);
   const [column, setColumn] = useState(columns)
-  const [xAxis, setXAxis] = useState({})
-
+  const [xAxis, setXAxis] = useState({});
+  const [groupedBy, setGroupedBy] = useState({
+    primary_activity: '',
+    appends: [],
+    columns: [],
+    columnKey: ''
+  });
+  
+  // modal logic
   const handleOk = () => {
     setIsModalVisible(false);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
   const handleOk2 = () => {
     setIsModalVisible2(false);
   };
@@ -171,18 +177,8 @@ const Relationships = () => {
       setColumn([...columns, ...dynamColumns]);
   };
 
-
-  // Update groupBy columns dynamically
-  const [groupedBy, setGroupedBy] = useState({
-    primary_activity: '',
-    appends: [],
-    columns: [],
-    columnKey: ''
-  });
-
   useEffect(() => {
       // console.log('groupedBy', groupedBy);
-
       if (groupedBy.columns.length) {
         const primaryActivity = activityTypes
           .filter(v => v.value === groupedBy.primary_activity)
@@ -220,22 +216,29 @@ const Relationships = () => {
       }
   }, [groupedBy])
 
-  const onFinish = async ({ appends, filters, primary_activity, measure, occurrence }) => {
+  const onFinish = ({ appends, filters, primary_activity, measure, occurrence }) => {
     setSecondaryColumn(appends) 
     setGroupedBy(prev => ({...prev, appends, primary_activity}));
-    const res = await fetch(API_URL + 'generate-dataset', {
+    setIsLoading(true);
+
+    fetch(API_URL + 'generate-dataset', {
       method: 'post',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ appends, filters, primary_activity, measure, occurrence }),
-    });
-    const data = await res.json();
-    setData(data)
-    setDataset(true)
-    // console.log('onFinishData: ', data);
+    })
+    .then(res => res.json())
+    .then(data => {
+      // console.log('onFinishData: ', data);
+      setData(data);
+      setDataset(true);
+      setIsLoading(false);
+    })
+    .catch(err => setIsLoading(false));    
   };
+  const onFinishFailed = err => console.log('formValidate Error: ',err);
 
   // Activity type label
   const [activityLabel, setActivityLabel] = useState("Activity")
@@ -269,7 +272,6 @@ const Relationships = () => {
   const showFilterModal = () => {
     setIsModalVisible(true);
   };
-
   const showFilterModal2 = (fieldName) => {
     setIsModalVisible2(true);
     setModalField(fieldName);
@@ -321,9 +323,8 @@ const Relationships = () => {
   const handleBack = () => {
     setColumn(columns);
     setGroupedBy({columns: []});
-    setData([]);
-    form.resetFields(['appends']);
     setDataset(false);
+    setCount(0);
   };
 
   // handle append onChange event
@@ -331,6 +332,19 @@ const Relationships = () => {
     const view = `${value.replace(/-/g, '_')}_view`;
     setAppendState(view)
   };
+
+  // count down timer in seconds
+  const [count, setCount] = useState(0);
+  const timer = () => setCount(prev => prev + 0.1);
+
+  useEffect(() => {
+    let clearTimer;
+    if (isLoading) {
+      const id = setInterval(timer, 100);
+      clearTimer = () => clearInterval(id);
+    }
+    return clearTimer;
+  }, [isLoading]);
 
   return (
     <Layout>
@@ -464,7 +478,7 @@ const Relationships = () => {
                 className="custom-card" 
                 title={
                   <span>
-                    <ArrowLeftOutlined onClick={handleBack} style={{ fontSize: '18px' }}/>
+                    <ArrowLeftOutlined onClick={handleBack} style={{fontSize: '18px'}}/>
                     &nbsp;&nbsp;Results
                   </span>
                 }
@@ -473,7 +487,7 @@ const Relationships = () => {
               </Card> :
               <Card className="custom-card" title="Dataset Generation" bordered={false}>
                 <p className="spacer-bottom">Relationship define how you append activities to your dataset</p>
-                <InlineForm form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
+                <InlineForm form={form} name="dynamic_form_nest_item" onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
                   <Modal
                     okButtonProps={{ style: { borderColor: '#7865bf', backgroundColor: '#7865bf' } }}
                     closable={false}
@@ -602,9 +616,20 @@ const Relationships = () => {
                               <span>Append Activity</span>
                               <PlusIcon />
                             </AppendActivityButton>
-                            <PrimaryButtonPurple style={{ marginLeft: 10 }} htmlType="submit">
-                              Generate Dataset
-                            </PrimaryButtonPurple>
+                            {
+                              isLoading?
+                              <div style={{marginLeft: 10, display: 'inline-block'}}>
+                                <Button type='primary' danger loading>
+                                  Cancel
+                                </Button>
+                                <p style={{display: 'inline-block', marginLeft: '1em'}}>
+                                  <b>{`${count.toFixed(1)} seconds`}</b>
+                                </p>
+                              </div>:
+                              <PrimaryButtonPurple style={{marginLeft: 10}} htmlType="submit">
+                                Generate Dataset
+                              </PrimaryButtonPurple>
+                            }
                           </div>
                         </Form.Item>
                       </>
