@@ -1,6 +1,63 @@
 import moment from 'moment'
+import { humanize } from '../utils/index';
 
- export const group_by_columns = {
+export const columns = [
+    {
+      title: 'Activity Id',
+      dataIndex: 'activity_id',
+      key: 'activity_id',
+    },
+    {
+      title: 'Customer',
+      dataIndex: 'customer',
+      key: 'customer',
+    },
+    {
+      title: 'Activity',
+      dataIndex: 'activity',
+      render: (activity) => humanize(activity || ''),
+      key: 'activity',
+    },
+    {
+      title: 'Timestamp',
+      dataIndex: 'ts',
+      render: (ts) => moment(ts).format('ll'),
+      key: 'ts',
+    },
+    {
+      title: 'Feature1',
+      dataIndex: 'feature_1',
+      key: 'feature_1',
+    },
+  
+    {
+      title: 'Feature2',
+      dataIndex: 'feature_2',
+      key: 'feature_2',
+    },
+    {
+      title: 'Feature3',
+      dataIndex: 'feature_3',
+      key: 'feature_3',
+    },
+    {
+      title: 'Revenue Impact',
+      dataIndex: 'revenue_impact',
+      key: 'revenue_impact',
+    },
+    {
+      title: 'Link',
+      dataIndex: 'link',
+      key: 'link',
+    },
+    {
+      title: 'Occurence',
+      dataIndex: 'occurence',
+      key: 'occurence',
+    },
+];
+
+export const group_by_columns = {
     group_by_activityid: [
         {
             title: "ActivityId",
