@@ -150,7 +150,6 @@ const Relationships = () => {
   // Update dynamic fields
   const setSecondaryColumn = appends => {
       // console.log('appends: ', appends);
-      if (!appends.length) return;
       const str = appends[0].append_type
       const title = appends[0].append_type
       const activity = appends[0].activity_type
@@ -171,7 +170,6 @@ const Relationships = () => {
           key: 'days_from_secondary_activity'
         }
       ];
-
       // console.log('Cols: ', dynamColumns)
       setColumn([...columns, ...dynamColumns]);
   };
@@ -216,10 +214,11 @@ const Relationships = () => {
   }, [groupedBy])
 
   const onFinish = ({ appends, filters, primary_activity, measure, occurrence }) => {
-    setSecondaryColumn(appends) 
-    setGroupedBy(prev => ({...prev, appends, primary_activity}));
+    if (appends.length) {
+      setSecondaryColumn(appends);
+      setGroupedBy(prev => ({...prev, appends, primary_activity}));
+    }
     setIsLoading(true);
-
     fetch(API_URL + 'generate-dataset', {
       method: 'post',
       headers: {
@@ -283,7 +282,7 @@ const Relationships = () => {
   // append state
   const [appendState, setAppendState] = useState('');
 
-  const handleOnClickGroupByColumn = async object => {
+  const handleOnClickGroupByColumn = object => {
     const groupByTime = object.key.split("_")
     let timeEndpoint
     let timePeriod
@@ -294,27 +293,27 @@ const Relationships = () => {
     } else {
       timePeriod = false
     }
+
+    if (!groupedBy.appends.length) return message.error('Append an activity!');
     const columns = group_by_columns[object.key] || group_by_columns[timeEndpoint];
-    setColumn(columns)
+    setColumn(columns);
     setGroupedBy(prev => ({...prev, columns}));
+
     const period = ['day','week','month','year'];
-    const time = period.includes(object.key) && object.key;
     const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
 
-
     if (endpoint) {
-      const res = await fetch(API_URL + endpoint, {
+      fetch(API_URL + endpoint, {
         method: 'post',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({time: timePeriod, view: appendState})
-      });
-
-      const data = await res.json();
-      setData(data)
-      // console.log('groupByColumn: ', data);
+      })
+      .then(res => res.json())
+      .then(data => setData(data))
+      .catch(console.log)
     }
   };
 
@@ -323,11 +322,7 @@ const Relationships = () => {
     setColumn(columns);
     setDataset(false);
     setCount(0);
-    setGroupedBy({
-      primary_activity: '',
-      appends: [],
-      columns: [],
-    });
+    setGroupedBy({columns: []});
   };
 
   // handle append onChange event
