@@ -136,6 +136,19 @@ const Relationships = () => {
     columns: [],
   });
   
+  // count down timer in seconds
+  const [count, setCount] = useState(0);
+  const timer = () => setCount(prev => prev + 0.1);
+
+  useEffect(() => {
+    let clearTimer;
+    if (isLoading) {
+      const id = setInterval(timer, 100);
+      clearTimer = () => clearInterval(id);
+    }
+    return clearTimer;
+  }, [isLoading]);
+  
   // modal logic
   const handleOk = () => {
     setIsModalVisible(false);
@@ -330,19 +343,6 @@ const Relationships = () => {
     const view = `${value.replace(/-/g, '_')}_view`;
     setAppendState(view)
   };
-
-  // count down timer in seconds
-  const [count, setCount] = useState(0);
-  const timer = () => setCount(prev => prev + 0.1);
-
-  useEffect(() => {
-    let clearTimer;
-    if (isLoading) {
-      const id = setInterval(timer, 100);
-      clearTimer = () => clearInterval(id);
-    }
-    return clearTimer;
-  }, [isLoading]);
 
   return (
     <Layout>
