@@ -42,8 +42,7 @@ const [graphType, setGraphType] = useState('line_graph')
 
   const [ Ylabel, setYlabel ] = useState('Total Revenue Impact');
   const [ Yvalue, setYvalue] = useState('total_revenue_impact');
-  const [ Xlabel, setXlabel ] = useState('Customer');
-  const [ Xvalue, setXvalue] = useState('customer');
+  const [ Y2value, setY2value] = useState('customer');
 
   const onYchange = index => {
     const cols = columns.filter(obj => obj.dataIndex !== index);
@@ -62,8 +61,7 @@ const [graphType, setGraphType] = useState('line_graph')
     ));
     store.y2Axis.forEach(obj => {
       if (obj.dataIndex === index && obj.dataIndex !== xAxis.dataIndex) {
-        setXlabel(obj.title);
-        setXvalue(obj.dataIndex);
+        setY2value(obj.dataIndex);
       }
     });
     setStore(prev => ({...prev, yAxis: cols}));
@@ -130,12 +128,12 @@ const [graphType, setGraphType] = useState('line_graph')
               </YAxis>
             }
             {((data && graphType === 'bar_graph') ||( data && graphType === 'composite_graph')) && 
-              <Bar dataKey={graphType === 'composite_graph' ?  Xvalue: Yvalue} barSize={60} fill="#1890ff" >
+              <Bar dataKey={graphType === 'composite_graph' ?  Y2value: Yvalue} barSize={60} fill="#1890ff" >
                 <LabelList dataKey={ Yvalue} position="insideTop"/>
               </Bar>
             }
             {(graphType === 'line_graph' || graphType === 'composite_graph') && 
-              <Line dataKey={graphType === 'composite_graph' ? Xvalue: Yvalue} stroke="#1890ff" fill="#1890ff" strokeDasharray="3 3"/> 
+              <Line dataKey={graphType === 'composite_graph' ? Y2value: Yvalue} stroke="#1890ff" fill="#1890ff" strokeDasharray="3 3"/> 
             }
             <Legend verticalAlign="top" height={36}/>
             <Tooltip />
