@@ -207,8 +207,7 @@ const Relationships = () => {
           },
           {
             title: `Average days from ${appendType} ${activityType}`,
-            dataIndex: `average_days_from_${ appendType.replace(/\s/g, '_') }_
-              ${ activityType.replace(/\s/g, '_') }`,
+            dataIndex: 'avarage_days',
             key: `average_days_from_${appendType}_${activityType}`
           }
         ]
@@ -332,15 +331,6 @@ const Relationships = () => {
     const view = `${value.replace(/-/g, '_')}_view`;
     setAppendState(view)
   };
-
-  const MenuItem = (
-    <>
-    <Menu.Item key="day">Day</Menu.Item>
-    <Menu.Item key="week">Week</Menu.Item>
-    <Menu.Item key="month">Month</Menu.Item>
-    <Menu.Item key="year">Year</Menu.Item>
-    </>
-  )
 
   return (
     <Layout>
