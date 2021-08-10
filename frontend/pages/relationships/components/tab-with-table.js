@@ -302,7 +302,7 @@ const Relationships = () => {
     if(groupByTime.length === 2) {
       timeEndpoint = column_id[groupByTime[0]]
       timePeriod = groupByTime[1]
-      console.log(timePeriod, 'timeperiod')
+      // console.log(timePeriod, 'timeperiod')
     } else {
       timePeriod = false
     }
@@ -311,6 +311,7 @@ const Relationships = () => {
     const columns = group_by_columns[object.key] || group_by_columns[timeEndpoint];
     setColumn(columns);
     setGroupedBy(prev => ({...prev, columns}));
+    setIsLoading(true);
 
     const period = ['day','week','month','year'];
     const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
@@ -325,8 +326,11 @@ const Relationships = () => {
         body: JSON.stringify({time: timePeriod, view: appendState})
       })
       .then(res => res.json())
-      .then(data => setData(data))
-      .catch(console.log)
+      .then(data => {
+        setData(data);
+        setIsLoading(false);
+      })
+      .catch(err => setIsLoading(false));
     }
   };
 
@@ -453,11 +457,6 @@ const Relationships = () => {
         </Card>
         <Card title="Occurence Info" style={{marginBottom: "40px"}} >
         <Menu mode="vertical">
-          {/* <SubMenu key="sub12" title="Activity Id" onClick={(item) => handleOnClickGroupByColumn(item)} > */}
-          {/* <Menu.Item key="group_by_activityid" >Only Column</Menu.Item>
-          { MenuItem } 
-          */}
-          {/* </SubMenu>  */}
           <SubMenu key="sub13" title="Occurence" onClick={(item) => handleOnClickGroupByColumn(item)}>
           <Menu.Item key="group_by_occurence"  >Only Column</Menu.Item>
             <Menu.Item key="oc_day">Day</Menu.Item>
