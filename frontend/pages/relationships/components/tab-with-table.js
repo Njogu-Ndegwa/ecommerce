@@ -186,7 +186,7 @@ const Relationships = () => {
       // console.log('Cols: ', dynamColumns)
       setColumn([...columns, ...dynamColumns]);
   };
-
+  // useEffect groupedBy dynamic fields
   useEffect(() => {
       // console.log('groupedBy', groupedBy);
       if (groupedBy.columns.length) {
@@ -296,6 +296,7 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState('');
 
   const handleOnClickGroupByColumn = object => {
+    // console.log('Object', object);
     const groupByTime = object.key.split("_")
     let timeEndpoint
     let timePeriod
@@ -327,6 +328,7 @@ const Relationships = () => {
       })
       .then(res => res.json())
       .then(data => {
+        // console.log('groupByColumnData', data);
         setData(data);
         setIsLoading(false);
       })

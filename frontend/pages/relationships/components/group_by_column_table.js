@@ -148,12 +148,12 @@ import moment from 'moment'
         },
     ],
 
-    day: [
+    id_day: [
         {
-            title: "Group by Day",
+            title: "Day",
             render:(ts) => moment(ts).format('ll'),
-            dataIndex: "ts",
-            key: "ts"
+            dataIndex: "daily",
+            key: "daily"
         },
         {
             title: "Total Revenue Impact",
@@ -162,12 +162,12 @@ import moment from 'moment'
         },
     ],
 
-    week: [
+    id_week: [
         {
-            title: "Group by Week",
+            title: "Week",
             render:(ts) => moment(ts).format('ll'),
-            dataIndex: "ts",
-            key: "ts"
+            dataIndex: "weekly",
+            key: "weekly"
         },
         {
             title: "Total Revenue Impact",
@@ -176,12 +176,12 @@ import moment from 'moment'
         },
     ],
 
-    month: [
+    id_month: [
         {
-            title: "Group by Month",
+            title: "Month",
             render:(ts) => moment(ts).format('ll'),
-            dataIndex: "ts",
-            key: "ts"
+            dataIndex: "monthly",
+            key: "monthly"
         },
         {
             title: "Total Revenue Impact",
@@ -190,12 +190,12 @@ import moment from 'moment'
         },
     ],
 
-    year: [
+    id_year: [
         {
-            title: "Group by Year",
+            title: "Year",
             render:(ts) => moment(ts).format('ll'),
-            dataIndex: "ts",
-            key: "ts"
+            dataIndex: "yearly",
+            key: "yearly"
         },
         {
             title: "Total Revenue Impact",
