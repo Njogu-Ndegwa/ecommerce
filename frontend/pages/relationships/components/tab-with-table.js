@@ -322,7 +322,7 @@ const Relationships = () => {
     setColumn(columns);
     setGroupedBy({columns: []});
     setData([]);
-    form.resetFields();
+    form.resetFields(['appends']);
     setDataset(false);
   };
 
