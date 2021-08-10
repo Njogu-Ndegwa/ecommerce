@@ -359,7 +359,16 @@ const Relationships = () => {
     </div>
     <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
       <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
-        {dataset && <PlotChart data={data} columns={column} xAxis = {xAxis} />}
+        {
+          dataset && 
+          <PlotChart 
+            data={data} 
+            columns={column} 
+            xAxis={xAxis} 
+            isLoading={isLoading} 
+            count={count}
+          />
+        }
 
         <Card title={activityLabel} style={{marginBottom: "40px"}} >
           <Menu mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
