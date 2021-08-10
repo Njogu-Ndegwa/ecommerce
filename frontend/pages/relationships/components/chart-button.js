@@ -55,9 +55,10 @@ const [graphType, setGraphType] = useState('line_graph')
     setStore(prev => ({...prev, xAxis: cols}));
   };
 
-  const onXchange = index => {
+  const onY2change = index => {
     const cols = columns.filter(obj => (
-      obj.dataIndex !== index && obj.dataIndex !== xAxis.dataIndex
+      obj.dataIndex !== index && 
+      obj.dataIndex !== xAxis.dataIndex
     ));
     store.y2Axis.forEach(obj => {
       if (obj.dataIndex === index && obj.dataIndex !== xAxis.dataIndex) {
@@ -106,7 +107,7 @@ const [graphType, setGraphType] = useState('line_graph')
             </Select>
           </Col>
           <Col span={4} offset={4}>
-            <Select defaultValue={columns[0]?.title} onChange={onXchange} style={{width: '250px'}} >
+            <Select defaultValue={columns[0]?.title} onChange={onY2change} style={{width: '250px'}} >
               {store.y2Axis.map(item => (
                 <Option value={item.dataIndex} key={item.key}>
                   {item.title}
