@@ -184,19 +184,19 @@ const Relationships = () => {
       // console.log('groupedBy', groupedBy);
 
       if (groupedBy.columns.length) {
-        const primaryActivity = activityTypes.
-          filter(v => v.value === groupedBy.primary_activity)
+        const primaryActivity = activityTypes
+          .filter(v => v.value === groupedBy.primary_activity)
         const appendType = groupedBy.appends[0].append_type.replace(/-/g, ' ');
         const activityType = groupedBy.appends[0].activity_type.replace(/_/g, ' ')
 
         const dynamColumns = [
           {
-            title: `Total ${primaryActivity[0].label}`,
+            title: `Total ${primaryActivity[0]?.label}`,
             dataIndex: 'total_primary',
             key: groupedBy.primary_activity
           },
           {
-            title: `Total ${appendType}`,
+            title: `Total ${appendType} ${activityType}`,
             dataIndex: 'total_secondary',
             key: `total_${appendType.replace(/\s/g, '_')}`
           },
@@ -215,7 +215,9 @@ const Relationships = () => {
 
         const columns = groupedBy.columns.concat(dynamColumns);
         setColumn(columns);
-        // console.log('columns: ', columns);
+        // console.log('useEffectColumns: ', columns);
+        setXAxis(columns[0]);
+        // console.log('columns[0]', columns[0]);
       }
   }, [groupedBy])
 
@@ -312,9 +314,7 @@ const Relationships = () => {
 
       const data = await res.json();
       setData(data)
-      console.log('groupByColumn: ', data);
-
-      setXAxis(columns[0])
+      // console.log('groupByColumn: ', data);
     }
   };
 
