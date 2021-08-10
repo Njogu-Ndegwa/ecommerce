@@ -285,18 +285,20 @@ const Relationships = () => {
     const groupByTime = object.key.split("_")
     let timeEndpoint
     let timePeriod
+    if(groupByTime.length === 2) {
+      timeEndpoint = column_id[groupByTime[0]]
+      timePeriod = groupByTime[1]
+      console.log(timePeriod, 'timeperiod')
+    } else {
+      timePeriod = false
+    }
     const columns = group_by_columns[object.key] || group_by_columns[timeEndpoint];
     setColumn(columns)
     setGroupedBy(prev => ({...prev, columns, columnKey: object.key }));
     const period = ['day','week','month','year'];
     const time = period.includes(object.key) && object.key;
     const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
-    if(time) {
-      timeEndpoint = column_id[groupByTime[0]]
-      timePeriod = groupByTime[1]
-    } else {
-      timePeriod = false
-    }
+
 
     if (endpoint) {
       const res = await fetch(API_URL + endpoint, {
@@ -305,7 +307,7 @@ const Relationships = () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({time: time, view: appendState})
+        body: JSON.stringify({time: timePeriod, view: appendState})
       });
 
       const data = await res.json();

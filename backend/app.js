@@ -272,8 +272,8 @@ var server = app.listen(5000, function () {
 
 // Group by Activity Id.
 app.post('/group_by_activityid', (req, res) => {
-  // const {time, view} = req.body
-  console.log(time, view)
+  const {time, view} = req.body
+  console.log(time, 'fdfdd')
   if(view) {
     if(time){
       RealPostgress.ReadQuery(`SELECT c.activity_id, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.activity_id, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
@@ -311,10 +311,10 @@ app.post('/group_by_activityid', (req, res) => {
 // Group by customers.
 app.post('/group_by_customer', (req, res) => {
   const {time, view} = req.body
-  console.log(time, view, 'fdfdd')
+  console.log(time, 'fdfdd')
   if(view) {
     if(time){
-      RealPostgress.ReadQuery(`SELECT c.customer, DATE_TRUNC('${time}', c.ts) as monthly, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.customer, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
+      RealPostgress.ReadQuery(`SELECT c.customer, DATE_TRUNC('${time}', c.ts) as ${time}, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.customer, DATE_TRUNC('${time}', c.ts)`, (data_set) =>{
         res.setHeader('Content-Type', 'application/json');
         const data = customParseInt(data_set)
         res.send(data.rows);
