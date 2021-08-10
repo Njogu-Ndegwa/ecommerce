@@ -80,7 +80,7 @@ export default function PlotChart({data, columns, xAxis, isLoading, count}) {
           {
             isLoading?
             <Button type='primary' danger loading>Cancel</Button>:
-            <Button type="primary" icon={<PlayCircleOutlined />}>Play</Button>
+            <Button type="primary" icon={<PlayCircleOutlined />}>Run</Button>
           }
         </Col>
         <Col span={6} offset={12}>
