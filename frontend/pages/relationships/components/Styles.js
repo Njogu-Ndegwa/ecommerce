@@ -1,6 +1,27 @@
 import styled from 'styled-components';
 import { Timeline, Input, Form, DatePicker, Switch, Button, Select, Menu } from 'antd';
 
+const ActivityMenuContainer = styled.div`
+  overflow-y: auto;
+  height: 40vh;
+
+  ::-webkit-scrollbar {
+    width: .8em;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    cursor: pointer;
+  }
+`;
+
 const MediumFormItem = styled(Form.Item)`
   margin-bottom: ${({ bottom }) => (bottom ? bottom : '16px')};
 
@@ -355,6 +376,7 @@ const MainMenu = styled(Menu)`
 `
 
 export {
+  ActivityMenuContainer,
   StyledSelect,
   RoundedTopCard,
   AppendActivityButton,
