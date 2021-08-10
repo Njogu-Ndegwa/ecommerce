@@ -298,9 +298,9 @@ const Relationships = () => {
       <h3>{dataset ? "Parent Dataset": "Editing Definitions"}</h3>       
     </div>
     <div style={{margin: '.5em 0'}}>
-      <div style={{marginLeft: '70%'}}>
-        <PrimaryButtonPurple>Analyze dataset</PrimaryButtonPurple>
-        <PrimaryButtonPurple style={{marginLeft: '.5em'}}>Download dataset</PrimaryButtonPurple>
+      <div style={{width: '25em', marginLeft: 'auto'}}>
+        <PrimaryButtonPurple style={{display: 'inline-block'}}>Analyze dataset</PrimaryButtonPurple>
+        <PrimaryButtonPurple style={{marginLeft: '.5em', display: 'inline-block'}}>Download dataset</PrimaryButtonPurple>
       </div>
     </div>
     <Layout className="site-layout-background">
