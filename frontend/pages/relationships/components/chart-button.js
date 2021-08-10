@@ -8,7 +8,7 @@ import {
 
 const {Option} = Select
 
-export default function PlotChart({data, columns, xAxis}) {
+export default function PlotChart({data, columns, xAxis, isLoading, count}) {
   const [isModalVisible, setisModalVisible] = useState(false);
   const [graphType, setGraphType] = useState('line_graph');
 
@@ -87,6 +87,16 @@ export default function PlotChart({data, columns, xAxis}) {
           <Button type="primary" onClick={handleShowChart} icon={<LineChartOutlined />}/>
         </Col>
       </Row>
+      {
+        isLoading?
+        <p style={{marginTop: '1em'}}>
+          <b>{`${count.toFixed(1)} seconds`}</b>
+        </p>:
+        <h3 style={{marginTop: '1em'}}>
+          <b>{`${data.length} rows`}</b>
+        </h3>
+      }
+
       <Modal
         title="New Plot" 
         visible={isModalVisible}
