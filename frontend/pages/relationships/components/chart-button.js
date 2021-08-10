@@ -31,13 +31,13 @@ const [graphType, setGraphType] = useState('line_graph')
   // columns store
   const [store, setStore] = useState({
     yAxis: [], 
-    xAxis: []
+    y2Axis: []
   });
 
   useEffect(() => {
     // filter 'customer' in yColumns
     const filteredCols = columns.filter(obj => obj.dataIndex !== 'customer');
-    setStore({yAxis: filteredCols, xAxis: columns});
+    setStore({yAxis: filteredCols, y2Axis: columns});
   }, [columns]);
 
   const [ Ylabel, setYlabel ] = useState('Total Revenue Impact');
@@ -60,7 +60,7 @@ const [graphType, setGraphType] = useState('line_graph')
     const cols = columns.filter(obj => (
       obj.dataIndex !== index && obj.dataIndex !== xAxis.dataIndex
     ));
-    store.xAxis.forEach(obj => {
+    store.y2Axis.forEach(obj => {
       if (obj.dataIndex === index && obj.dataIndex !== xAxis.dataIndex) {
         setXlabel(obj.title);
         setXvalue(obj.dataIndex);
@@ -109,7 +109,7 @@ const [graphType, setGraphType] = useState('line_graph')
           </Col>
           <Col span={4} offset={4}>
             <Select defaultValue={columns[0]?.title} onChange={onXchange} style={{width: '250px'}} >
-              {store.xAxis.map(item => (
+              {store.y2Axis.map(item => (
                 <Option value={item.dataIndex} key={item.key}>
                   {item.title}
                 </Option>
