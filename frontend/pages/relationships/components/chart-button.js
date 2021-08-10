@@ -77,7 +77,11 @@ export default function PlotChart({data, columns, xAxis}) {
     <Card style={{ width: 200, marginBottom: 16 }}>
       <Row>
         <Col span={6}>
-          <Button type="primary" icon={<PlayCircleOutlined />}/>
+          {
+            isLoading?
+            <Button type='primary' danger loading>Cancel</Button>:
+            <Button type="primary" icon={<PlayCircleOutlined />}>Play</Button>
+          }
         </Col>
         <Col span={6} offset={12}>
           <Button type="primary" onClick={handleShowChart} icon={<LineChartOutlined />}/>
