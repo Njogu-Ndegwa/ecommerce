@@ -134,7 +134,6 @@ const Relationships = () => {
     primary_activity: '',
     appends: [],
     columns: [],
-    columnKey: ''
   });
   
   // modal logic
@@ -297,7 +296,7 @@ const Relationships = () => {
     }
     const columns = group_by_columns[object.key] || group_by_columns[timeEndpoint];
     setColumn(columns)
-    setGroupedBy(prev => ({...prev, columns, columnKey: object.key }));
+    setGroupedBy(prev => ({...prev, columns}));
     const period = ['day','week','month','year'];
     const time = period.includes(object.key) && object.key;
     const endpoint = timeEndpoint ? timeEndpoint : !period.includes(object.key) && object.key;
@@ -322,9 +321,13 @@ const Relationships = () => {
   // handle back navigation 
   const handleBack = () => {
     setColumn(columns);
-    setGroupedBy({columns: []});
     setDataset(false);
     setCount(0);
+    setGroupedBy({
+      primary_activity: '',
+      appends: [],
+      columns: [],
+    });
   };
 
   // handle append onChange event
@@ -362,6 +365,7 @@ const Relationships = () => {
     <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
       <Sider className="site-layout-background" style={{width: 200, backgroundColor:"#EEEEEE"}} >
         {dataset && <PlotChart data={data} columns={column} xAxis = {xAxis} />}
+
         <Card title={activityLabel} style={{marginBottom: "40px"}} >
           <Menu mode="vertical" onClick={(object) => handleOnClickGroupByColumn(object)}>
             <SubMenu key="sub1" title="Activity Id" >
