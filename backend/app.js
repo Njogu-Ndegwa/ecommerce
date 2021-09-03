@@ -16,7 +16,7 @@ var indexRouter = require('./routes/index');
 var chartsRouter = require('./routes/charts');
 const { data } = require('./charts');
 const {groupByColumn, groupByColumn2, groupByDay, groupByMonth, groupByYear, groupByWeek} = require('./modules/grou_by_column')
-const {firstEver, lastEver, firstBetween, lastBetween, aggregationAll, customParseInt} = require('./modules/secondary_activities')
+const {firstEver, lastEver, firstBetween, lastBetween, lastBefore, firstBefore, aggregationAll, customParseInt} = require('./modules/secondary_activities')
 
 // app instance
 var app = express();
@@ -41,7 +41,8 @@ app.get('/', function (req, res) {
     <h2>Links </h2>
     <ul>
         <li>To Create and Insert Data to Database<a href="/create-insert-activity-stream"> Link</a></li>
-        <li>To Create and Insert Data to Database<a href="/create-insert-viewdemo-stream"> Link</a></li>
+        <li>To Create and Insert Data to View Demo<a href="/create-insert-viewdemo-stream"> Link</a></li>
+        <li>To Create and Insert Data to Activity Reference Table<a href="/create-insert-activity-reference-table"> Link</a></li>
         <li>To Create and Insert Data to /first-ever <a href="/first-ever"> Link</a></li>
         <li>To Create and Insert Data to /last-ever <a href="/last-ever"> Link</a></li>
         <li>To Create and Insert Data to /first-before <a href="/first-before"> Link</a></li>
@@ -61,11 +62,14 @@ app.get('/getall', function (req, res) {
   });
 });
 
-app.get('/activity_types', function (req, res) {
+app.get('/activity_types', function (req, res) { 
+  let sql1 = `SELECT DISTINCT a.activity, r.feature_1, r.feature_2, r.feature_3 from activity_stream as a CROSS JOIN activity_reference as r where a.activity = r.activity;`
   let sql = `SELECT DISTINCT acts.activity FROM public.activity_stream as acts;`;
-  RealPostgress.ReadQuery(sql, function (data_set) {
+  RealPostgress.ReadQuery(sql1, function (data_set) {
     res.setHeader('Content-Type', 'application/json');
+    console.log(data_set.rows)
     res.send(data_set.rows);
+    
   });
 });
 
@@ -107,6 +111,15 @@ app.get('/create-insert-activity-stream', function (err, res) {
 app.get('/create-insert-viewdemo-stream', function (err, res) {
   KendObj.CreateViewDemoStream(() => {
     PostgressObj.InsertViewDemoData((state) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send({ state: state, message: 'Table Created success' });
+    });
+  });
+});
+
+app.get('/create-insert-activity-reference-table', function (err, res) {
+  KendObj.CreateActivityReferenceTable(() => {
+    PostgressObj.InsertActivityReference((state) => {
       res.setHeader('Content-Type', 'application/json');
       res.send({ state: state, message: 'Table Created success' });
     });
@@ -168,7 +181,7 @@ app.post('/generate-dataset', function (req, res) {
       break;
   }
 
-  RealPostgress.ReadQuery(`CREATE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}' 
+  RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW generate_data_view as SELECT DISTINCT az1.activity_id, az1.customer, az1.revenue_impact, v.occurence, az1.feature_1, az1.ts, az1.feature_2, az1.feature_3, az1.activity, az1.source, az1.source_id, az1.link FROM public.activity_stream AS az1 cross join viewdemo_stream as v where az1.activity_id = v.activity_id and az1.activity = '${primary_activity}' ${occurrenceQuery}
   `, function (data_set) {
     console.log('Generate Data View Created', data_set)
   })
@@ -195,10 +208,10 @@ app.post('/generate-dataset', function (req, res) {
       lastEver(data_set, appends, primary_activity, res)
     }
     else if(appends[0].append_type === 'first-before') {
-      firstEver(data_set, appends, primary_activity, res)
+      firstBefore(data_set, appends, primary_activity, res)
     }
     else if(appends[0].append_type === 'last-before') {
-      lastEver(data_set, appends, primary_activity, res)
+      lastBefore(data_set, appends, primary_activity, res)
     }
   }
   else {

@@ -40,6 +40,20 @@ class PostgressFuntion {
     });
   }
 
+  InsertActivityReference(callback) {
+    let size = 0;
+    CsvObj.ReadCsv('./csv_files/activityReference.csv', (res) => {
+      res.forEach((element) => {
+        KnexObj.InsertActivityRefence(element, () => {
+          size++;
+          if (size === res.length) {
+            callback(true);
+          }
+        });
+      });
+    });
+  }
+
   SelectAll(callback) {
     KnexObj.SelectAllRecords(callback);
   }

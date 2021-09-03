@@ -74,7 +74,7 @@ export default function PlotChart({data, columns, xAxis, isLoading, count}) {
 
 // const ticks = [5000, 10000, 15000, 20000, 25000, 60000, 70000, 80000, 90000, 100000, 110000, 120000]
   return (
-    <Card style={{ width: 200, marginBottom: 16 }}>
+    <Card style={{ width: 300, marginBottom: 16 }}>
       <Row>
         <Col span={6}>
           {

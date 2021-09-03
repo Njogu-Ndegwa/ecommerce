@@ -49,6 +49,25 @@ class KnexStaticDatabases {
       });
   }
 
+  CreateActivityReferenceTable(callback) {
+    this.knex.schema
+      .createTable('activity_reference', (table) => {
+        table.increments('id');
+        table.string('activity');
+        table.string('feature_1');
+        table.string('feature_2');
+        table.string('feature_3');
+      })
+      .then(() => callback())
+      .catch((err) => {
+        console.log(err);
+        throw err;
+      })
+      .finally(() => {
+        // this.knex.destroy();
+      });
+  }
+
   InsertActivity(res, callback) {
     this.knex('activity_stream')
       .insert(res)
@@ -60,6 +79,14 @@ class KnexStaticDatabases {
   InsertViewDemo(res, callback) {
     // console.log(res, 'viewdemo_stream')
     this.knex('viewdemo_stream')
+      .insert(res)
+      .then(() => {
+        callback();
+      });
+  }
+
+  InsertActivityRefence(res, callback) {
+    this.knex('activity_reference')
       .insert(res)
       .then(() => {
         callback();
@@ -79,6 +106,15 @@ class KnexStaticDatabases {
     this.knex
       .select()
       .from('viewdemo_stream')
+      .then((records) => {
+        callback(records);
+      });
+  }
+
+  SelectAllRecordsActivityReference(callback) {
+    this.knex
+      .select()
+      .from('activity_reference')
       .then((records) => {
         callback(records);
       });

@@ -55,6 +55,59 @@ function lastBetween(data_set, appends, primary_activity, res) {
     }
 }
 
+function firstBefore(data_set, appends, primary_activity, res) {
+
+  if(appends[0].append_type === 'first-before') {
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_before_temp as SELECT  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, case when activity = '${primary_activity}' then min(ts) filter (where activity = '${appends[0].activity_type}') over (partition by customer order by ts) end as a, CASE WHEN az1.activity = '${appends[0].activity_type}' THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity FROM generate_data_view as az1 order by ts`, function (data_set1) { 
+      console.log("temp Created")
+    })
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW first_before_view as SELECT  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, az1.primary_activity, az1.secondary_activity, case when (a IS NOT NULL) then 1 else 0 end as first_before_secondary from first_before_temp as az1
+    `, function (data_set1) { 
+      console.log("View Created")
+    })
+  RealPostgress.ReadQuery('select * from first_before_view', function (data_set) { 
+  res.setHeader('Content-Type', 'application/json')
+  res.send(data_set.rows)
+  });
+  }
+}
+
+function lastBefore(data_set, appends, primary_activity, res) {
+
+  if(appends[0].append_type === 'last-before') {
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_before_temp as SELECT  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, case when activity = '${primary_activity}' then max(ts) filter (where activity = '${appends[0].activity_type}') over (partition by customer order by ts) end as a, CASE WHEN az1.activity = '${appends[0].activity_type}' THEN 1 ELSE 0 end as secondary_activity, CASE WHEN az1.activity = '${primary_activity}' THEN 1 ELSE 0 end as primary_activity FROM generate_data_view as az1 order by ts`, function (data_set1) { 
+      console.log("temp Created")
+    })
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_before_view as SELECT  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, az1.primary_activity, az1.secondary_activity, case when (a IS NOT NULL) then 1 else 0 end as last_before_secondary from last_before_temp as az1
+    `, function (data_set1) { 
+      console.log("View Created")
+    })
+  RealPostgress.ReadQuery('select * from last_before_view', function (data_set) { 
+  res.setHeader('Content-Type', 'application/json')
+  res.send(data_set.rows)
+  });
+  }
+}
+
+
+function aggregationAll(data_set, appends, primary_activity, res) {
+
+  if(appends[0].append_type === 'last-before') {
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW aggregation_temp as SELECT  customer,case when activity = 'completed_order' then (select count(*) over (partition by customer order by ts) from activity_stream as az where activity = 'email' and az1.customer = az.customer order by ts DESC limit 1) end as aggregate_all_ever FROM public.activity_stream as az1 order by ts`, function (data_set1) { 
+      console.log("temp Created")
+    })
+    RealPostgress.ReadQuery(`CREATE OR REPLACE VIEW last_before_view as SELECT  az1.activity_id, az1.ts, az1.source, az1.source_id, az1.customer, az1.activity, az1.feature_1, az1.feature_2, az1.feature_3, az1.revenue_impact, az1.link, az1.occurence, az1.primary_activity, az1.secondary_activity, case when (a IS NOT NULL) then 1 else 0 end as last_before_secondary from last_before_temp as az1
+    `, function (data_set1) { 
+      console.log("View Created")
+    })
+  RealPostgress.ReadQuery('select * from last_before_view', function (data_set) { 
+  res.setHeader('Content-Type', 'application/json')
+  res.send(data_set.rows)
+  });
+  }
+}
+
+
 function aggregationAll(data_set, appends, primary_activity, res) {
     let sql1 = `SELECT  *,
     case
@@ -98,6 +151,8 @@ module.exports = {
     firstBetween,
     lastBetween,
     aggregationAll,
+    lastBefore,
+    firstBefore,
     customParseInt
 }
 
