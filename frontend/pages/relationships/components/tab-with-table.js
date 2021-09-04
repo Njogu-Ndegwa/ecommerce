@@ -15,6 +15,7 @@ import {
   Layout,
   Menu,
   Dropdown,
+  Tabs
 } from "antd";
 import {
   FilterOutlined,
@@ -28,7 +29,7 @@ import {
   PrimaryButtonPurple,
   SelectWithBackgroundColor,
   ActivityMenuContainer,
-  SecondaryActivityMenuContainer
+  SecondaryActivityMenuContainer,
 } from "./Styles";
 
 import { humanize } from "../utils/index";
@@ -72,7 +73,7 @@ export const customerAttrs = [
 ];
 
 const API_URL = "http://localhost:5000/";
-
+const {TabPane} = Tabs
 const Relationships = () => {
   const [form] = Form.useForm();
 
@@ -93,17 +94,28 @@ const Relationships = () => {
     appends: [],
     columns: [],
   });
-  const [selectedPrimaryActivity, setSelectedPrimaryActivity] =
-    useState({label:"Select an Activity", value:''});
-  const [selectedSecondaryActivity, setSelectedSecondaryActivity] =
-    useState({label:"Select an Activity", value:''});
-  const [isprimaryActivitySelected, setisPrimaryActivitySelected] = useState(false);
+  const [selectedPrimaryActivity, setSelectedPrimaryActivity] = useState({
+    label: "Select an Activity",
+    value: "",
+  });
+  const [selectedSecondaryActivity, setSelectedSecondaryActivity] = useState({
+    label: "Select an Activity",
+    value: "",
+  });
+  const [isprimaryActivitySelected, setisPrimaryActivitySelected] =
+    useState(false);
   const [issecondaryActivitySelected, setisSecondaryActivitySelected] =
     useState(false);
+  const [panes, setPanes] = useState([]);
+  const [activeKey, setActiveKey] = useState('0');
+  const [newTabIndex, setNewTabIndex] = useState(0);
 
   // count down timer in seconds
   const [count, setCount] = useState(0);
   const timer = () => setCount((prev) => prev + 0.1);
+  const [onFinishCalled, setOnfinishCalled] = useState(false)
+  const [groupbyColumnCalled, setGroupbyColumnCalled] = useState(false)
+  const [groupByTabTitle, setgroupByTabTitle] = useState('')
 
   useEffect(() => {
     let clearTimer;
@@ -150,6 +162,7 @@ const Relationships = () => {
     ];
     // console.log('Cols: ', dynamColumns)
     setColumn([...columns, ...dynamColumns]);
+    console.log(data, "while setting dynamic columns")
   };
   // useEffect groupedBy dynamic fields
   useEffect(() => {
@@ -195,16 +208,20 @@ const Relationships = () => {
     }
   }, [groupedBy]);
 
-  const onFinish = ({
-    appends,
-    filters,
-    measure,
-    occurrence,
-  }) => {
-    const primary_activity = selectedPrimaryActivity['value']
-    const secondary_activity = selectedSecondaryActivity['value']
-    appends[0]['activity_type'] = secondary_activity
-    console.log({"appends": appends,"filters": filters, "primary_activity": primary_activity, "measure": measure, "occurence": occurrence})
+  const onFinish = ({ appends, filters, measure, occurrence }) => {
+    const primary_activity = selectedPrimaryActivity["value"];
+    if(selectedSecondaryActivity["value"]){
+      const secondary_activity = selectedSecondaryActivity["value"];
+      appends[0]["activity_type"] = secondary_activity;
+    }
+    
+    console.log({
+      appends: appends,
+      filters: filters,
+      primary_activity: primary_activity,
+      measure: measure,
+      occurence: occurrence,
+    });
     if (appends.length) {
       setSecondaryColumn(appends);
       setGroupedBy((prev) => ({ ...prev, appends, primary_activity }));
@@ -225,14 +242,18 @@ const Relationships = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log("onFinishData: ", data);
-        setData(data);
+      .then((value) => {
+        console.log("onFinishData: ", value);
+        setData(value);
         setDataset(true);
         setIsLoading(false);
+        setOnfinishCalled(true)
+        
       })
       .catch((err) => setIsLoading(false));
+      console.log('On finish Called')
   };
+
   const onFinishFailed = (err) => console.log("formValidate Error: ", err);
 
   // Activity type label
@@ -247,7 +268,7 @@ const Relationships = () => {
     setShowOccurenceInput(val === "nth");
     activityTypes.forEach(({ label, value }) => {
       if (value === val["key"]) {
-        setSelectedPrimaryActivity({label:label, value:value});
+        setSelectedPrimaryActivity({ label: label, value: value });
         setisPrimaryActivitySelected(true);
       }
     });
@@ -255,23 +276,22 @@ const Relationships = () => {
 
   const handleSecondaryActivityChange = (val) => {
     console.log(val);
-    typeof val === "string" && setSecondaryActivityLabel(humanize(val.split('-').join(' ')))
+    typeof val === "string" &&
+      setSecondaryActivityLabel(humanize(val.split("-").join(" ")));
     activityTypes.forEach(({ label, value }) => {
       if (value === val["key"]) {
-        setSelectedSecondaryActivity({label:label, value:value})
+        setSelectedSecondaryActivity({ label: label, value: value });
         setisSecondaryActivitySelected(true);
       }
     });
     appendTypes.forEach(({ label, value }) => {
       if (value === val) {
-        console.log(val)
+        console.log(val);
         const view = `${value.replace(/-/g, "_")}_view`;
         setAppendState(view);
       }
     });
-
   };
-
 
   useEffect(async () => {
     const activityTypesResponse = await fetch(API_URL + "activity_types");
@@ -316,7 +336,7 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState("");
 
   const handleOnClickGroupByColumn = (object) => {
-    // console.log('Object', object);
+    console.log('Object', humanize(object['key'].split('_').slice(1).join(' ')));
     const groupByTime = object.key.split("_");
     let timeEndpoint;
     let timePeriod;
@@ -351,9 +371,12 @@ const Relationships = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          // console.log('groupByColumnData', data);
+          const tabtitle = humanize(object['key'].split('_').slice(1).join(' '))
+          setgroupByTabTitle(tabtitle)
           setData(data);
           setIsLoading(false);
+          setGroupbyColumnCalled(true)
+          // tabAdd(data, tabtitle, columns)
         })
         .catch((err) => setIsLoading(false));
     }
@@ -434,28 +457,103 @@ const Relationships = () => {
     </Menu>
   );
 
-
-
   const primaryActivityTitle =
-    activityLabel && selectedPrimaryActivity['label'] !== "Select an Activity" ? (
+    activityLabel &&
+    selectedPrimaryActivity["label"] !== "Select an Activity" ? (
       <div>
         <h5 style={{ fontWeight: "400" }}>{activityLabel}</h5>
-        <h4>{selectedPrimaryActivity['label']}</h4>
+        <h4>{selectedPrimaryActivity["label"]}</h4>
       </div>
     ) : (
-      selectedPrimaryActivity['label']
-    );
-    
-  const secondaryActivityTitle =
-    secondaryActivityLabel && selectedSecondaryActivity['label'] !== "Select an Activity" ? (
-      <div>
-        <h5 style={{ fontWeight: "400" }}>{secondaryActivityLabel}</h5>
-        <h4>{selectedSecondaryActivity['label']}</h4>
-      </div>
-    ) : (
-      selectedSecondaryActivity['label']
+      selectedPrimaryActivity["label"]
     );
 
+  const secondaryActivityTitle =
+    secondaryActivityLabel &&
+    selectedSecondaryActivity["label"] !== "Select an Activity" ? (
+      <div>
+        <h5 style={{ fontWeight: "400" }}>{secondaryActivityLabel}</h5>
+        <h4>{selectedSecondaryActivity["label"]}</h4>
+      </div>
+    ) : (
+      selectedSecondaryActivity["label"]
+    );
+
+  const onTabChange = (activeKey) => {
+    setActiveKey(activeKey);
+  };
+
+  const onTabEdit = (targetKey, action) => {
+    console.log(action)
+    if (action === "add") {
+      tabAdd(targetKey);
+    } else if (action === "remove") {
+      tabRemove(targetKey);
+    }
+  };
+
+  const tabAdd = (title) => {
+    let tabTitle
+    if(groupbyColumnCalled) {
+      tabTitle = groupByTabTitle
+    }
+    else if(onFinishCalled) {
+      tabTitle = title
+    }
+    const activeKey = `newTab${newTabIndex}`;
+    console.log(activeKey);
+    const newPanes = [...panes];
+    newPanes.push({
+      title: tabTitle,
+      content: <Table
+      size="small"
+      rowKey="activity_id"
+      scroll={{ x: 400 }}
+      columns={column}
+      dataSource={data}
+    />,
+      key: activeKey,
+    });
+    setPanes(newPanes);
+    setActiveKey(activeKey);
+    setNewTabIndex((prevTabIndex) => prevTabIndex + 1);
+  };
+
+  const tabRemove = (targetKey) => {
+    let newActiveKey = activeKey;
+    let lastIndex;
+    panes.forEach((pane, i) => {
+      if (pane.key === targetKey) {
+        lastIndex = i - 1;
+      }
+    });
+    const newPanes = panes.filter((pane) => pane.key !== targetKey);
+    if (newPanes.length && newActiveKey === targetKey) {
+      if (lastIndex >= 0) {
+        newActiveKey = newPanes[lastIndex].key;
+      } else {
+        newActiveKey = newPanes[0].key;
+      }
+    }
+    setPanes(newPanes);
+    setActiveKey(newActiveKey);
+  };
+
+  useEffect(() => {
+    if(data && onFinishCalled){
+      let title = "Parent"
+      tabAdd(title)
+      setOnfinishCalled(false)
+    }
+  },[data, column, onFinishCalled])
+
+  useEffect(() => {
+    console.log(groupbyColumnCalled)
+    if(data && groupbyColumnCalled){
+      tabAdd()
+    }
+    setGroupbyColumnCalled(false)
+  },[data, column, groupbyColumnCalled])
   return (
     <Layout>
       <Content style={{ padding: "0 2.5em" }}>
@@ -496,7 +594,7 @@ const Relationships = () => {
 
             <Card
               title={primaryActivityTitle}
-              style={{ marginBottom: "1em", minHeight: 290, width:300 }}
+              style={{ marginBottom: "1em", minHeight: 290, width: 300 }}
             >
               {isprimaryActivitySelected ? (
                 <ActivityMenuContainer className="activity-menu-container">
@@ -516,7 +614,6 @@ const Relationships = () => {
                     <SubMenu
                       key="sub2"
                       title="Timestamp"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
                     >
                       <Menu.Item key="group_by_timestamp">
                         Only Column
@@ -529,7 +626,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub3"
                       title="Source"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_source">Only Column</Menu.Item>
                       <Menu.Item key="sc_day">Day</Menu.Item>
@@ -540,7 +637,6 @@ const Relationships = () => {
                     <SubMenu
                       key="sub4"
                       title="Source_id"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
                     >
                       <Menu.Item key="group_by_sourceid">Only Column</Menu.Item>
                       <Menu.Item key="scid_day">Day</Menu.Item>
@@ -551,7 +647,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub5"
                       title="Customer"
-                      onClick={(item) => handleOnClickGroupByColumn(item)}
+                      
                     >
                       <Menu.Item key="group_by_customer">Only Column</Menu.Item>
                       <Menu.Item key="cu_day">Day</Menu.Item>
@@ -562,7 +658,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub6"
                       title="activity"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_activity">Only Column</Menu.Item>
                       <Menu.Item key="ac_day">Day</Menu.Item>
@@ -573,7 +669,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub7"
                       title="feature_1"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_feature1">Only Column</Menu.Item>
                       <Menu.Item key="f1_day">Day</Menu.Item>
@@ -584,7 +680,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub8"
                       title="feature_2"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_feature2">Only Column</Menu.Item>
                       <Menu.Item key="f2_day">Day</Menu.Item>
@@ -595,7 +691,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub9"
                       title="feature_3"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_feature3">Only Column</Menu.Item>
                       <Menu.Item key="f3_day">Day</Menu.Item>
@@ -606,7 +702,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub10"
                       title="revenue_impact"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_revenue_impact">
                         Only Column
@@ -619,7 +715,7 @@ const Relationships = () => {
                     <SubMenu
                       key="sub11"
                       title="link"
-                      onClick={(object) => handleOnClickGroupByColumn(object)}
+                      
                     >
                       <Menu.Item key="group_by_link">Only Column</Menu.Item>
                       <Menu.Item key="li_day">Day</Menu.Item>
@@ -634,47 +730,52 @@ const Relationships = () => {
               )}
             </Card>
             {issecondaryActivitySelected ? (
-              <Card title={secondaryActivityTitle} style={{ marginBottom: "40px", width:300 }}>
+              <Card
+                title={secondaryActivityTitle}
+                style={{ marginBottom: "40px", width: 300 }}
+              >
                 <SecondaryActivityMenuContainer>
-                <Menu mode="vertical">
-                  <SubMenu
-                    key="sub13"
-                    title={`${secondaryActivityLabel} ${selectedSecondaryActivity['label']} Timestamp`}
-                    onClick={(item) => handleOnClickGroupByColumn(item)}
-                  >
-                    <Menu.Item key="group_by_occurence">Only Column</Menu.Item>
-                    <Menu.Item key="oc_day">Day</Menu.Item>
-                    <Menu.Item key="oc_week">Week</Menu.Item>
-                    <Menu.Item key="oc_month">Month</Menu.Item>
-                    <Menu.Item key="oc_year">Year</Menu.Item>
-                  </SubMenu>
-                  <SubMenu
-                    key="sub14"
-                    title={`Did ${selectedSecondaryActivity['label']}`}
-                    onClick={(item) => handleOnClickGroupByColumn(item)}
-                  >
-                    <Menu.Item key="group_by_activity_repeated_at">
-                      Only Column
-                    </Menu.Item>
-                    <Menu.Item key="at_day">Day</Menu.Item>
-                    <Menu.Item key="at_week">Week</Menu.Item>
-                    <Menu.Item key="at_month">Month</Menu.Item>
-                    <Menu.Item key="at_year">Year</Menu.Item>
-                  </SubMenu>
-                  <SubMenu
-                    key="sub15"
-                    title={`Days to ${selectedSecondaryActivity['label']}`}
-                    onClick={(item) => handleOnClickGroupByColumn(item)}
-                  >
-                    <Menu.Item key="group_by_activity_repeated_at">
-                      Only Column
-                    </Menu.Item>
-                    <Menu.Item key="at_day">Day</Menu.Item>
-                    <Menu.Item key="at_week">Week</Menu.Item>
-                    <Menu.Item key="at_month">Month</Menu.Item>
-                    <Menu.Item key="at_year">Year</Menu.Item>
-                  </SubMenu>
-                </Menu>
+                  <Menu mode="vertical">
+                    <SubMenu
+                      key="sub13"
+                      title={`${secondaryActivityLabel} ${selectedSecondaryActivity["label"]} Timestamp`}
+                      onClick={(item) => handleOnClickGroupByColumn(item)}
+                    >
+                      <Menu.Item key="group_by_occurence">
+                        Only Column
+                      </Menu.Item>
+                      <Menu.Item key="oc_day">Day</Menu.Item>
+                      <Menu.Item key="oc_week">Week</Menu.Item>
+                      <Menu.Item key="oc_month">Month</Menu.Item>
+                      <Menu.Item key="oc_year">Year</Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="sub14"
+                      title={`Did ${selectedSecondaryActivity["label"]}`}
+                      
+                    >
+                      <Menu.Item key="group_by_activity_repeated_at">
+                        Only Column
+                      </Menu.Item>
+                      <Menu.Item key="at_day">Day</Menu.Item>
+                      <Menu.Item key="at_week">Week</Menu.Item>
+                      <Menu.Item key="at_month">Month</Menu.Item>
+                      <Menu.Item key="at_year">Year</Menu.Item>
+                    </SubMenu>
+                    <SubMenu
+                      key="sub15"
+                      title={`Days to ${selectedSecondaryActivity["label"]}`}
+                      
+                    >
+                      <Menu.Item key="group_by_activity_repeated_at">
+                        Only Column
+                      </Menu.Item>
+                      <Menu.Item key="at_day">Day</Menu.Item>
+                      <Menu.Item key="at_week">Week</Menu.Item>
+                      <Menu.Item key="at_month">Month</Menu.Item>
+                      <Menu.Item key="at_year">Year</Menu.Item>
+                    </SubMenu>
+                  </Menu>
                 </SecondaryActivityMenuContainer>
               </Card>
             ) : (
@@ -684,7 +785,7 @@ const Relationships = () => {
           <Content style={{ padding: "0 24px", minHeight: 280 }}>
             {dataset ? (
               <Card
-                style={{width: '65vw', marginLeft: 100}}
+                style={{ width: "65vw", marginLeft: 100 }}
                 bordered={false}
                 className="custom-card"
                 title={
@@ -697,20 +798,36 @@ const Relationships = () => {
                   </span>
                 }
               >
-                <Table
+                {/* <Table
                   size="small"
                   rowKey="activity_id"
                   scroll={{ x: 400 }}
                   columns={column}
                   dataSource={data}
-                />
+                /> */}
+                <Tabs
+                  type="editable-card"
+                  onChange={onTabChange}
+                  activeKey={activeKey}
+                  onEdit={onTabEdit}
+                >
+                  {panes.map((pane) => (
+                    <TabPane
+                      tab={pane.title}
+                      key={pane.key}
+                      closable={pane.closable}
+                    >
+                      {pane.content}
+                    </TabPane>
+                  ))}
+                </Tabs>
               </Card>
             ) : (
               <Card
                 className="custom-card"
                 title="Dataset Generation"
                 bordered={false}
-                style={{width:'64vw', marginLeft:100}}
+                style={{ width: "64vw", marginLeft: 100 }}
               >
                 <p className="spacer-bottom">
                   Relationship define how you append activities to your dataset
@@ -821,7 +938,7 @@ const Relationships = () => {
                             }}
                             icon={<DownOutlined />}
                           >
-                            {selectedPrimaryActivity['label']}
+                            {selectedPrimaryActivity["label"]}
                           </Button>
                         </Dropdown>
                       </Form.Item>
@@ -860,7 +977,9 @@ const Relationships = () => {
                                           showSearch
                                           style={{ minWidth: 128 }}
                                           options={appendTypes}
-                                          onChange={handleSecondaryActivityChange}
+                                          onChange={
+                                            handleSecondaryActivityChange
+                                          }
                                         />
                                       </Form.Item>
                                       <Button
@@ -890,7 +1009,7 @@ const Relationships = () => {
                                       }}
                                       icon={<DownOutlined />}
                                     >
-                                      {selectedSecondaryActivity['label']}
+                                      {selectedSecondaryActivity["label"]}
                                     </Button>
                                   </Dropdown>
                                 </Form.Item>
