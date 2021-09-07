@@ -40,6 +40,7 @@ import PlotChart from "./chart-button";
 import { columns, group_by_columns } from "./group_by_column_table";
 import { column_id } from "./column_id";
 import CustomDropDown from "../custom_dropdown";
+import moment from 'moment'
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -116,6 +117,7 @@ const Relationships = () => {
   const [onFinishCalled, setOnfinishCalled] = useState(false)
   const [groupbyColumnCalled, setGroupbyColumnCalled] = useState(false)
   const [groupByTabTitle, setgroupByTabTitle] = useState('')
+  const [timeColumn, setTimeColumn] = useState('')
 
   useEffect(() => {
     let clearTimer;
@@ -166,7 +168,7 @@ const Relationships = () => {
   };
   // useEffect groupedBy dynamic fields
   useEffect(() => {
-    // console.log('groupedBy', groupedBy);
+    console.log(timeColumn, "Time Column")
     if (groupedBy.columns.length) {
       const primaryActivity = activityTypes.filter(
         (v) => v.value === groupedBy.primary_activity
@@ -182,6 +184,12 @@ const Relationships = () => {
           title: `Total ${primaryActivity[0]?.label}`,
           dataIndex: "total_primary",
           key: groupedBy.primary_activity,
+        },
+        {
+          title: `${humanize(timeColumn)}`,
+          dataIndex: `${timeColumn}`,
+          render: timeColumn ? (timeColumn) => moment(timeColumn).format('ll') : '',
+          key: timeColumn
         },
         {
           title: `Total ${appendType} ${activityType}`,
@@ -343,6 +351,7 @@ const Relationships = () => {
     if (groupByTime.length === 2) {
       timeEndpoint = column_id[groupByTime[0]];
       timePeriod = groupByTime[1];
+      setTimeColumn(timePeriod)
       // console.log(timePeriod, 'timeperiod')
     } else {
       timePeriod = false;
@@ -351,6 +360,7 @@ const Relationships = () => {
     if (!groupedBy.appends.length) return message.error("Append an activity!");
     const columns =
       group_by_columns[object.key] || group_by_columns[timeEndpoint];
+    console.log(timeEndpoint, 'timeEndpoint')
     setColumn(columns);
     setGroupedBy((prev) => ({ ...prev, columns }));
     setIsLoading(true);
@@ -371,6 +381,7 @@ const Relationships = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data, "group by data")
           const tabtitle = humanize(object['key'].split('_').slice(1).join(' '))
           setgroupByTabTitle(tabtitle)
           setData(data);
