@@ -179,17 +179,19 @@ const Relationships = () => {
         " "
       );
 
+      const dynamicTimeColumn = [
+        {
+          title: `${humanize(timeColumn)}`,
+          dataIndex: `${timeColumn}`,
+          render:(timeColumn) => moment(timeColumn).format('ll'),
+          key: timeColumn
+        },
+      ]
       const dynamColumns = [
         {
           title: `Total ${primaryActivity[0]?.label}`,
           dataIndex: "total_primary",
           key: groupedBy.primary_activity,
-        },
-        {
-          title: `${humanize(timeColumn)}`,
-          dataIndex: `${timeColumn}`,
-          render: timeColumn ? (timeColumn) => moment(timeColumn).format('ll') : '',
-          key: timeColumn
         },
         {
           title: `Total ${appendType} ${activityType}`,
@@ -208,10 +210,21 @@ const Relationships = () => {
         },
       ];
 
-      const columns = groupedBy.columns.concat(dynamColumns);
-      setColumn(columns);
+
+      if(timeColumn){
+        const columns = [...dynamicTimeColumn, ...groupedBy.columns, ...dynamColumns]
+        setColumn(columns);
+        setXAxis(columns[0]);
+        setTimeColumn('')
+      }
+      else {
+        const columns = groupedBy.columns.concat(dynamColumns);
+        setColumn(columns);
+        setXAxis(columns[0]);
+      }
+      // setColumn(columns);
       // console.log('useEffectColumns: ', columns);
-      setXAxis(columns[0]);
+      // setXAxis(columns[0]);
       // console.log('columns[0]', columns[0]);
     }
   }, [groupedBy]);
@@ -344,15 +357,16 @@ const Relationships = () => {
   const [appendState, setAppendState] = useState("");
 
   const handleOnClickGroupByColumn = (object) => {
-    console.log('Object', humanize(object['key'].split('_').slice(1).join(' ')));
+    console.log(object.key)
     const groupByTime = object.key.split("_");
     let timeEndpoint;
     let timePeriod;
     if (groupByTime.length === 2) {
       timeEndpoint = column_id[groupByTime[0]];
       timePeriod = groupByTime[1];
-      setTimeColumn(timePeriod)
-      // console.log(timePeriod, 'timeperiod')
+      if(timeEndpoint !== 'group_by_timestamp'){
+        setTimeColumn(timePeriod)
+      } 
     } else {
       timePeriod = false;
     }
@@ -360,7 +374,7 @@ const Relationships = () => {
     if (!groupedBy.appends.length) return message.error("Append an activity!");
     const columns =
       group_by_columns[object.key] || group_by_columns[timeEndpoint];
-    console.log(timeEndpoint, 'timeEndpoint')
+      console.log({"object.key": object.key, "timeEndpoint": timeEndpoint})
     setColumn(columns);
     setGroupedBy((prev) => ({ ...prev, columns }));
     setIsLoading(true);
