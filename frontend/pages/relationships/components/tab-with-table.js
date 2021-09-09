@@ -364,19 +364,29 @@ const Relationships = () => {
     if (groupByTime.length === 2) {
       timeEndpoint = column_id[groupByTime[0]];
       timePeriod = groupByTime[1];
-      if(timeEndpoint !== 'group_by_timestamp'){
+      // if(timeEndpoint !== 'group_by_timestamp'){
         setTimeColumn(timePeriod)
-      } 
+      // } 
     } else {
       timePeriod = false;
     }
 
     if (!groupedBy.appends.length) return message.error("Append an activity!");
-    const columns =
+    
+   
+    if(timeEndpoint === 'group_by_timestamp'){
+      const columns = [group_by_columns[timeEndpoint][1]]
+      console.log(columns)
+      setColumn(columns)
+      setGroupedBy((prev) => ({ ...prev, columns }));
+    }
+    else {
+      const columns =
       group_by_columns[object.key] || group_by_columns[timeEndpoint];
-      console.log({"object.key": object.key, "timeEndpoint": timeEndpoint})
-    setColumn(columns);
-    setGroupedBy((prev) => ({ ...prev, columns }));
+      setColumn(columns);
+      setGroupedBy((prev) => ({ ...prev, columns }));
+    }
+
     setIsLoading(true);
 
     const period = ["day", "week", "month", "year"];
