@@ -505,6 +505,13 @@ const Relationships = () => {
     );
 
   const onTabChange = (activeKey) => {
+    panes.forEach((value, index) => {
+      if(value['key'] === activeKey) {
+        setData(value['data'])
+        setXAxis(value['xAxis'])
+      }
+      
+    })
     setActiveKey(activeKey);
   };
 
@@ -538,6 +545,8 @@ const Relationships = () => {
       dataSource={data}
     />,
       key: activeKey,
+      xAxis: xAxis,
+      data: data
     });
     setPanes(newPanes);
     setActiveKey(activeKey);

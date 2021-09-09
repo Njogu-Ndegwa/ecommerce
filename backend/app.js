@@ -718,81 +718,9 @@ app.post('/group_by_occurence', (req, res) => {
   }
 })
 
-// Group by Activity Repeated at. *
-app.get('/group_by_activity_repeated_at', (req, res) => {
-  const {time, view} = req.body
-  if(view) {
-    if(time){
-      RealPostgress.ReadQuery(`SELECT c.source, DATE_TRUNC('${time}', c.ts) as ${time}, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts) ORDER BY DATE_TRUNC('${time}', c.ts) ASC`, (data_set) =>{
-        res.setHeader('Content-Type', 'application/json');
-          const data = customParseInt(data_set)
-        res.send(data.rows);
-      })
-    } else if(!time) {
-      RealPostgress.ReadQuery(`
-      SELECT c.source, SUM(revenue_impact) as total_revenue_impact, SUM(secondary_activity) as total_secondary, SUM(primary_activity) as total_primary, CASE WHEN SUM(secondary_activity) != 0 and SUM(primary_activity) != 0 THEN SUM(secondary_activity)/SUM(primary_activity) ELSE 0 end as conversion_rate from ${view} as c group by c.source`, (data_set) =>{
-        res.setHeader('Content-Type', 'application/json');
-          const data = customParseInt(data_set)
-        res.send(data.rows);
-      })
-    }
-  } else {
-    if(!time){
-      RealPostgress.ReadQuery(`SELECT c.source, SUM(c.revenue_impact) as total_revenue_impact from ${view} as c group by c.source`, (data_set) =>{
-        res.setHeader('Content-Type', 'application/json');
-          const data = customParseInt(data_set)
-        res.send(data.rows);
-      })
-    } else if(time) {
-      RealPostgress.ReadQuery(`
-      SELECT c.source, DATE_TRUNC('${time}', c.ts) as ${time} from ${view} as c group by c.source, DATE_TRUNC('${time}', c.ts) ORDER BY DATE_TRUNC('${time}', c.ts) ASC`, (data_set) =>{
-        res.setHeader('Content-Type', 'application/json');
-          const data = customParseInt(data_set)
-        res.send(data.rows);
-      })
-    }
-  }
-})
 
-// Group by Day
-app.get('/day', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('day',ts) AS  ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('day',ts);"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-      const data = customParseInt(data_set)
-        res.send(data.rows);
-  })
-})
 
-// Group by Week.
-app.get('/week', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('week',ts) AS ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('week',ts);"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByWeek(data_set)
-    res.send(data_set1.rows);
-  })
-})
 
-// Group by Month.
-app.get('/month', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('month',ts) AS  ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('month',ts);"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByMonth(data_set)
-    res.send(data_set1.rows);
-  })
-})
-
-// Group by Year.
-app.get('/year', (req, res) => {
-  let sql = "SELECT DATE_TRUNC('year',ts) AS ts, COUNT(id) AS count FROM activity_stream GROUP BY DATE_TRUNC('year',ts);"
-  RealPostgress.ReadQuery(sql, (data_set) =>{
-    res.setHeader('Content-Type', 'application/json');
-    let data_set1 = groupByYear(data_set)
-    res.send(data_set1.rows);
-  })
-})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
